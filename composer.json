@@ -1,0 +1,16 @@
+{
+    "name": "wpnest/theme",
+    "autoload": {
+        "psr-4": {
+            "wpnest\\Theme\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "wpnest"
+        }
+    ],
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.12"
+    }
+}

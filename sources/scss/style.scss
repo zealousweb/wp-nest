@@ -1,0 +1,11 @@
+// Base styles
+@use "base/core" as base;
+
+// Components
+@use "components/core" as components;
+
+// Layout
+@use "layout/core" as layout;
+
+// Templates
+@use "templates/core" as templates;

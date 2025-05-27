@@ -1,0 +1,19 @@
+<svg 
+  width="150" 
+  height="50" 
+  viewBox="0 0 150 50" 
+  xmlns="http://www.w3.org/2000/svg" 
+  role="img" 
+  aria-label="Your Company Logo">
+  
+  <!-- Background or bounding box (optional) -->
+  <rect width="150" height="50" fill="#ffffff"/>
+
+  <!-- Icon -->
+  <circle cx="25" cy="25" r="20" fill="#2D9CDB" />
+
+  <!-- Text -->
+  <text x="55" y="32" font-family="Arial, sans-serif" font-size="20" fill="#333">
+    Company
+  </text>
+</svg>
