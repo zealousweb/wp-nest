@@ -1,16 +1,18 @@
 // Webpack config (ES6 Compatible) with full comments
 
 import path from "path";
+import { glob } from "glob";
 import { fileURLToPath } from "node:url";
 import TerserPlugin from "terser-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import { WebpackManifestPlugin } from "webpack-manifest-plugin";
 import { PurgeCSSPlugin } from "purgecss-webpack-plugin";
-import { glob } from "glob";
 import WebpackBuildNotifierPlugin from "webpack-build-notifier";
 import WebpackBar from "webpackbar";
 import whitelist from './config/purgecss-safelist.js';
+import ESLintPlugin from 'eslint-webpack-plugin';
+import StylelintPlugin from 'stylelint-webpack-plugin';
 
 
 // Export Webpack config object
@@ -65,6 +67,25 @@ export default (env, argv) => {
 		}),
 
 		new WebpackBar(),
+
+		new ESLintPlugin({
+			extensions: ['js'],
+			failOnError: isProd, 
+			emitWarning: isDev,
+			overrideConfigFile: path.resolve(dirname, 'config/config.eslint.js')
+		}),
+
+		new StylelintPlugin({
+		  	configFile: path.resolve(dirname, 'config/config.stylelint.js'),
+			context: path.resolve(dirname, 'sources/scss'),
+			files: '**/*.scss',
+			failOnError: isProd,
+			failOnWarning: false,
+			emitErrors: isDev,
+			emitWarnings: isDev,
+			quiet: false,
+			lintDirtyModulesOnly: false,
+		})
 	];
 
 	
