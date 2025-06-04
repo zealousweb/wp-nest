@@ -60,9 +60,6 @@ export default (env, argv) => {
 			suppressSuccess: true,
 			suppressWarning: false,
 			suppressCompileStart: true,
-			successSound: false,
-			warningSound: "Glass",
-			failureSound: "Basso",
 			activateTerminalOnError: true,
 		}),
 
@@ -70,7 +67,8 @@ export default (env, argv) => {
 
 		new ESLintPlugin({
 			extensions: ['js'],
-			failOnError: isProd, 
+			failOnError: isProd,
+			fix: isProd,
 			emitWarning: isDev,
 			overrideConfigFile: path.resolve(dirname, 'config/config.eslint.js')
 		}),
@@ -82,6 +80,7 @@ export default (env, argv) => {
 			failOnError: isProd,
 			failOnWarning: false,
 			emitErrors: isDev,
+			fix: isProd,
 			emitWarnings: isDev,
 			quiet: false,
 			lintDirtyModulesOnly: false,
