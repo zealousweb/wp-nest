@@ -10,25 +10,24 @@ import { WebpackManifestPlugin } from "webpack-manifest-plugin";
 import { PurgeCSSPlugin } from "purgecss-webpack-plugin";
 import WebpackBuildNotifierPlugin from "webpack-build-notifier";
 import WebpackBar from "webpackbar";
-import whitelist from './config/purgecss-safelist.js';
-import ESLintPlugin from 'eslint-webpack-plugin';
-import StylelintPlugin from 'stylelint-webpack-plugin';
+import whitelist from "./config/purgecss-safelist.js";
+import ESLintPlugin from "eslint-webpack-plugin";
+import StylelintPlugin from "stylelint-webpack-plugin";
 
+// Get current file path and directory
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 // Export Webpack config object
 export default (env, argv) => {
-	// Get current file path and directory
-	const filename = fileURLToPath(import.meta.url);
-	const dirname = path.dirname(filename);
-
 	// Detect if we're in development mode
 	const isDev = argv.mode === "development";
 	const isProd = argv.mode === "production";
-
 	const enableModules = true; // Toggle this to true or false
+
 	const getModuleEntries = () => {
-		const files = glob.sync("sources/js/modules/**/*.js");
 		const entries = {};
+		const files = glob.sync("sources/js/modules/**/*.js");
 
 		files.forEach((file) => {
 			const name = path
@@ -45,67 +44,134 @@ export default (env, argv) => {
 		? "css/[name].css"
 		: "css/[name]-[contenthash].css";
 
-	// Base plugins always applied
-	const plugins = [
-		new MiniCssExtractPlugin({
-			filename: cssFilename,
-		}),
-		new WebpackManifestPlugin({
-			publicPath: "/",
-			basePath: "",
-		}),
+	// Plugins configuration
+	const getPlugins = () => {
+		const plugins = [
+			new MiniCssExtractPlugin({
+				filename: cssFilename,
+			}),
+			new WebpackManifestPlugin({
+				publicPath: "/",
+				basePath: "",
+			}),
 
-		new WebpackBuildNotifierPlugin({
-			title: "Webpack Notification",
-			suppressSuccess: true,
-			suppressWarning: false,
-			suppressCompileStart: true,
-			activateTerminalOnError: true,
-		}),
+			new WebpackBuildNotifierPlugin({
+				title: "Webpack Notification",
+				suppressSuccess: true,
+				suppressWarning: false,
+				suppressCompileStart: true,
+				activateTerminalOnError: true,
+			}),
 
-		new WebpackBar(),
+			new WebpackBar(),
 
-		new ESLintPlugin({
-			extensions: ['js'],
-			failOnError: isProd,
-			fix: isProd,
-			emitWarning: isDev,
-			overrideConfigFile: path.resolve(dirname, 'config/config.eslint.js')
-		}),
+			new ESLintPlugin({
+				extensions: ["js"],
+				failOnError: isProd,
+				fix: isProd,
+				emitWarning: isDev,
+				overrideConfigFile: path.resolve(
+					dirname,
+					"config/config.eslint.js"
+				),
+			}),
 
-		new StylelintPlugin({
-		  	configFile: path.resolve(dirname, 'config/config.stylelint.js'),
-			context: path.resolve(dirname, 'sources/scss'),
-			files: '**/*.scss',
-			failOnError: isProd,
-			failOnWarning: false,
-			emitErrors: isDev,
-			fix: isProd,
-			emitWarnings: isDev,
-			quiet: false,
-			lintDirtyModulesOnly: false,
-		})
-	];
+			new StylelintPlugin({
+				configFile: path.resolve(dirname, "config/config.stylelint.js"),
+				context: path.resolve(dirname, "sources/scss"),
+				files: "**/*.scss",
+				failOnError: isProd,
+				failOnWarning: false,
+				emitErrors: isDev,
+				fix: isProd,
+				emitWarnings: isDev,
+				quiet: false,
+				lintDirtyModulesOnly: false,
+			}),
+		];
 
-	
-	// Purging
-	const safelist = whitelist.map((item) => {
-		return item.startsWith("^") || item.endsWith("$")
-			? new RegExp(item)
-			: item;
-	});
-	if (isProd) {
-		plugins.push(
-			new PurgeCSSPlugin({
-				paths: glob.sync(`${dirname}/**/*.{php,js}`, {
-					nodir: true,
+		// Production-only plugins
+		if (isProd) {
+			plugins.push(
+				new PurgeCSSPlugin({
+					paths: glob.sync(`${dirname}/**/*.{php,js}`, {
+						nodir: true,
+					}),
+					safelist: whitelist.map((item) =>
+						item.startsWith("^") || item.endsWith("$")
+							? new RegExp(item)
+							: item
+					),
+					defaultExtractor: (content) =>
+						content.match(/[\w-/:]+(?<!:)/g) || [],
+					fontFace: true,
+					keyframes: true,
+				})
+			);
+		}
+		return plugins;
+	};
+
+	// Optimization configuration
+	const getOptimization = () => {
+		const optimization = {
+			splitChunks: {
+				chunks: "all",
+				cacheGroups: {
+					libraries: {
+						test: /[\\/]node_modules[\\/]/,
+						name(module) {
+							const context = module.context;
+							if (!context) return "library/common";
+							const match = context.match(
+								/[\\/]node_modules[\\/](.*?)([\\/]|$)/
+							);
+							const packageName = match
+								? match[1].replace("@", "")
+								: "common";
+							return `library/${packageName}`;
+						},
+						enforce: true,
+						priority: 10,
+					},
+				},
+			},
+			minimize: isProd,
+			minimizer: [
+				new TerserPlugin({
+					parallel: true,
+					terserOptions: {
+						ecma: 2023,
+						compress: {
+							drop_console: isProd,
+							passes: 2,
+						},
+						format: {
+							comments: false,
+						},
+					},
+					extractComments: false,
 				}),
-				safelist,
-				defaultExtractor: (content) => content.match(/[\w-]+/g) || [],
-				verbose: true,
-			})
-		);
-	}
+				new CssMinimizerPlugin({
+					parallel: true,
+					minimizerOptions: {
+						preset: [
+							"default",
+							{
+								discardComments: { removeAll: true },
+							},
+						],
+					},
+				}),
+			],
+		};
+
+		if (isDev) {
+			optimization.runtimeChunk = "single";
+		}
+
+		return optimization;
+	};
 
 	return {
 		mode: isDev ? "development" : "production",
@@ -206,48 +272,13 @@ export default (env, argv) => {
 			},
 		},
 
-		plugins,
+		plugins: getPlugins(),
 
-		optimization: {
-			splitChunks: {
-				chunks: "all",
-				cacheGroups: {
-					libraries: {
-						test: /[\\/]node_modules[\\/]/,
-						name(module) {
-							const context = module.context;
-							if (!context) return "library/common";
-							const match = context.match(
-								/[\\/]node_modules[\\/](.*?)([\\/]|$)/
-							);
-							const packageName = match
-								? match[1].replace("@", "")
-								: "common";
-							return `library/${packageName}`;
-						},
-						chunks: "all",
-						enforce: true,
-						priority: 10,
-					},
-				},
-			},
-			minimize: isProd,
-			minimizer: [
-				new TerserPlugin({
-					terserOptions: {
-						ecma: 2023,
-						compress: {
-							drop_console: isProd,
-						},
-					},
-				}),
-				new CssMinimizerPlugin(),
-			],
-		},
+		optimization: getOptimization(),
 
 		target: ["web", "es2023"],
 
-		devtool: "cheap-module-source-map",
+		devtool: isDev ? "cheap-module-source-map" : "source-map",
 
 		watch: isDev,
 
@@ -263,7 +294,13 @@ export default (env, argv) => {
 			moduleAssets: true,
 			assetsSort: "size",
 			groupAssetsByChunk: true,
-			excludeAssets: [/node_modules/, /\.map$/, /^images\//, /^fonts\//],
+			excludeAssets: [
+				/node_modules/,
+				/\.css.map$/,
+				/\.js.map$/,
+				/^images\//,
+				/^fonts\//,
+			],
 			excludeModules: true,
 		},
 
