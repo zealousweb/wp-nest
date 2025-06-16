@@ -6,13 +6,11 @@
   "library/swiper.js": "/js/library/swiper.js",
   "library/common.css": "/css/library/common.css",
   "library/fancyapps.js": "/js/library/fancyapps.js",
-  "library/wpnestjs.js": "/js/library/wpnestjs.js",
   "main.css.map": "/css/main.css.map",
   "main.js.map": "/js/main.js.map",
   "ajax-scripts.js.map": "/js/modules/ajax-scripts.js.map",
   "runtime.js.map": "/js/runtime.js.map",
   "swiper.js.map": "/js/library/swiper.js.map",
   "common.css.map": "/css/library/common.css.map",
-  "fancyapps.js.map": "/js/library/fancyapps.js.map",
-  "wpnestjs.js.map": "/js/library/wpnestjs.js.map"
+  "fancyapps.js.map": "/js/library/fancyapps.js.map"
 }

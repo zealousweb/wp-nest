@@ -62,8 +62,7 @@
 		"@fancyapps/ui": "^5.0.36",
 		"fs": "^0.0.1-security",
 		"jquery": "^3.7.1",
-		"swiper": "^11.2.6",
-		"wpnestjs": "^1.0.4"
+		"swiper": "^11.2.6"
 	},
 	"lint-staged": {
 		"sources/**/*.js": [
