@@ -164,11 +164,8 @@ export default (env, argv) => {
 					},
 				}),
 			],
+			runtimeChunk: "single"
 		};
-
-		if (isDev) {
-			optimization.runtimeChunk = "single";
-		}
 
 		return optimization;
 	};
@@ -193,6 +190,9 @@ export default (env, argv) => {
 				{
 					test: /\.js$/,
 					exclude: /node_modules/,
+					resolve: {
+						fullySpecified: false,
+					},
 					use: {
 						loader: "babel-loader",
 						options: {
