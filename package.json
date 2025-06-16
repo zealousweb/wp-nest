@@ -63,7 +63,7 @@
 		"fs": "^0.0.1-security",
 		"jquery": "^3.7.1",
 		"swiper": "^11.2.6",
-		"wpnestjs": "^1.0.3"
+		"wpnestjs": "^1.0.4"
 	},
 	"lint-staged": {
 		"sources/**/*.js": [
