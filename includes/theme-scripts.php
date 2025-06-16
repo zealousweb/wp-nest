@@ -72,8 +72,10 @@ function wpnestScripts()
     themeCSS('library/common.css');
 
     // library js.
+    themeJS('runtime.js');
     themeJS('library/swiper.js');
     themeJS('library/fancyapps.js');
+    themeJS('library/wpnestjs.js');
 
     // Compiled main scripts.
     themeJS('main.js');

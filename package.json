@@ -8,7 +8,7 @@
 	"description": "A starter theme for WordPress with modern JavaScript and CSS tooling.",
 	"type": "module",
 	"scripts": {
-		"watch": "webpack --watch --mode development",
+		"watch": "webpack --mode development --watch",
 		"build": "webpack --mode production",
 		"lint:js": "eslint -c config/config.eslint.js sources/**/*.js",
 		"lint:js:fix": "eslint -c config/config.eslint.js sources/**/*.js --fix",
@@ -62,7 +62,8 @@
 		"@fancyapps/ui": "^5.0.36",
 		"fs": "^0.0.1-security",
 		"jquery": "^3.7.1",
-		"swiper": "^11.2.6"
+		"swiper": "^11.2.6",
+		"wpnestjs": "^1.0.3"
 	},
 	"lint-staged": {
 		"sources/**/*.js": [
