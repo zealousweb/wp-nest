@@ -22,7 +22,9 @@ export default {
       'at-rule-empty-line-before': ['always', {
         except: ['blockless-after-same-name-blockless', 'first-nested'],
         ignore: ['after-comment', 'inside-block']
-      }]
+      }],
+      'property-no-vendor-prefix': null,
+      'value-no-vendor-prefix': null,
     },      
     overrides: [
       {
