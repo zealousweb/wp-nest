@@ -51,7 +51,6 @@ class NativeLintPlugin {
     );
     const errored = results.filter((r) => r.errored);
     if (errored.length) {
-      errored.forEach((r) => console.error(r.output));
       if (!this.isDev) throw new Error("Stylelint failed with errors.");
     }
   }
@@ -192,6 +191,15 @@ export default async (env, argv) => {
                 importLoaders: 1,
                 sourceMap: isDev,
                 modules: { auto: true, namedExport: true },
+              },
+            },
+            {
+              loader: "postcss-loader",
+              options: {
+                sourceMap: isDev,
+                postcssOptions: {
+                  config: path.resolve(dirname, "config/postcss.config.js"),
+                },
               },
             },
             {
