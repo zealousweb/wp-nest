@@ -18,242 +18,350 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 class NativeLintPlugin {
-  constructor({ argv }) {
-    this.isDev = argv.mode === "development";
-    this.isProd = argv.mode === "production";
-    this.rootDir = path.resolve();
-  }
+	constructor({ argv }) {
+		this.isDev = argv.mode === "development";
+		this.isProd = argv.mode === "production";
+		this.rootDir = path.resolve();
+	}
 
-  async lintJS() {
-    const eslint = new ESLint({
-      fix: this.isDev,
-      overrideConfigFile: path.resolve(this.rootDir, "config/config.eslint.js"),
-    });
-    const files = glob.sync("sources/**/*.js");
-    const results = await eslint.lintFiles(files);
-    if (this.isDev) await ESLint.outputFixes(results);
-    const formatter = await eslint.loadFormatter("stylish");
-    console.log(formatter.format(results));
-    const hasErrors = results.some((r) => r.errorCount > 0);
-    if (hasErrors && !this.isDev) throw new Error("ESLint failed with errors.");
-  }
+	async lintJS() {
+		const eslint = new ESLint({
+			fix: this.isDev,
+			overrideConfigFile: path.resolve(
+				this.rootDir,
+				"config/config.eslint.js"
+			),
+		});
 
-  async lintSCSS() {
-    const files = glob.sync("sources/**/*.scss");
-    const results = await Promise.all(
-      files.map((file) =>
-        stylelint.lint({
-          files: file,
-          configFile: path.resolve(this.rootDir, "config/config.stylelint.js"),
-          fix: this.isDev,
-        })
-      )
-    );
-    const errored = results.filter((r) => r.errored);
-    if (errored.length) {
-      if (!this.isDev) throw new Error("Stylelint failed with errors.");
-    }
-  }
+		const files = glob.sync("sources/**/*.js");
+		const results = await eslint.lintFiles(files);
 
-  apply(compiler) {
-    compiler.hooks.watchRun.tapPromise("NativeLintPlugin", async () => {
-      await this.lintJS();
-      await this.lintSCSS();
-    });
+		if (this.isDev) {
+			await ESLint.outputFixes(results);
+			console.log("✅ ESLint auto-fixes applied (dev mode).");
+		}
 
-    compiler.hooks.run.tapPromise("NativeLintPlugin", async () => {
-      await this.lintJS();
-      await this.lintSCSS();
-    });
-  }
+		const formatter = await eslint.loadFormatter("stylish");
+		const resultText = formatter.format(results);
+
+		const hasErrors = results.some((r) => r.errorCount > 0);
+		const hasWarnings = results.some((r) => r.warningCount > 0);
+
+		if (hasErrors || hasWarnings) {
+			console.log("⚠️ ESLint issues detected:\n");
+			console.log(resultText);
+		}
+
+		if (hasErrors && !this.isDev) {
+			console.error(
+				"❌ ESLint failed with errors. See above for details."
+			);
+			process.exit(1);
+		}
+	}
+
+	async lintSCSS() {
+		const files = glob.sync("sources/**/*.scss");
+		const results = await Promise.all(
+			files.map((file) =>
+				stylelint.lint({
+					files: file,
+					configFile: path.resolve(
+						this.rootDir,
+						"config/config.stylelint.js"
+					),
+					fix: this.isDev,
+				})
+			)
+		);
+
+		const errored = results.filter((r) => r.errored);
+		if (errored.length) {
+			console.error("\n⚠️ Stylelint found errors:\n");
+
+			errored.forEach((result) => {
+				result.results?.forEach((r) => {
+					console.error(`\nFile: ${r.source}`);
+					r.warnings.forEach((w) => {
+						console.error(
+							`- [${w.severity}] Line ${w.line}, Col ${w.column}: ${w.text}`
+						);
+					});
+				});
+			});
+
+			if (!this.isDev) {
+				console.error(
+					"❌ Stylelint failed with errors. See above for details."
+				);
+				process.exit(1);
+			}
+		}
+	}
+
+	apply(compiler) {
+		compiler.hooks.watchRun.tapPromise("NativeLintPlugin", async () => {
+			await this.lintJS();
+			await this.lintSCSS();
+		});
+
+		compiler.hooks.run.tapPromise("NativeLintPlugin", async () => {
+			await this.lintJS();
+			await this.lintSCSS();
+		});
+	}
 }
 
 export default async (env, argv) => {
-  const isDev = argv.mode === "development";
-  const isProd = argv.mode === "production";
-  const enableModules = true;
+	const isDev = argv.mode === "development";
+	const isProd = argv.mode === "production";
+	const enableModules = true;
 
-  const getModuleEntries = () => {
-    const entries = {};
-    const files = glob.sync("sources/js/modules/**/*.js");
-    files.forEach((file) => {
-      const name = path
-        .relative("sources/js", file)
-        .replace(/\.js$/, "")
-        .replace(/\\/g, "/");
-      entries[name] = path.resolve(dirname, file);
-    });
-    return entries;
-  };
+	const getModuleEntries = () => {
+		const entries = {};
+		const files = glob.sync("sources/js/modules/**/*.js");
+		files.forEach((file) => {
+			const name = path
+				.relative("sources/js", file)
+				.replace(/\.js$/, "")
+				.replace(/\\/g, "/");
+			entries[name] = path.resolve(dirname, file);
+		});
+		return entries;
+	};
 
-  const jsFilename = isDev ? "js/[name].js" : "js/[name]-[contenthash].js";
-  const cssFilename = isDev ? "css/[name].css" : "css/[name]-[contenthash].css";
+	const jsFilename = isDev ? "js/[name].js" : "js/[name]-[contenthash].js";
+	const cssFilename = isDev
+		? "css/[name].css"
+		: "css/[name]-[contenthash].css";
 
-  const plugins = [
-    new MiniCssExtractPlugin({ filename: cssFilename }),
-    new WebpackManifestPlugin({ publicPath: "/" }),
-    new WebpackBuildNotifierPlugin({
-      title: "Webpack Notification",
-      suppressSuccess: true,
-      activateTerminalOnError: true,
-    }),
-    new WebpackBar(),
-    new NativeLintPlugin({ argv }),
-  ];
+	const plugins = [
+		new MiniCssExtractPlugin({
+			filename: cssFilename,
+		}),
+		new WebpackManifestPlugin({
+			publicPath: "/",
+		}),
+		new WebpackBuildNotifierPlugin({
+			title: "Webpack Notification",
+			suppressSuccess: true,
+			activateTerminalOnError: true,
+		}),
+		new WebpackBar(),
+		new NativeLintPlugin({
+			argv,
+		}),
+	];
 
-  if (isProd) {
-    plugins.push(
-      new PurgeCSSPlugin({
-        paths: glob.sync(`${dirname}/**/*.{php,js}`, { nodir: true }),
-        safelist: whitelist.map((item) =>
-          item.startsWith("^") || item.endsWith("$") ? new RegExp(item) : item
-        ),
-        defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-        fontFace: true,
-        keyframes: true,
-      })
-    );
-  }
+	if (isProd) {
+		plugins.push(
+			new PurgeCSSPlugin({
+				paths: glob.sync(`${dirname}/**/*.{php,js}`, {
+					nodir: true,
+				}),
+				safelist: whitelist.map((item) =>
+					item.startsWith("^") || item.endsWith("$")
+						? new RegExp(item)
+						: item
+				),
+				defaultExtractor: (content) =>
+					content.match(/[\w-/:]+(?<!:)/g) || [],
+				fontFace: true,
+				keyframes: true,
+			})
+		);
+	}
 
-  const optimization = {
-    splitChunks: {
-      chunks: "all",
-      cacheGroups: {
-        libraries: {
-          test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const context = module.context;
-            if (!context) return "library/common";
-            const match = context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/);
-            const packageName = match ? match[1].replace("@", "") : "common";
-            return `library/${packageName}`;
-          },
-          enforce: true,
-          priority: 10,
-        },
-      },
-    },
-    minimize: isProd,
-    minimizer: [
-      new TerserPlugin({
-        parallel: true,
-        terserOptions: {
-          ecma: 2023,
-          compress: { drop_console: isProd, passes: 2 },
-          format: { comments: false },
-        },
-        extractComments: false,
-      }),
-      new CssMinimizerPlugin({
-        parallel: true,
-        minimizerOptions: {
-          preset: ["default", { discardComments: { removeAll: true } }],
-        },
-      }),
-    ],
-    runtimeChunk: "single",
-  };
+	const optimization = {
+		splitChunks: {
+			chunks: "all",
+			cacheGroups: {
+				libraries: {
+					test: /[\\/]node_modules[\\/]/,
+					name(module) {
+						const context = module.context;
+						if (!context) return "library/common";
+						const match = context.match(
+							/[\\/]node_modules[\\/](.*?)([\\/]|$)/
+						);
+						const packageName = match
+							? match[1].replace("@", "")
+							: "common";
+						return `library/${packageName}`;
+					},
+					enforce: true,
+					priority: 10,
+				},
+			},
+		},
+		minimize: isProd,
+		minimizer: [
+			new TerserPlugin({
+				parallel: true,
+				terserOptions: {
+					ecma: 2023,
+					compress: {
+						drop_console: isProd,
+						passes: 2,
+					},
+					format: {
+						comments: false,
+					},
+				},
+				extractComments: false,
+			}),
+			new CssMinimizerPlugin({
+				parallel: true,
+				minimizerOptions: {
+					preset: [
+						"default",
+						{
+							discardComments: {
+								removeAll: true,
+							},
+						},
+					],
+				},
+			}),
+		],
+		runtimeChunk: "single",
+	};
 
-  return {
-    mode: isDev ? "development" : "production",
-    entry: {
-      main: ["./sources/js/script.js", "./sources/scss/style.scss"],
-      ...(enableModules ? getModuleEntries() : {}),
-    },
-    output: {
-      path: path.resolve(dirname, "assets"),
-      filename: jsFilename,
-      clean: true,
-      publicPath: "/",
-      assetModuleFilename: "[name][ext][query]"
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          resolve: { fullySpecified: false },
-          use: {
-            loader: "babel-loader",
-            options: {
-              presets: [["@babel/preset-env", { targets: { esmodules: true }, bugfixes: true }]],
-              cacheDirectory: true,
-            },
-          },
-        },
-        {
-          test: /\.(scss|css)$/,
-          use: [
-            { loader: MiniCssExtractPlugin.loader, options: { publicPath: "../" } },
-            {
-              loader: "css-loader",
-              options: {
-                importLoaders: 1,
-                sourceMap: isDev,
-                modules: { auto: true, namedExport: true },
-              },
-            },
-            {
-              loader: "postcss-loader",
-              options: {
-                sourceMap: isDev,
-                postcssOptions: {
-                  config: path.resolve(dirname, "config/postcss.config.js"),
-                },
-              },
-            },
-            {
-              loader: "sass-loader",
-              options: {
-                sourceMap: isDev,
-                sassOptions: { outputStyle: "expanded" },
-              },
-            },
-          ],
-        },
-        {
-          test: /\.(png|jpe?g|gif|svg|webp|avif)$/i,
-          type: "asset/resource",
-          generator: { filename: "images/[name][ext][query]" },
-        },
-        {
-          test: /\.(woff(2)?|ttf|eot)$/,
-          type: "asset/resource",
-          generator: { filename: "fonts/[name][ext][query]" },
-        },
-      ],
-    },
-    resolve: {
-      extensions: [".scss", ".js"],
-      alias: {
-        "@scss": path.resolve(dirname, "sources/scss"),
-        "@js": path.resolve(dirname, "sources/js"),
-        "@img": path.resolve(dirname, "sources/images"),
-      },
-    },
-    plugins,
-    optimization,
-    target: ["web", "es2023"],
-    devtool: isDev ? "cheap-module-source-map" : "source-map",
-    watch: isDev,
-    stats: {
-      all: false,
-      assets: true,
-      colors: true,
-      timings: true,
-      builtAt: true,
-      errors: true,
-      warnings: true,
-      moduleAssets: true,
-      assetsSort: "size",
-      groupAssetsByChunk: true,
-      excludeAssets: [/node_modules/, /\.css.map$/, /\.js.map$/, /^images\//, /^fonts\//],
-      excludeModules: true,
-    },
-    performance: {
-      hints: isDev ? false : "warning",
-      maxEntrypointSize: 912000,
-      maxAssetSize: 912000,
-    },
-  };
+	return {
+		mode: isDev ? "development" : "production",
+		entry: {
+			main: ["./sources/js/script.js", "./sources/scss/style.scss"],
+			...(enableModules ? getModuleEntries() : {}),
+		},
+		output: {
+			path: path.resolve(dirname, "assets"),
+			filename: jsFilename,
+			clean: true,
+			publicPath: "/",
+			assetModuleFilename: "[name][ext][query]",
+		},
+		module: {
+			rules: [
+				{
+					test: /\.js$/,
+					exclude: /node_modules/,
+					resolve: {
+						fullySpecified: false,
+					},
+					use: {
+						loader: "babel-loader",
+						options: {
+							presets: [
+								[
+									"@babel/preset-env",
+									{
+										targets: {
+											esmodules: true,
+										},
+										bugfixes: true,
+									},
+								],
+							],
+							cacheDirectory: true,
+						},
+					},
+				},
+				{
+					test: /\.(scss|css)$/,
+					use: [
+						{
+							loader: MiniCssExtractPlugin.loader,
+							options: {
+								publicPath: "../",
+							},
+						},
+						{
+							loader: "css-loader",
+							options: {
+								importLoaders: 1,
+								sourceMap: isDev,
+								modules: {
+									auto: true,
+									namedExport: true,
+								},
+							},
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								sourceMap: isDev,
+								postcssOptions: {
+									config: path.resolve(
+										dirname,
+										"config/postcss.config.js"
+									),
+								},
+							},
+						},
+						{
+							loader: "sass-loader",
+							options: {
+								sourceMap: isDev,
+								sassOptions: {
+									outputStyle: "expanded",
+								},
+							},
+						},
+					],
+				},
+				{
+					test: /\.(png|jpe?g|gif|svg|webp|avif)$/i,
+					type: "asset/resource",
+					generator: {
+						filename: "images/[name][ext][query]",
+					},
+				},
+				{
+					test: /\.(woff(2)?|ttf|eot)$/,
+					type: "asset/resource",
+					generator: {
+						filename: "fonts/[name][ext][query]",
+					},
+				},
+			],
+		},
+		resolve: {
+			extensions: [".scss", ".js"],
+			alias: {
+				"@scss": path.resolve(dirname, "sources/scss"),
+				"@js": path.resolve(dirname, "sources/js"),
+				"@img": path.resolve(dirname, "sources/images"),
+			},
+		},
+		plugins,
+		optimization,
+		target: ["web", "es2023"],
+		devtool: isDev ? "cheap-module-source-map" : "source-map",
+		watch: isDev,
+		stats: {
+			all: false,
+			assets: true,
+			colors: true,
+			timings: true,
+			builtAt: true,
+			errors: true,
+			warnings: true,
+			moduleAssets: true,
+			assetsSort: "size",
+			groupAssetsByChunk: true,
+			excludeAssets: [
+				/node_modules/,
+				/\.css.map$/,
+				/\.js.map$/,
+				/^images\//,
+				/^fonts\//,
+			],
+			excludeModules: true,
+		},
+		performance: {
+			hints: isDev ? false : "warning",
+			maxEntrypointSize: 912000,
+			maxAssetSize: 912000,
+		},
+	};
 };
