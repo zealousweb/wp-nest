@@ -77,7 +77,7 @@ class NativeLintPlugin {
 
 		const errored = results.filter((r) => r.errored);
 		if (errored.length) {
-			console.error("\n⚠️ Stylelint found errors:\n");
+			console.error("\n ⚠️ Stylelint found errors:\n");
 
 			errored.forEach((result) => {
 				result.results?.forEach((r) => {

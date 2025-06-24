@@ -25,6 +25,7 @@ export default {
       }],
       'property-no-vendor-prefix': null,
       'value-no-vendor-prefix': null,
+      'font-family-name-quotes': null,
     },      
     overrides: [
       {
