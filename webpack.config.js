@@ -116,6 +116,8 @@ export default async (env, argv) => {
 	const isDev = argv.mode === "development";
 	const isProd = argv.mode === "production";
 	const enableModules = true;
+	const nodeMajorVersion = parseInt(process.versions.node.split(".")[0], 10);
+	const ditectNodeVersion = nodeMajorVersion >= 18;
 
 	const getModuleEntries = () => {
 		const entries = {};
@@ -148,10 +150,19 @@ export default async (env, argv) => {
 			activateTerminalOnError: true,
 		}),
 		new WebpackBar(),
-		new NativeLintPlugin({
-			argv,
-		}),
 	];
+
+	if (ditectNodeVersion) {
+		plugins.push(
+			new NativeLintPlugin({
+				argv,
+			})
+		);
+	} else {
+		console.warn(
+			"\x1b[33m ⚠️ Node < 18 detected. Skipping NativeLintPlugin (ESLint + Stylelint).\x1b[0m"
+		);
+	}
 
 	if (isProd) {
 		plugins.push(
