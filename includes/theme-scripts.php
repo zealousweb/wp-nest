@@ -75,7 +75,6 @@ function wpnestScripts()
     themeJS('runtime.js');
     themeJS('library/swiper.js');
     themeJS('library/fancyapps.js');
-    themeJS('library/wpnestjs.js');
 
     // Compiled main scripts.
     themeJS('main.js');
