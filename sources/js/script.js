@@ -1,7 +1,17 @@
-import { initHomeSlider } from '@js/common/swiperInit.js';
+// Device menu is global, so keep it eager
 import deviceMenu from '@js/common/deviceMenu.js';
-import { initFancybox } from '@js/common/fancybox';
-
-initHomeSlider();
 deviceMenu();
-initFancybox();
+
+// Load Home slider only if homepage element exists
+if (document.querySelector('.home-slider')) {
+    import('@js/common/swiperInit.js').then(({ initHomeSlider }) => {
+        initHomeSlider();
+    });
+}
+
+// Load Fancybox only if gallery/trigger elements exist
+if (document.querySelector('[data-fancybox]')) {
+    import('@js/common/fancybox').then(({ initFancybox }) => {
+        initFancybox();
+    });
+}
