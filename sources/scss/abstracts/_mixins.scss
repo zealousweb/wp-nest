@@ -146,7 +146,7 @@
 @mixin icon($content) {
     content: $content;
 
-    font-family: var(--icon-family);
+    font-family: var(--font-icon);
     font-weight: normal;
     font-style: normal;
     font-variant: normal;
@@ -154,7 +154,7 @@
 }
 
 // custom scroll
-@mixin custom-scroll($color1: var(--color-secondary-100)) {
+@mixin custom-scroll($color1: var(--color-secondary)) {
     &::-webkit-scrollbar {
         width: 10px;
     }
@@ -173,17 +173,17 @@
     }
 
     &::-webkit-scrollbar-thumb:window-inactive {
-        background: var(--color-primary-100);
+        background: var(--color-primary);
     }
 }
 
 // Container Spacing
-@mixin container-space($position: "", $value: var(--container-full-width)) {
+@mixin container-space($position: "", $value: var(--container-full)) {
     @if $position == "left" {
         padding-left: calc((100% - (#{$value})) / 2);
 
         >div {
-            padding-left: var(--gutters);
+            padding-left: var(--spacing-container-gutter);
 
             @include respond-below(md) {
                 padding-left: rem(20px);
@@ -193,7 +193,7 @@
         padding-right: calc((100% - (#{$value})) / 2);
 
         >div {
-            padding-right: var(--gutters);
+            padding-right: var(--spacing-container-gutter);
 
             @include respond-below(md) {
                 padding-right: rem(20px);

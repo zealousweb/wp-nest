@@ -7,7 +7,7 @@ $mbnav: ".mbnav";
 $hamburger: ".hamburger";
 
 #{$hamburger} {
-    --humburgerbox: #{rem(40px)};
+    --humburger-box: #{rem(40px)};
 
     z-index: 999;
     
@@ -15,8 +15,8 @@ $hamburger: ".hamburger";
     align-items: center;
     justify-content: center;
 
-    width: var(--humburgerbox);
-    height: var(--humburgerbox);
+    width: var(--humburger-box);
+    height: var(--humburger-box);
     margin: 0 0 0 rem(25px);
     padding: 0;
 
@@ -49,7 +49,7 @@ $hamburger: ".hamburger";
         margin: 0 auto;
         border-radius: 2px;
 
-        background: var(--color-primary-100);
+        background: var(--color-primary);
 
         transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
 
@@ -66,7 +66,7 @@ $hamburger: ".hamburger";
             height: 100%;
             border-radius: 2px;
 
-            background: var(--color-primary-100);
+            background: var(--color-primary);
 
             transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
         }
@@ -87,7 +87,7 @@ $hamburger: ".hamburger";
             &::before,
             &::after {
                 top: 0;
-                background-color: var(--color-primary-100);
+                background-color: var(--color-primary);
             }
 
             &::before {
@@ -140,7 +140,7 @@ $hamburger: ".hamburger";
     &__top {
         display: flex;
         justify-content: space-between;
-        background: var(--color-secondary-100);
+        background: var(--color-secondary);
     }
 
     &__logo {
@@ -209,11 +209,11 @@ $hamburger: ".hamburger";
 
             margin: 0;
             padding: 0;
-            border-bottom: 1px solid var(--color-gray);
+            border-bottom: 1px solid var(--color-gray-200);
 
             font-size: rem(20px);
             font-weight: 500;
-            color: var(--color-primary-100);
+            color: var(--color-primary);
             list-style: none;
 
             &::before {
@@ -233,7 +233,7 @@ $hamburger: ".hamburger";
             }
 
             %after {
-                --sarrow-width: 10px;
+                --arrow-width: 10px;
 
                 content: "";
 
@@ -242,10 +242,10 @@ $hamburger: ".hamburger";
                 display: flex;
                 align-items: center;
 
-                width: var(--sarrow-width);
-                height: var(--sarrow-width);
+                width: var(--arrow-width);
+                height: var(--arrow-width);
                 margin: auto;
-                border: calc(var(--sarrow-width) / 4) solid var(--color-primary-100);
+                border: calc(var(--arrow-width) / 4) solid var(--color-primary);
                 border-bottom: 0;
                 border-left: 0;
             }
@@ -325,7 +325,7 @@ $hamburger: ".hamburger";
                 color: currentcolor;
     
                 &::before {
-                    --sarrow-width: 10px;
+                    --arrow-width: 10px;
                     
                     content: "";
 
@@ -337,10 +337,10 @@ $hamburger: ".hamburger";
                     display: flex;
                     align-items: center;
 
-                    width: var(--sarrow-width);
-                    height: var(--sarrow-width);
+                    width: var(--arrow-width);
+                    height: var(--arrow-width);
                     margin: auto;
-                    border: calc(var(--sarrow-width) / 4) solid var(--color-primary-100);
+                    border: calc(var(--arrow-width) / 4) solid var(--color-primary);
                     border-bottom: 0;
                     border-left: 0;
                 }
@@ -362,7 +362,7 @@ $hamburger: ".hamburger";
                     @extend %after;
 
                     .color-mbnav & {
-                        color: var(--color-primary-100) !important;
+                        color: var(--color-primary) !important;
                     }
                 }
             }
@@ -370,14 +370,14 @@ $hamburger: ".hamburger";
 
         ul {
             li {
-                font-size: var(--menu-level-2);
+                font-size: var(--text-menu-2);
 
                 a {
                     padding-left: 25px;
                 }
 
                 li {
-                    font-size: var(--menu-level-3);
+                    font-size: var(--text-menu-3);
 
                     a {
                         padding-left: 35px;

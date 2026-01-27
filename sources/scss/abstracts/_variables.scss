@@ -7,63 +7,65 @@
 
 :root {
   // Fonts
-  --font-family-base: 'Open Sans', 'Arial', sans-serif;
-  --icon-family: "iconfontfamily";
-  --font-size-base: #{rem(16px)};
+  --font-sans: 'Open Sans', 'Arial', sans-serif;
+  --font-icon: "iconfontfamily";
+  --text-base: #{rem(16px)};
 
   // Colors
-  --color-primary-100: #1eb2a6;
-  --color-secondary-100: #ffa34d;
+  --color-primary: #1eb2a6;
+  --color-secondary: #ffa34d;
   --color-white: #fff;
   --color-black: #000;
-  --color-gray: #dee3e2;
+  --color-gray-200: #dee3e2;
 
-  // Body
-  --body-bg: var(--color-white);
-  --body-color: var(--color-black);
-  --line-height-base: 1.5;
-  --font-weight-base: 500;
+  // Background/Foreground
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
+  
+  // Typography
+  --leading-normal: 1.5;
+  --leading-tight: 1.1;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
 
   // Headings
-  --font-weight-heading: 700;
-  --line-height-heading: 1.1;
-  --hgroup-margin-bottom: #{rem(15px)};
-  --h1-size: #{rem(50px)};
-  --h2-size: #{rem(40px)};
-  --h3-size: #{rem(32px)};
-  --h4-size: #{rem(25px)};
-  --h5-size: #{rem(20px)};
-  --h6-size: #{rem(18px)};
+  --spacing-heading-margin: #{rem(15px)};
+  --text-h1: #{rem(50px)};
+  --text-h2: #{rem(40px)};
+  --text-h3: #{rem(32px)};
+  --text-h4: #{rem(25px)};
+  --text-h5: #{rem(20px)};
+  --text-h6: #{rem(18px)};
 
   // Spacing & Containers
   --container-width: #{rem(1170px)};
-  --gutters: #{rem(50px)};
-  --row-gutters: #{rem(30px)};
-  --container-full-width: calc(var(--container-width) + (var(--gutters) * 2));
+  --spacing-container-gutter: #{rem(50px)};
+  --spacing-row-gutter: #{rem(30px)};
+  --container-full: calc(var(--container-width) + (var(--spacing-container-gutter) * 2));
 
   // Forms
-  --label-font-size: #{rem(14px)};
-  --label-font-weight: 400;
-  --input-bg: var(--color-white);
-  --input-radius: 0;
-  --input-height: #{rem(42px)};
-  --input-border-color: var(--color-secondary-100);
-  --textarea-height: #{rem(150px)};
+  --text-label: #{rem(14px)};
+  --font-weight-label: 400;
+  --input-background: var(--color-white);
+  --radius-input: 0;
+  --height-input: #{rem(42px)};
+  --color-input-border: var(--color-secondary);
+  --height-textarea: #{rem(150px)};
 
   // Mobile Menu
-  --menu-level-1: 18px;
-  --menu-level-2: 16px;
-  --menu-level-3: 14px;
+  --text-menu-1: 18px;
+  --text-menu-2: 16px;
+  --text-menu-3: 14px;
 }
 
 // Heading font Size
 $heading-size: (
-  'h1': var(--h1-size, rem(50px)),
-  'h2': var(--h2-size, rem(40px)),
-  'h3': var(--h3-size, rem(32px)),
-  'h4': var(--h4-size, rem(25px)),
-  'h5': var(--h5-size, rem(20px)),
-  'h6': var(--h6-size, rem(18px)),
+  'h1': var(--text-h1, rem(50px)),
+  'h2': var(--text-h2, rem(40px)),
+  'h3': var(--text-h3, rem(32px)),
+  'h4': var(--text-h4, rem(25px)),
+  'h5': var(--text-h5, rem(20px)),
+  'h6': var(--text-h6, rem(18px)),
 );
 
 // Set assets path

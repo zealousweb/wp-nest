@@ -7,15 +7,15 @@ form label {
 
 	margin-bottom: rem(10px);
 
-	font-family: var(--font-family-base);
-	font-size: var(--label-font-size);
-	font-weight: var(--label-font-weight);
-	line-height: var(--line-height-base);
-	color: var(--body-color);
+	font-family: var(--font-sans);
+	font-size: var(--text-label);
+	font-weight: var(--font-weight-label);
+	line-height: var(--leading-normal);
+	color: var(--color-foreground);
 }
 
 :is(input, textarea, button, select) {
-	font-family: var(--font-family-base);
+	font-family: var(--font-sans);
 }
 
 input[type="url"],
@@ -38,7 +38,7 @@ textarea {
 	overflow: auto;
 	display: block;
 
-	height: var(--textarea-height);
+	height: var(--height-textarea);
 	padding: rem(10px) rem(15px);
 }
 
@@ -53,17 +53,17 @@ input[type="date"],
 textarea,
 select {
 	width: 100%;
-	height: var(--input-height);
+	height: var(--height-input);
 	padding: 0 rem(15px);
-	border: rem(1px) solid var(--input-border-color);
-	border-radius: var(--input-radius);
+	border: rem(1px) solid var(--color-input-border);
+	border-radius: var(--radius-input);
 
-	font-size: var(--font-size-base);
-	font-weight: var(--label-font-weight);
-	color: var(--body-color);
+	font-size: var(--text-base);
+	font-weight: var(--font-weight-label);
+	color: var(--color-foreground);
 
 	&:focus {
-		border-color: var(--input-border-color);
+		border-color: var(--color-input-border);
 		outline: none;
 	}
 
@@ -181,7 +181,7 @@ select:-webkit-autofill:focus {
 
 			width: rem(5px);
 			height: rem(10px);
-			border: solid var(--color-secondary-100);
+			border: solid var(--color-secondary);
 			border-width: 0 rem(2px) rem(2px) 0;
 		}
 	}
@@ -200,7 +200,7 @@ select:-webkit-autofill:focus {
 
 			margin-right: rem(8px);
 			padding: rem(8px);
-			border: rem(2px) solid var(--color-secondary-100);
+			border: rem(2px) solid var(--color-secondary);
 
 			vertical-align: middle;
 

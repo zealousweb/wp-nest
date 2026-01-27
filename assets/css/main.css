@@ -2,41 +2,41 @@
   !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.101.3/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/postcss-loader@8.1.1_postcss@8.5.6_webpack@5.101.3/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/.pnpm/sass-loader@16.0.5_sass@1.90.0_webpack@5.101.3/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./sources/scss/style.scss ***!
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 :root {
-  --font-family-base: "Open Sans", "Arial", sans-serif;
-  --icon-family: "iconfontfamily";
-  --font-size-base: 1rem;
-  --color-primary-100: #1eb2a6;
-  --color-secondary-100: #ffa34d;
+  --font-sans: "Open Sans", "Arial", sans-serif;
+  --font-icon: "iconfontfamily";
+  --text-base: 1rem;
+  --color-primary: #1eb2a6;
+  --color-secondary: #ffa34d;
   --color-white: #fff;
   --color-black: #000;
-  --color-gray: #dee3e2;
-  --body-bg: var(--color-white);
-  --body-color: var(--color-black);
-  --line-height-base: 1.5;
-  --font-weight-base: 500;
-  --font-weight-heading: 700;
-  --line-height-heading: 1.1;
-  --hgroup-margin-bottom: 0.938rem;
-  --h1-size: 3.125rem;
-  --h2-size: 2.5rem;
-  --h3-size: 2rem;
-  --h4-size: 1.563rem;
-  --h5-size: 1.25rem;
-  --h6-size: 1.125rem;
+  --color-gray-200: #dee3e2;
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
+  --leading-normal: 1.5;
+  --leading-tight: 1.1;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --spacing-heading-margin: 0.938rem;
+  --text-h1: 3.125rem;
+  --text-h2: 2.5rem;
+  --text-h3: 2rem;
+  --text-h4: 1.563rem;
+  --text-h5: 1.25rem;
+  --text-h6: 1.125rem;
   --container-width: 73.125rem;
-  --gutters: 3.125rem;
-  --row-gutters: 1.875rem;
-  --container-full-width: calc(var(--container-width) + (var(--gutters) * 2));
-  --label-font-size: 0.875rem;
-  --label-font-weight: 400;
-  --input-bg: var(--color-white);
-  --input-radius: 0;
-  --input-height: 2.625rem;
-  --input-border-color: var(--color-secondary-100);
-  --textarea-height: 9.375rem;
-  --menu-level-1: 18px;
-  --menu-level-2: 16px;
-  --menu-level-3: 14px;
+  --spacing-container-gutter: 3.125rem;
+  --spacing-row-gutter: 1.875rem;
+  --container-full: calc(var(--container-width) + (var(--spacing-container-gutter) * 2));
+  --text-label: 0.875rem;
+  --font-weight-label: 400;
+  --input-background: var(--color-white);
+  --radius-input: 0;
+  --height-input: 2.625rem;
+  --color-input-border: var(--color-secondary);
+  --height-textarea: 9.375rem;
+  --text-menu-1: 18px;
+  --text-menu-2: 16px;
+  --text-menu-3: 14px;
 }
 
 /* Note: If need Disable Decimal-value functionilty open function.scss file */
@@ -184,12 +184,12 @@ body {
   max-width: 100%;
   height: auto;
   min-height: 100%;
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-base);
-  line-height: var(--line-height-base);
-  color: var(--body-color);
-  background-color: var(--body-bg);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--leading-normal);
+  color: var(--color-foreground);
+  background-color: var(--color-background);
 }
 body.scroll-fixed {
   overflow: hidden;
@@ -202,12 +202,12 @@ body.scroll-fixed {
 
 h1,
 .h1 {
-  margin-bottom: var(--hgroup-margin-bottom);
+  margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--h1-size, 3.125rem);
-  font-weight: var(--font-weight-heading);
-  line-height: var(--line-height-heading);
-  color: var(--body-color);
+  font-size: var(--text-h1, 3.125rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-foreground);
   word-break: keep-all;
 }
 h1 a,
@@ -235,12 +235,12 @@ h1 span,
 
 h2,
 .h2 {
-  margin-bottom: var(--hgroup-margin-bottom);
+  margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--h2-size, 2.5rem);
-  font-weight: var(--font-weight-heading);
-  line-height: var(--line-height-heading);
-  color: var(--body-color);
+  font-size: var(--text-h2, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-foreground);
   word-break: keep-all;
 }
 h2 a,
@@ -268,12 +268,12 @@ h2 span,
 
 h3,
 .h3 {
-  margin-bottom: var(--hgroup-margin-bottom);
+  margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--h3-size, 2rem);
-  font-weight: var(--font-weight-heading);
-  line-height: var(--line-height-heading);
-  color: var(--body-color);
+  font-size: var(--text-h3, 2rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-foreground);
   word-break: keep-all;
 }
 h3 a,
@@ -295,12 +295,12 @@ h3 span,
 
 h4,
 .h4 {
-  margin-bottom: var(--hgroup-margin-bottom);
+  margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--h4-size, 1.563rem);
-  font-weight: var(--font-weight-heading);
-  line-height: var(--line-height-heading);
-  color: var(--body-color);
+  font-size: var(--text-h4, 1.563rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-foreground);
   word-break: keep-all;
 }
 h4 a,
@@ -322,12 +322,12 @@ h4 span,
 
 h5,
 .h5 {
-  margin-bottom: var(--hgroup-margin-bottom);
+  margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--h5-size, 1.25rem);
-  font-weight: var(--font-weight-heading);
-  line-height: var(--line-height-heading);
-  color: var(--body-color);
+  font-size: var(--text-h5, 1.25rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-foreground);
   word-break: keep-all;
 }
 h5 a,
@@ -349,12 +349,12 @@ h5 span,
 
 h6,
 .h6 {
-  margin-bottom: var(--hgroup-margin-bottom);
+  margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--h6-size, 1.125rem);
-  font-weight: var(--font-weight-heading);
-  line-height: var(--line-height-heading);
-  color: var(--body-color);
+  font-size: var(--text-h6, 1.125rem);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-foreground);
   word-break: keep-all;
 }
 h6 a,
@@ -395,7 +395,7 @@ p:last-child {
   left: 0;
   width: 2px;
   height: 100%;
-  background-color: var(--color-secondary-100);
+  background-color: var(--color-secondary);
 }
 
 :is(ul, ol) {
@@ -413,7 +413,7 @@ p:last-child {
 
 ul > li::marker {
   font-size: 1.2em;
-  color: var(--color-secondary-100);
+  color: var(--color-secondary);
 }
 
 blockquote {
@@ -421,13 +421,13 @@ blockquote {
   display: block;
   margin-bottom: 1.563rem;
   padding: 1.25rem;
-  border-left: 0.25rem solid var(--color-primary-100);
+  border-left: 0.25rem solid var(--color-primary);
   font-size: 1.125rem;
   font-style: italic;
   line-height: 2;
   color: var(--color-black);
   text-align: left;
-  background-color: var(--color-gray);
+  background-color: var(--color-gray-200);
   /* stylelint-disable no-descending-specificity */
   /* stylelint-enable no-descending-specificity */
 }
@@ -465,12 +465,12 @@ picture {
 
 /* Link */
 a {
-  color: var(--color-primary-100);
+  color: var(--color-primary);
   text-decoration: underline;
   transition: background-color 0.3s ease 0s, color 0.3s ease 0s;
 }
 a:hover {
-  color: var(--color-secondary-100);
+  color: var(--color-secondary);
   outline: none;
 }
 a.tab-outline {
@@ -504,7 +504,7 @@ table td {
 .table-bordered td,
 .table-bordered th {
   padding: 0.625rem;
-  border-bottom: 0.063rem solid var(--color-gray);
+  border-bottom: 0.063rem solid var(--color-gray-200);
   vertical-align: bottom;
 }
 
@@ -519,7 +519,7 @@ table td {
  * Main content containers
  */
 .alignwide, .container-fluid, .container {
-  --gutter: var(--gutters);
+  --gutter: var(--spacing-container-gutter);
   width: min(100% - var(--gutter) * 2, var(--container-width, 100%));
   margin-right: auto;
   margin-left: auto;
@@ -536,16 +536,16 @@ table td {
 [class*=cell-] {
   position: relative;
   width: 100%;
-  padding-right: calc(var(--row-gutters) * 0.5);
-  padding-left: calc(var(--row-gutters) * 0.5);
+  padding-right: calc(var(--spacing-row-gutter) * 0.5);
+  padding-left: calc(var(--spacing-row-gutter) * 0.5);
 }
 
 /* row and column */
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: calc(var(--row-gutters) * -0.5);
-  margin-left: calc(var(--row-gutters) * -0.5);
+  margin-right: calc(var(--spacing-row-gutter) * -0.5);
+  margin-left: calc(var(--spacing-row-gutter) * -0.5);
 }
 .row.no-gutters {
   margin-right: 0;
@@ -1396,7 +1396,7 @@ table td {
 input[type=button],
 input[type=reset],
 input[type=submit], .btn {
-  --focuc-outline-space: -1px;
+  --focus-outline-space: -1px;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
@@ -1405,14 +1405,14 @@ input[type=submit], .btn {
   padding: 0.688rem 1.5rem;
   border: none;
   border-radius: 0.125rem;
-  font-size: var(--font-size-base);
+  font-size: var(--text-base);
   font-weight: 700;
   line-height: 1.5;
   color: var(--color-white);
   text-align: center;
   text-decoration: none;
   vertical-align: top;
-  background-color: var(--color-primary-100);
+  background-color: var(--color-primary);
   transition: background-color 0.3s ease 0s, color 0.3s ease 0s, border-color 0.3s ease 0s;
 }
 @media (max-width: 767px) {
@@ -1428,8 +1428,8 @@ input[type=submit]::before, .btn::before {
   pointer-events: none;
   content: "";
   position: absolute;
-  inset: var(--focuc-outline-space);
-  border: 1px solid var(--color-gray);
+  inset: var(--focus-outline-space);
+  border: 1px solid var(--color-gray-200);
   border-radius: 0.313rem;
   visibility: hidden;
   opacity: 0;
@@ -1439,14 +1439,14 @@ input[type=button]:hover,
 input[type=reset]:hover,
 input[type=submit]:hover, .btn:hover {
   cursor: pointer;
-  color: var(--color-primary-100);
+  color: var(--color-primary);
   text-decoration: none;
-  background-color: var(--color-secondary-100);
+  background-color: var(--color-secondary);
 }
 input[type=button]:focus,
 input[type=reset]:focus,
 input[type=submit]:focus, .btn:focus {
-  --focuc-outline-space: -4px;
+  --focus-outline-space: -4px;
   color: var(--color-white);
   outline: 0;
 }
@@ -1467,9 +1467,9 @@ input[type=submit]:focus::before, .btn:focus::before {
           user-select: none;
   position: relative;
   border: 0;
-  font-size: var(--font-size-base);
+  font-size: var(--text-base);
   font-weight: 700;
-  color: var(--color-primary-100);
+  color: var(--color-primary);
   text-decoration: none;
   transition: background-color 0.3s ease 0s, color 0.3s ease 0s, border-color 0.3s ease 0s;
 }
@@ -1478,7 +1478,7 @@ input[type=submit]:focus::before, .btn:focus::before {
   content: "";
   position: absolute;
   inset: -4px -8px;
-  border: 1px solid var(--color-gray);
+  border: 1px solid var(--color-gray-200);
   border-radius: 1.25rem;
   visibility: hidden;
   opacity: 0;
@@ -1486,7 +1486,7 @@ input[type=submit]:focus::before, .btn:focus::before {
 }
 .btn-link::after {
   content: "c";
-  font-family: var(--icon-family);
+  font-family: var(--font-icon);
   font-weight: normal;
   font-style: normal;
   font-variant: normal;
@@ -1494,17 +1494,17 @@ input[type=submit]:focus::before, .btn:focus::before {
   display: inline-flex;
   margin-left: 8px;
   font-size: 0.563rem;
-  color: var(--color-primary-100);
+  color: var(--color-primary);
   transition: 0.4s ease;
 }
 .btn-link:hover {
   border-color: currentcolor;
-  color: var(--color-secondary-100);
+  color: var(--color-secondary);
   text-decoration: none;
 }
 .btn-link:hover::after {
   transform: translateX(4px);
-  color: var(--color-secondary-100);
+  color: var(--color-secondary);
 }
 .btn-link:focus {
   outline: 0;
@@ -1525,15 +1525,15 @@ input[type=submit] {
 form label {
   display: block;
   margin-bottom: 0.625rem;
-  font-family: var(--font-family-base);
-  font-size: var(--label-font-size);
-  font-weight: var(--label-font-weight);
-  line-height: var(--line-height-base);
-  color: var(--body-color);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-label);
+  line-height: var(--leading-normal);
+  color: var(--color-foreground);
 }
 
 :is(input, textarea, button, select) {
-  font-family: var(--font-family-base);
+  font-family: var(--font-sans);
 }
 
 input[type=url],
@@ -1556,7 +1556,7 @@ textarea {
   resize: none;
   overflow: auto;
   display: block;
-  height: var(--textarea-height);
+  height: var(--height-textarea);
   padding: 0.625rem 0.938rem;
 }
 
@@ -1571,13 +1571,13 @@ input[type=date],
 textarea,
 select {
   width: 100%;
-  height: var(--input-height);
+  height: var(--height-input);
   padding: 0 0.938rem;
-  border: 0.063rem solid var(--input-border-color);
-  border-radius: var(--input-radius);
-  font-size: var(--font-size-base);
-  font-weight: var(--label-font-weight);
-  color: var(--body-color);
+  border: 0.063rem solid var(--color-input-border);
+  border-radius: var(--radius-input);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-label);
+  color: var(--color-foreground);
 }
 input[type=url]:focus,
 input[type=text]:focus,
@@ -1589,7 +1589,7 @@ input[type=number]:focus,
 input[type=date]:focus,
 textarea:focus,
 select:focus {
-  border-color: var(--input-border-color);
+  border-color: var(--color-input-border);
   outline: none;
 }
 input[type=url]::-webkit-input-placeholder, input[type=text]::-webkit-input-placeholder, input[type=password]::-webkit-input-placeholder, input[type=email]::-webkit-input-placeholder, input[type=tel]::-webkit-input-placeholder, input[type=search]::-webkit-input-placeholder, input[type=number]::-webkit-input-placeholder, input[type=date]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-webkit-input-placeholder {
@@ -1702,7 +1702,7 @@ select:-webkit-autofill:focus {
   display: block;
   width: 0.313rem;
   height: 0.625rem;
-  border: solid var(--color-secondary-100);
+  border: solid var(--color-secondary);
   border-width: 0 0.125rem 0.125rem 0;
 }
 .checkbox label {
@@ -1716,7 +1716,7 @@ select:-webkit-autofill:focus {
   display: inline-block;
   margin-right: 0.5rem;
   padding: 0.5rem;
-  border: 0.125rem solid var(--color-secondary-100);
+  border: 0.125rem solid var(--color-secondary);
   vertical-align: middle;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -1837,28 +1837,28 @@ select:-webkit-autofill:focus {
   margin: 0 0.625rem;
   padding: 0;
   font-weight: 700;
-  color: color-mix(in srgb, var(--color-primary-100), transparent 40%);
+  color: color-mix(in srgb, var(--color-primary), transparent 40%);
 }
 .pagination li a:hover {
-  color: var(--color-secondary-100) !important;
+  color: var(--color-secondary) !important;
 }
 .pagination li a:not(.prev, .next),
 .pagination li span {
   border: none;
   font-weight: 700;
   line-height: 1;
-  color: color-mix(in srgb, var(--color-primary-100), transparent 40%);
+  color: color-mix(in srgb, var(--color-primary), transparent 40%);
   text-decoration: none;
   transition: 0.4s ease background-color, 0.4s ease color;
 }
 .pagination li a:not(.prev, .next).active,
 .pagination li span.active {
-  border-color: var(--color-primary-100);
+  border-color: var(--color-primary);
 }
 .pagination li .prev,
 .pagination li .next {
   cursor: pointer;
-  color: var(--color-primary-100);
+  color: var(--color-primary);
   text-decoration: none;
 }
 .pagination li .prev::after,
@@ -1866,14 +1866,14 @@ select:-webkit-autofill:focus {
   content: "";
   position: absolute;
   inset: -2px -4px;
-  border: 1px solid var(--color-gray);
+  border: 1px solid var(--color-gray-200);
   border-radius: 0.375rem;
   visibility: hidden;
   opacity: 0;
 }
 .pagination li .prev:hover,
 .pagination li .next:hover {
-  color: var(--color-secondary-100);
+  color: var(--color-secondary);
 }
 .pagination li .prev:focus::after,
 .pagination li .next:focus::after {
@@ -1887,18 +1887,18 @@ select:-webkit-autofill:focus {
   opacity: 0.6;
 }
 .pagination li .current {
-  color: var(--color-primary-100);
+  color: var(--color-primary);
 }
 
 /* stylelint-disable max-nesting-depth */
 .hamburger {
-  --humburgerbox: 2.5rem;
+  --humburger-box: 2.5rem;
   z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--humburgerbox);
-  height: var(--humburgerbox);
+  width: var(--humburger-box);
+  height: var(--humburger-box);
   margin: 0 0 0 1.563rem;
   padding: 0;
   text-align: center;
@@ -1924,7 +1924,7 @@ select:-webkit-autofill:focus {
   height: 2px;
   margin: 0 auto;
   border-radius: 2px;
-  background: var(--color-primary-100);
+  background: var(--color-primary);
   transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .hamburger span::before, .hamburger span::after {
@@ -1935,7 +1935,7 @@ select:-webkit-autofill:focus {
   width: 100%;
   height: 100%;
   border-radius: 2px;
-  background: var(--color-primary-100);
+  background: var(--color-primary);
   transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .hamburger span::before {
@@ -1949,7 +1949,7 @@ select:-webkit-autofill:focus {
 }
 .hamburger.is-clicked span::before, .hamburger.is-clicked span::after {
   top: 0;
-  background-color: var(--color-primary-100);
+  background-color: var(--color-primary);
 }
 .hamburger.is-clicked span::before {
   transform: rotate(45deg);
@@ -1990,7 +1990,7 @@ select:-webkit-autofill:focus {
 .mbnav__top {
   display: flex;
   justify-content: space-between;
-  background: var(--color-secondary-100);
+  background: var(--color-secondary);
 }
 .mbnav__logo {
   padding: 15px;
@@ -2039,10 +2039,10 @@ select:-webkit-autofill:focus {
   justify-content: space-between;
   margin: 0;
   padding: 0;
-  border-bottom: 1px solid var(--color-gray);
+  border-bottom: 1px solid var(--color-gray-200);
   font-size: 1.25rem;
   font-weight: 500;
-  color: var(--color-primary-100);
+  color: var(--color-primary);
   list-style: none;
 }
 .mbnav ul li:not(.btn-wrap)::before {
@@ -2055,15 +2055,15 @@ select:-webkit-autofill:focus {
   display: none;
 }
 .mbnav ul li:not(.btn-wrap) .mbnav__caret::before, .mbnav ul li:not(.btn-wrap) a::after {
-  --sarrow-width: 10px;
+  --arrow-width: 10px;
   content: "";
   transform: rotate(45deg);
   display: flex;
   align-items: center;
-  width: var(--sarrow-width);
-  height: var(--sarrow-width);
+  width: var(--arrow-width);
+  height: var(--arrow-width);
   margin: auto;
-  border: calc(var(--sarrow-width) / 4) solid var(--color-primary-100);
+  border: calc(var(--arrow-width) / 4) solid var(--color-primary);
   border-bottom: 0;
   border-left: 0;
 }
@@ -2118,7 +2118,7 @@ select:-webkit-autofill:focus {
   color: currentcolor;
 }
 .mbnav ul li:not(.btn-wrap).back-click::before {
-  --sarrow-width: 10px;
+  --arrow-width: 10px;
   content: "";
   position: absolute;
   top: 20px;
@@ -2126,10 +2126,10 @@ select:-webkit-autofill:focus {
   transform: rotate(-135deg);
   display: flex;
   align-items: center;
-  width: var(--sarrow-width);
-  height: var(--sarrow-width);
+  width: var(--arrow-width);
+  height: var(--arrow-width);
   margin: auto;
-  border: calc(var(--sarrow-width) / 4) solid var(--color-primary-100);
+  border: calc(var(--arrow-width) / 4) solid var(--color-primary);
   border-bottom: 0;
   border-left: 0;
 }
@@ -2143,17 +2143,17 @@ select:-webkit-autofill:focus {
   height: auto;
 }
 .color-mbnav .mbnav__caret::before {
-  color: var(--color-primary-100) !important;
+  color: var(--color-primary) !important;
 }
 
 .mbnav ul ul li {
-  font-size: var(--menu-level-2);
+  font-size: var(--text-menu-2);
 }
 .mbnav ul ul li a {
   padding-left: 25px;
 }
 .mbnav ul ul li li {
-  font-size: var(--menu-level-3);
+  font-size: var(--text-menu-3);
 }
 .mbnav ul ul li li a {
   padding-left: 35px;
@@ -2262,13 +2262,13 @@ select:-webkit-autofill:focus {
   transform: rotate(135deg);
   width: 10px;
   height: 10px;
-  border-top: 1px solid var(--color-primary-100);
-  border-right: 1px solid var(--color-primary-100);
+  border-top: 1px solid var(--color-primary);
+  border-right: 1px solid var(--color-primary);
   transition: border-color 0.3s;
 }
 .main-header .navigation nav ul li:hover > a {
   color: var(--color-white);
-  background-color: var(--color-primary-100);
+  background-color: var(--color-primary);
 }
 .main-header .navigation nav ul li:hover > a::after {
   border-color: var(--color-white);
@@ -2293,7 +2293,7 @@ select:-webkit-autofill:focus {
 .main-header .navigation nav ul.sub-menu li a {
   display: block;
   color: var(--color-white);
-  background-color: var(--color-primary-100);
+  background-color: var(--color-primary);
 }
 .main-header .navigation nav ul.sub-menu li.menu-item-has-children > a::after {
   top: 17px;
@@ -2301,11 +2301,11 @@ select:-webkit-autofill:focus {
   border-color: var(--color-white);
 }
 .main-header .navigation nav ul.sub-menu li:hover > a {
-  color: var(--color-primary-100);
+  color: var(--color-primary);
   background-color: var(--color-white);
 }
 .main-header .navigation nav ul.sub-menu li:hover > a::after {
-  border-color: var(--color-primary-100);
+  border-color: var(--color-primary);
 }
 .main-header .navigation nav ul.sub-menu li:not(:last-child) a {
   border-bottom: 1px solid color-mix(in srgb, var(--color-white), transparent 70%);
@@ -2319,7 +2319,7 @@ select:-webkit-autofill:focus {
   padding: 50px 0;
   line-height: normal;
   text-align: center;
-  background: var(--color-primary-100);
+  background: var(--color-primary);
 }
 
 /*# sourceMappingURL=main.css.map*/

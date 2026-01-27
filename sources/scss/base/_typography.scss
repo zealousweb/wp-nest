@@ -22,13 +22,13 @@ body {
     height: auto;
     min-height: 100%;
 
-    font-family: var(--font-family-base);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-base);
-    line-height: var(--line-height-base);
-    color: var(--body-color);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-normal);
+    color: var(--color-foreground);
 
-    background-color: var(--body-bg);
+    background-color: var(--color-background);
 
     &.scroll-fixed {
         overflow: hidden;
@@ -45,13 +45,13 @@ body {
 @each $key, $size in $heading-size {
     #{$key},
     .#{$key} {
-        margin-bottom: var(--hgroup-margin-bottom);
+        margin-bottom: var(--spacing-heading-margin);
 
         font-family: inherit;
         font-size: $size;
-        font-weight: var(--font-weight-heading);
-        line-height: var(--line-height-heading);
-        color: var(--body-color);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--leading-tight);
+        color: var(--color-foreground);
         word-break: keep-all;
 
         a {
@@ -133,7 +133,7 @@ p {
         width: 2px;
         height: 100%;
 
-        background-color: var(--color-secondary-100);
+        background-color: var(--color-secondary);
     }
 }
 
@@ -157,7 +157,7 @@ ul {
     >li {
         &::marker {
             font-size: 1.2em;
-            color: var(--color-secondary-100);
+            color: var(--color-secondary);
         }
     }
 }
@@ -169,7 +169,7 @@ blockquote {
 
     margin-bottom: rem(25px);
     padding: rem(20px);
-    border-left: rem(4px) solid var(--color-primary-100);
+    border-left: rem(4px) solid var(--color-primary);
 
     font-size: rem(18px);
     font-style: italic;
@@ -177,7 +177,7 @@ blockquote {
     color: var(--color-black);
     text-align: left;
 
-    background-color: var(--color-gray);
+    background-color: var(--color-gray-200);
 
     /* stylelint-disable no-descending-specificity */
     p {
@@ -220,14 +220,14 @@ picture {
 
 /* Link */
 a {
-    color: var(--color-primary-100);
+    color: var(--color-primary);
     text-decoration: underline;
     transition:
         background-color 0.3s ease 0s,
         color 0.3s ease 0s;
 
     &:hover {
-        color: var(--color-secondary-100);
+        color: var(--color-secondary);
         outline: none;
     }
 
@@ -266,7 +266,7 @@ table {
     td,
     th {
         padding: rem(10px);
-        border-bottom: rem(1px) solid var(--color-gray);
+        border-bottom: rem(1px) solid var(--color-gray-200);
         vertical-align: bottom;
     }
 }
