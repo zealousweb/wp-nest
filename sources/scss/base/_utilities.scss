@@ -153,8 +153,29 @@
 	}
 }
 
-/* text alignment */
-.text {
+// Font Weight
+
+.font{
+    &-normal{
+        font-weight: var(--font-weight-normal);
+    }
+
+    &-medium{
+        font-weight: var(--font-weight-medium);
+    }
+
+    &-semi-bold{
+        font-weight: var(--font-weight-semibold);
+    }
+
+    &-bold{
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+// text size and transform
+
+.text{
 	&-center {
 		text-align: center;
 	}
@@ -165,6 +186,38 @@
 
 	&-left {
 		text-align: left;
+	}
+
+	&-base{
+		font-size: var(--text-base);
+	}
+
+	&-xs{
+		font-size: var(--text-xs);
+	}
+
+	&-sm{
+		font-size: var(--text-sm);
+	}
+
+	&-lg{
+		font-size: var(--text-lg);
+	}
+
+	&-xl{
+		font-size: var(--text-xl);
+	}
+
+	&-uppercase{
+		text-transform: uppercase;
+	}
+
+	&-lowercase{
+		text-transform: lowercase;
+	}
+
+	&-capitalize{
+		text-transform: capitalize;
 	}
 }
 

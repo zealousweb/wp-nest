@@ -3,8 +3,8 @@
   \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 :root {
   --font-sans: "Open Sans", "Arial", sans-serif;
+  --font-serif: "Times New Roman", times, serif;
   --font-icon: "iconfontfamily";
-  --text-base: 1rem;
   --color-primary: #1eb2a6;
   --color-secondary: #ffa34d;
   --color-white: #fff;
@@ -14,19 +14,27 @@
   --color-foreground: var(--color-black);
   --leading-normal: 1.5;
   --leading-tight: 1.1;
+  --font-weight-normal: 400;
   --font-weight-medium: 500;
+  --font-weight-semibold: 600;
   --font-weight-bold: 700;
-  --spacing-heading-margin: 0.938rem;
-  --text-h1: 3.125rem;
-  --text-h2: 2.5rem;
-  --text-h3: 2rem;
-  --text-h4: 1.563rem;
-  --text-h5: 1.25rem;
-  --text-h6: 1.125rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
   --container-width: 73.125rem;
   --spacing-container-gutter: 3.125rem;
   --spacing-row-gutter: 1.875rem;
   --container-full: calc(var(--container-width) + (var(--spacing-container-gutter) * 2));
+  --spacing-heading-margin: 1rem;
+  --space-lg: 6rem;
+  --space-md: 4.5rem;
+  --space-sm: 3.75rem;
   --text-label: 0.875rem;
   --font-weight-label: 400;
   --input-background: var(--color-white);
@@ -34,9 +42,9 @@
   --height-input: 2.625rem;
   --color-input-border: var(--color-secondary);
   --height-textarea: 9.375rem;
-  --text-menu-1: 18px;
-  --text-menu-2: 16px;
-  --text-menu-3: 14px;
+  --text-menu-1: 1.125rem;
+  --text-menu-2: 1rem;
+  --text-menu-3: 0.875rem;
 }
 
 /* Note: If need Disable Decimal-value functionilty open function.scss file */
@@ -186,7 +194,7 @@ body {
   min-height: 100%;
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
   line-height: var(--leading-normal);
   color: var(--color-foreground);
   background-color: var(--color-background);
@@ -204,7 +212,7 @@ h1,
 .h1 {
   margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--text-h1, 3.125rem);
+  font-size: var(--text-5xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--leading-tight);
   color: var(--color-foreground);
@@ -237,7 +245,7 @@ h2,
 .h2 {
   margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--text-h2, 2.5rem);
+  font-size: var(--text-4xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--leading-tight);
   color: var(--color-foreground);
@@ -270,7 +278,7 @@ h3,
 .h3 {
   margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--text-h3, 2rem);
+  font-size: var(--text-3xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--leading-tight);
   color: var(--color-foreground);
@@ -297,7 +305,7 @@ h4,
 .h4 {
   margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--text-h4, 1.563rem);
+  font-size: var(--text-2xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--leading-tight);
   color: var(--color-foreground);
@@ -324,7 +332,7 @@ h5,
 .h5 {
   margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--text-h5, 1.25rem);
+  font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--leading-tight);
   color: var(--color-foreground);
@@ -351,7 +359,7 @@ h6,
 .h6 {
   margin-bottom: var(--spacing-heading-margin);
   font-family: inherit;
-  font-size: var(--text-h6, 1.125rem);
+  font-size: var(--text-lg);
   font-weight: var(--font-weight-bold);
   line-height: var(--leading-tight);
   color: var(--color-foreground);
@@ -628,7 +636,19 @@ table td {
   justify-content: space-evenly;
 }
 
-/* text alignment */
+.font-normal {
+  font-weight: var(--font-weight-normal);
+}
+.font-medium {
+  font-weight: var(--font-weight-medium);
+}
+.font-semi-bold {
+  font-weight: var(--font-weight-semibold);
+}
+.font-bold {
+  font-weight: var(--font-weight-bold);
+}
+
 .text-center {
   text-align: center;
 }
@@ -637,6 +657,30 @@ table td {
 }
 .text-left {
   text-align: left;
+}
+.text-base {
+  font-size: var(--text-base);
+}
+.text-xs {
+  font-size: var(--text-xs);
+}
+.text-sm {
+  font-size: var(--text-sm);
+}
+.text-lg {
+  font-size: var(--text-lg);
+}
+.text-xl {
+  font-size: var(--text-xl);
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-lowercase {
+  text-transform: lowercase;
+}
+.text-capitalize {
+  text-transform: capitalize;
 }
 
 /* background and text color */
@@ -1752,11 +1796,6 @@ select:-webkit-autofill:focus {
   text-transform: uppercase;
 }
 
-:root {
-  --space-lg: 6.25rem;
-  --space-md: 4.688rem;
-  --space-sm: 3.125rem;
-}
 @media (max-width: 1199px) {
   :root {
     --space-lg: 3.125rem;

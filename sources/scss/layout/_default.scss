@@ -3,10 +3,6 @@
 @use "@scss/abstracts/mixins" as *;
 
 :root {
-	--space-lg: #{rem(100px)};
-	--space-md: #{rem(75px)};
-	--space-sm: #{rem(50px)};
-
 	@include respond-below(xl) {
 		--space-lg: #{rem(50px)};
 		--space-md: #{rem(50px)};

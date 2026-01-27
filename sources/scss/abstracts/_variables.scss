@@ -8,8 +8,8 @@
 :root {
   // Fonts
   --font-sans: 'Open Sans', 'Arial', sans-serif;
+  --font-serif: 'Times New Roman', times, serif;
   --font-icon: "iconfontfamily";
-  --text-base: #{rem(16px)};
 
   // Colors
   --color-primary: #1eb2a6;
@@ -25,23 +25,31 @@
   // Typography
   --leading-normal: 1.5;
   --leading-tight: 1.1;
+  --font-weight-normal: 400;
   --font-weight-medium: 500;
+  --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  // Headings
-  --spacing-heading-margin: #{rem(15px)};
-  --text-h1: #{rem(50px)};
-  --text-h2: #{rem(40px)};
-  --text-h3: #{rem(32px)};
-  --text-h4: #{rem(25px)};
-  --text-h5: #{rem(20px)};
-  --text-h6: #{rem(18px)};
+  // text size
+  --text-xs: #{rem(12px)};
+  --text-sm: #{rem(14px)};
+  --text-base: #{rem(16px)};
+  --text-lg: #{rem(18px)};
+  --text-xl: #{rem(20px)};
+  --text-2xl: #{rem(24px)};
+  --text-3xl: #{rem(30px)};
+  --text-4xl: #{rem(36px)};
+  --text-5xl: #{rem(48px)};
 
   // Spacing & Containers
   --container-width: #{rem(1170px)};
   --spacing-container-gutter: #{rem(50px)};
   --spacing-row-gutter: #{rem(30px)};
   --container-full: calc(var(--container-width) + (var(--spacing-container-gutter) * 2));
+  --spacing-heading-margin: #{rem(16px)};
+  --space-lg: #{rem(96px)};
+	--space-md: #{rem(72px)};
+	--space-sm: #{rem(60px)};
 
   // Forms
   --text-label: #{rem(14px)};
@@ -53,24 +61,20 @@
   --height-textarea: #{rem(150px)};
 
   // Mobile Menu
-  --text-menu-1: 18px;
-  --text-menu-2: 16px;
-  --text-menu-3: 14px;
+  --text-menu-1: #{rem(18px)};
+  --text-menu-2: #{rem(16px)};
+  --text-menu-3: #{rem(14px)};
 }
 
 // Heading font Size
 $heading-size: (
-  'h1': var(--text-h1, rem(50px)),
-  'h2': var(--text-h2, rem(40px)),
-  'h3': var(--text-h3, rem(32px)),
-  'h4': var(--text-h4, rem(25px)),
-  'h5': var(--text-h5, rem(20px)),
-  'h6': var(--text-h6, rem(18px)),
+  'h1': var(--text-5xl),
+  'h2': var(--text-4xl),
+  'h3': var(--text-3xl),
+  'h4': var(--text-2xl),
+  'h5': var(--text-xl),
+  'h6': var(--text-lg),
 );
-
-// Set assets path
-$img: '../images'; // background-img:url( #{$img}/)
-$fonts: '../fonts';
 
 // Media Query breakpoints.
 $breakpoints: (
