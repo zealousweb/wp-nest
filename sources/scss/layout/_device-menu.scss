@@ -4,12 +4,6 @@
 
 /* stylelint-disable max-nesting-depth */
 $mbnav: ".mbnav";
-$mbbg: $secondary-100;
-$line: $secondary-100;
-$text-color: $white;
-$menulevel1: 18px;
-$menulevel2: 16px;
-$menulevel3: 14px;
 $hamburger: ".hamburger";
 
 #{$hamburger} {
@@ -55,7 +49,7 @@ $hamburger: ".hamburger";
         margin: 0 auto;
         border-radius: 2px;
 
-        background: $primary-100;
+        background: var(--color-primary-100);
 
         transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
 
@@ -72,7 +66,7 @@ $hamburger: ".hamburger";
             height: 100%;
             border-radius: 2px;
 
-            background: $primary-100;
+            background: var(--color-primary-100);
 
             transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
         }
@@ -93,7 +87,7 @@ $hamburger: ".hamburger";
             &::before,
             &::after {
                 top: 0;
-                background-color: $primary-100;
+                background-color: var(--color-primary-100);
             }
 
             &::before {
@@ -146,12 +140,12 @@ $hamburger: ".hamburger";
     &__top {
         display: flex;
         justify-content: space-between;
-        background: rgba($mbbg, 1);
+        background: var(--color-secondary-100);
     }
 
     &__logo {
         padding: 15px;
-        color: $white;
+        color: var(--color-white);
     }
 
     .menu-wrap {
@@ -181,7 +175,7 @@ $hamburger: ".hamburger";
             max-height: 100%;
             padding-top: rem(85px);
 
-            background-color: $white;
+            background-color: var(--color-white);
         }
     }
 
@@ -193,7 +187,7 @@ $hamburger: ".hamburger";
         margin: 0;
         padding: 0 20px;
 
-        box-shadow: 0 0 10px 0 rgba($black, 0.2);
+        box-shadow: 0 0 10px 0 color-mix(in srgb, var(--color-black), transparent 80%);
 
         transition: 0.4s ease;
 
@@ -215,11 +209,11 @@ $hamburger: ".hamburger";
 
             margin: 0;
             padding: 0;
-            border-bottom: 1px solid $gray;
+            border-bottom: 1px solid var(--color-gray);
 
             font-size: rem(20px);
             font-weight: 500;
-            color: $primary-100;
+            color: var(--color-primary-100);
             list-style: none;
 
             &::before {
@@ -251,7 +245,7 @@ $hamburger: ".hamburger";
                 width: var(--sarrow-width);
                 height: var(--sarrow-width);
                 margin: auto;
-                border: calc(var(--sarrow-width) / 4) solid $primary-100;
+                border: calc(var(--sarrow-width) / 4) solid var(--color-primary-100);
                 border-bottom: 0;
                 border-left: 0;
             }
@@ -346,7 +340,7 @@ $hamburger: ".hamburger";
                     width: var(--sarrow-width);
                     height: var(--sarrow-width);
                     margin: auto;
-                    border: calc(var(--sarrow-width) / 4) solid $primary-100;
+                    border: calc(var(--sarrow-width) / 4) solid var(--color-primary-100);
                     border-bottom: 0;
                     border-left: 0;
                 }
@@ -368,7 +362,7 @@ $hamburger: ".hamburger";
                     @extend %after;
 
                     .color-mbnav & {
-                        color: $primary-100 !important;
+                        color: var(--color-primary-100) !important;
                     }
                 }
             }
@@ -376,14 +370,14 @@ $hamburger: ".hamburger";
 
         ul {
             li {
-                font-size: $menulevel2;
+                font-size: var(--menu-level-2);
 
                 a {
                     padding-left: 25px;
                 }
 
                 li {
-                    font-size: $menulevel3;
+                    font-size: var(--menu-level-3);
 
                     a {
                         padding-left: 35px;
@@ -407,7 +401,7 @@ $hamburger: ".hamburger";
 
         visibility: hidden;
         opacity: 0;
-        background: rgba($black, 0.55);
+        background: color-mix(in srgb, var(--color-black), transparent 45%);
 
         transition: all 0.4s ease-in;
     }
@@ -419,7 +413,7 @@ $hamburger: ".hamburger";
 
         visibility: hidden;
         opacity: 0;
-        background: rgba($black, 0.5);
+        background: color-mix(in srgb, var(--color-black), transparent 50%);
 
         transition: all 0.4s ease-in;
 

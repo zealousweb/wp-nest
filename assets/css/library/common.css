@@ -1,8 +1,8 @@
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/swiper/swiper-bundle.css ***!
-  \****************************************************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.101.3/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/postcss-loader@8.1.1_postcss@8.5.6_webpack@5.101.3/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/.pnpm/sass-loader@16.0.5_sass@1.90.0_webpack@5.101.3/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/swiper@11.2.10/node_modules/swiper/swiper-bundle.css ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /**
- * Swiper 11.2.6
+ * Swiper 11.2.10
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
@@ -10,7 +10,7 @@
  *
  * Released under the MIT License
  *
- * Released on: March 19, 2025
+ * Released on: June 28, 2025
  */
 /* FONT_START */
 @font-face {
@@ -143,15 +143,18 @@
 }
 
 .swiper-css-mode.swiper-horizontal > .swiper-wrapper {
-  scroll-snap-type: x mandatory;
+  -webkit-scroll-snap-type: x mandatory;
+          scroll-snap-type: x mandatory;
 }
 
 .swiper-css-mode.swiper-vertical > .swiper-wrapper {
-  scroll-snap-type: y mandatory;
+  -webkit-scroll-snap-type: y mandatory;
+          scroll-snap-type: y mandatory;
 }
 
 .swiper-css-mode.swiper-free-mode > .swiper-wrapper {
-  scroll-snap-type: none;
+  -webkit-scroll-snap-type: none;
+          scroll-snap-type: none;
 }
 
 .swiper-css-mode.swiper-free-mode > .swiper-wrapper > .swiper-slide {
@@ -170,7 +173,8 @@
 }
 
 .swiper-css-mode.swiper-centered.swiper-horizontal > .swiper-wrapper > .swiper-slide:first-child {
-  margin-inline-start: var(--swiper-centered-offset-before);
+  -webkit-margin-start: var(--swiper-centered-offset-before);
+          margin-inline-start: var(--swiper-centered-offset-before);
 }
 
 .swiper-css-mode.swiper-centered.swiper-horizontal > .swiper-wrapper::before {
@@ -180,7 +184,8 @@
 }
 
 .swiper-css-mode.swiper-centered.swiper-vertical > .swiper-wrapper > .swiper-slide:first-child {
-  margin-block-start: var(--swiper-centered-offset-before);
+  -webkit-margin-before: var(--swiper-centered-offset-before);
+          margin-block-start: var(--swiper-centered-offset-before);
 }
 
 .swiper-css-mode.swiper-centered.swiper-vertical > .swiper-wrapper::before {
@@ -338,7 +343,8 @@
 .swiper-button-next svg {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   transform-origin: center;
 }
 
@@ -491,7 +497,8 @@ button.swiper-pagination-bullet {
   padding: 0;
   box-shadow: none;
   -webkit-appearance: none;
-  appearance: none;
+  -moz-appearance: none;
+       appearance: none;
 }
 
 .swiper-pagination-clickable .swiper-pagination-bullet {
@@ -686,7 +693,8 @@ button.swiper-pagination-bullet {
 .swiper-zoom-container > canvas {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 /* Zoom container styles end */
@@ -793,7 +801,8 @@ button.swiper-pagination-bullet {
   top: 0;
   bottom: 0;
   right: 0;
-  filter: blur(50px);
+  -webkit-filter: blur(50px);
+          filter: blur(50px);
 }
 
 .swiper-cube .swiper-slide-next + .swiper-slide {
@@ -860,9 +869,9 @@ button.swiper-pagination-bullet {
   backface-visibility: hidden;
   overflow: hidden;
 }
-/*!********************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/@fancyapps/ui/dist/fancybox/fancybox.css ***!
-  \********************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.101.3/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/postcss-loader@8.1.1_postcss@8.5.6_webpack@5.101.3/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/.pnpm/sass-loader@16.0.5_sass@1.90.0_webpack@5.101.3/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@fancyapps+ui@5.0.36/node_modules/@fancyapps/ui/dist/fancybox/fancybox.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 :root {
   --f-spinner-width: 36px;
   --f-spinner-height: 36px;
@@ -1217,7 +1226,8 @@ button.swiper-pagination-bullet {
   stroke-linejoin: round;
   transition: opacity 0.15s ease;
   transform: var(--f-button-transform);
-  filter: var(--f-button-svg-filter);
+  -webkit-filter: var(--f-button-svg-filter);
+          filter: var(--f-button-svg-filter);
   pointer-events: none;
 }
 
@@ -1325,7 +1335,6 @@ html.with-fancybox body.hide-scrollbar {
   transform-origin: top left;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: none;
-  -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
   overscroll-behavior-y: contain;
 }
@@ -1367,11 +1376,13 @@ html.with-fancybox body.hide-scrollbar {
 
 .fancybox__viewport.is-draggable {
   cursor: move;
+  cursor: -webkit-grab;
   cursor: grab;
 }
 
 .fancybox__viewport.is-dragging {
   cursor: move;
+  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 
@@ -1394,7 +1405,8 @@ html.with-fancybox body.hide-scrollbar {
   overflow: auto;
   overscroll-behavior: contain;
   transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 .fancybox__container:not(.is-compact) .fancybox__slide.has-close-btn {
@@ -1444,6 +1456,7 @@ html.with-fancybox body.hide-scrollbar {
 
 .is-draggable .fancybox__content {
   cursor: move;
+  cursor: -webkit-grab;
   cursor: grab;
 }
 
@@ -1457,6 +1470,7 @@ html.with-fancybox body.hide-scrollbar {
 
 .is-dragging .fancybox__content {
   cursor: move;
+  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 
@@ -1473,7 +1487,8 @@ html.with-fancybox body.hide-scrollbar {
   background-position: center center;
   transition: none;
   transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 
 .fancybox__slide.has-image > .fancybox__content > picture > img {
@@ -1492,9 +1507,13 @@ html.with-fancybox body.hide-scrollbar {
   width: 100%;
   height: 100%;
   min-height: 0;
-  object-fit: contain;
-  user-select: none;
-  filter: blur(0px);
+  -o-object-fit: contain;
+     object-fit: contain;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  -webkit-filter: blur(0px);
+          filter: blur(0px);
 }
 
 .fancybox__caption {
@@ -1657,7 +1676,9 @@ html.with-fancybox body.hide-scrollbar {
   right: 0;
   bottom: 0;
   z-index: 40;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .fancybox-ghost {
@@ -1667,9 +1688,12 @@ html.with-fancybox body.hide-scrollbar {
   width: 100%;
   height: 100%;
   min-height: 0;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   z-index: 40;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   pointer-events: none;
 }
 
@@ -1789,7 +1813,9 @@ html.with-fancybox body.hide-scrollbar {
   margin: 0;
   overflow: hidden;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   perspective: 1000px;
   transform: translateZ(0);
 }
@@ -1848,6 +1874,8 @@ html.with-fancybox body.hide-scrollbar {
 }
 
 .is-modern .f-thumbs__track {
+  width: -webkit-max-content;
+  width: -moz-max-content;
   width: max-content;
 }
 
@@ -1873,15 +1901,20 @@ html.with-fancybox body.hide-scrollbar {
 }
 
 .is-modern.is-resting .f-thumbs__slide__button {
+  transition: -webkit-clip-path 0.33s ease;
   transition: clip-path 0.33s ease;
+  transition: clip-path 0.33s ease, -webkit-clip-path 0.33s ease;
 }
 
 .is-using-tab .is-modern .f-thumbs__slide:focus-within {
-  filter: drop-shadow(-1px 0px 0px var(--f-thumb-outline-color)) drop-shadow(2px 0px 0px var(--f-thumb-outline-color)) drop-shadow(0px -1px 0px var(--f-thumb-outline-color)) drop-shadow(0px 2px 0px var(--f-thumb-outline-color));
+  -webkit-filter: drop-shadow(-1px 0px 0px var(--f-thumb-outline-color)) drop-shadow(2px 0px 0px var(--f-thumb-outline-color)) drop-shadow(0px -1px 0px var(--f-thumb-outline-color)) drop-shadow(0px 2px 0px var(--f-thumb-outline-color));
+          filter: drop-shadow(-1px 0px 0px var(--f-thumb-outline-color)) drop-shadow(2px 0px 0px var(--f-thumb-outline-color)) drop-shadow(0px -1px 0px var(--f-thumb-outline-color)) drop-shadow(0px 2px 0px var(--f-thumb-outline-color));
 }
 
 .f-thumbs__slide__button {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   width: var(--f-thumb-width);
   height: 100%;
   margin: 0 -100% 0 -100%;
@@ -1914,7 +1947,8 @@ html.with-fancybox body.hide-scrollbar {
 
 .is-modern .f-thumbs__slide__button {
   --clip-path: inset( 0 calc( ((var(--f-thumb-width, 0) - var(--f-thumb-clip-width, 0))) * (1 - var(--progress, 0)) * 0.5 ) round var(--f-thumb-border-radius, 0) );
-  clip-path: var(--clip-path);
+  -webkit-clip-path: var(--clip-path);
+          clip-path: var(--clip-path);
 }
 
 .is-classic .is-nav-selected .f-thumbs__slide__button {
@@ -1948,7 +1982,8 @@ html.with-fancybox body.hide-scrollbar {
   padding: var(--f-thumb-offset);
   box-sizing: border-box;
   pointer-events: none;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: var(--f-thumb-border-radius);
 }
 
@@ -2096,7 +2131,9 @@ html.with-fancybox body.hide-scrollbar {
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: subpixel-antialiased;
   cursor: default;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .fancybox__infobar span {
@@ -2140,8 +2177,16 @@ html.with-fancybox body.hide-scrollbar {
   display: none;
 }
 
+:-webkit-full-screen [data-fancybox-toggle-fullscreen] svg g:first-child {
+  display: none;
+}
+
 :fullscreen [data-fancybox-toggle-fullscreen] svg g:first-child {
   display: none;
+}
+
+:-webkit-full-screen [data-fancybox-toggle-fullscreen] svg g:last-child {
+  display: flex;
 }
 
 :fullscreen [data-fancybox-toggle-fullscreen] svg g:last-child {
@@ -2160,7 +2205,9 @@ html.with-fancybox body.hide-scrollbar {
   transition-timing-function: linear;
   background: var(--f-progress-color, var(--f-carousel-theme-color, #0091ff));
   z-index: 30;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   pointer-events: none;
 }
 

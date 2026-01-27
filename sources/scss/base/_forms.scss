@@ -7,15 +7,15 @@ form label {
 
 	margin-bottom: rem(10px);
 
-	font-family: $label-font-family;
-	font-size: $label-font-size;
-	font-weight: $label-font-weight;
-	line-height: 1.5;
-	color: $label-color;
+	font-family: var(--font-family-base);
+	font-size: var(--label-font-size);
+	font-weight: var(--label-font-weight);
+	line-height: var(--line-height-base);
+	color: var(--body-color);
 }
 
 :is(input, textarea, button, select) {
-	font-family: $input-font-family;
+	font-family: var(--font-family-base);
 }
 
 input[type="url"],
@@ -38,7 +38,7 @@ textarea {
 	overflow: auto;
 	display: block;
 
-	height: $textarea-height-base;
+	height: var(--textarea-height);
 	padding: rem(10px) rem(15px);
 }
 
@@ -53,22 +53,22 @@ input[type="date"],
 textarea,
 select {
 	width: 100%;
-	height: $input-height-base;
+	height: var(--input-height);
 	padding: 0 rem(15px);
-	border: rem(1px) solid $input-border-color;
-	border-radius: $input-radius;
+	border: rem(1px) solid var(--input-border-color);
+	border-radius: var(--input-radius);
 
-	font-size: $input-font-size;
-	font-weight: $input-font-weight;
-	color: $input-color;
+	font-size: var(--font-size-base);
+	font-weight: var(--label-font-weight);
+	color: var(--body-color);
 
 	&:focus {
-		border-color: $input-border-color-focus;
+		border-color: var(--input-border-color);
 		outline: none;
 	}
 
 	@include placeholder {
-		color: $input-color-placeholder;
+		color: color-mix(in srgb, var(--color-black), transparent 50%);
 		opacity: 1;
 	}
 }
@@ -117,7 +117,7 @@ select:-webkit-autofill:focus {
 		.radio-custom-label {
 			cursor: pointer;
 			margin: 0;
-			color: $black;
+			color: var(--color-black);
 
 			&::before {
 				cursor: pointer;
@@ -129,13 +129,13 @@ select:-webkit-autofill:focus {
 				height: rem(10px);
 				margin-top: rem(3px);
 				margin-right: rem(10px);
-				border: rem(2px) solid $white;
+				border: rem(2px) solid var(--color-white);
 				border-radius: 50%;
 
 				vertical-align: middle;
 
-				background-color: $white;
-				box-shadow: 0 0 0 2px $black;
+				background-color: var(--color-white);
+				box-shadow: 0 0 0 2px var(--color-black);
 			}
 		}
 
@@ -151,7 +151,7 @@ select:-webkit-autofill:focus {
 
 			&:checked {
 				+ .radio-custom-label::before {
-					background-color: $black;
+					background-color: var(--color-black);
 				}
 			}
 		}
@@ -181,7 +181,7 @@ select:-webkit-autofill:focus {
 
 			width: rem(5px);
 			height: rem(10px);
-			border: solid $secondary-100;
+			border: solid var(--color-secondary-100);
 			border-width: 0 rem(2px) rem(2px) 0;
 		}
 	}
@@ -200,7 +200,7 @@ select:-webkit-autofill:focus {
 
 			margin-right: rem(8px);
 			padding: rem(8px);
-			border: rem(2px) solid $secondary-100;
+			border: rem(2px) solid var(--color-secondary-100);
 
 			vertical-align: middle;
 

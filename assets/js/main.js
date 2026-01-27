@@ -137,84 +137,6 @@ const DeviceMenu = () => {
 
 /***/ }),
 
-/***/ "./sources/js/common/fancybox.js":
-/*!***************************************!*\
-  !*** ./sources/js/common/fancybox.js ***!
-  \***************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   initFancybox: () => (/* binding */ initFancybox)
-/* harmony export */ });
-/* harmony import */ var _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fancyapps/ui */ "./node_modules/@fancyapps/ui/dist/index.esm.js");
-/* harmony import */ var _fancyapps_ui_dist_fancybox_fancybox_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fancyapps/ui/dist/fancybox/fancybox.css */ "./node_modules/@fancyapps/ui/dist/fancybox/fancybox.css");
-// fancyboxInit.js
-
-
-const initFancybox = () => {
-  _fancyapps_ui__WEBPACK_IMPORTED_MODULE_0__.Fancybox.bind('[data-fancybox]', {
-    loop: true,
-    Toolbar: {
-      display: ['close']
-    }
-  });
-};
-
-/***/ }),
-
-/***/ "./sources/js/common/swiperInit.js":
-/*!*****************************************!*\
-  !*** ./sources/js/common/swiperInit.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   initHomeSlider: () => (/* binding */ initHomeSlider),
-/* harmony export */   initTestimonialSlider: () => (/* binding */ initTestimonialSlider)
-/* harmony export */ });
-/* harmony import */ var swiper_bundle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper/bundle */ "./node_modules/swiper/swiper-bundle.mjs");
-/* harmony import */ var swiper_modules__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper/modules */ "./node_modules/swiper/modules/index.mjs");
-/* harmony import */ var swiper_css_bundle__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! swiper/css/bundle */ "./node_modules/swiper/swiper-bundle.css");
-// swiperInit.js
-
-
-
-const initHomeSlider = () => {
-  return new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('.home-slider', {
-    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Pagination],
-    loop: true,
-    navigation: {
-      nextEl: '.home-next',
-      prevEl: '.home-prev'
-    },
-    pagination: {
-      el: '.home-pagination',
-      clickable: true
-    }
-  });
-};
-const initTestimonialSlider = () => {
-  return new swiper_bundle__WEBPACK_IMPORTED_MODULE_0__["default"]('.testimonial-slider', {
-    modules: [swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Navigation, swiper_modules__WEBPACK_IMPORTED_MODULE_1__.Pagination],
-    loop: true,
-    slidesPerView: 2,
-    spaceBetween: 30,
-    pagination: {
-      el: '.testimonial-pagination',
-      clickable: true
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 1
-      }
-    }
-  });
-};
-
-/***/ }),
-
 /***/ "./sources/js/script.js":
 /*!******************************!*\
   !*** ./sources/js/script.js ***!
@@ -222,15 +144,28 @@ const initTestimonialSlider = () => {
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _js_common_swiperInit_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @js/common/swiperInit.js */ "./sources/js/common/swiperInit.js");
-/* harmony import */ var _js_common_deviceMenu_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @js/common/deviceMenu.js */ "./sources/js/common/deviceMenu.js");
-/* harmony import */ var _js_common_fancybox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @js/common/fancybox */ "./sources/js/common/fancybox.js");
+/* harmony import */ var _js_common_deviceMenu_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @js/common/deviceMenu.js */ "./sources/js/common/deviceMenu.js");
+// Device menu is global, so keep it eager
 
+(0,_js_common_deviceMenu_js__WEBPACK_IMPORTED_MODULE_0__["default"])();
 
+// Load Home slider only if homepage element exists
+if (document.querySelector('.home-slider')) {
+  Promise.all(/*! import() */[__webpack_require__.e("library/.pnpm"), __webpack_require__.e("library/common"), __webpack_require__.e("sources_js_common_swiperInit_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/swiperInit.js */ "./sources/js/common/swiperInit.js")).then(({
+    initHomeSlider
+  }) => {
+    initHomeSlider();
+  });
+}
 
-(0,_js_common_swiperInit_js__WEBPACK_IMPORTED_MODULE_0__.initHomeSlider)();
-(0,_js_common_deviceMenu_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
-(0,_js_common_fancybox__WEBPACK_IMPORTED_MODULE_2__.initFancybox)();
+// Load Fancybox only if gallery/trigger elements exist
+if (document.querySelector('[data-fancybox]')) {
+  Promise.all(/*! import() */[__webpack_require__.e("library/.pnpm"), __webpack_require__.e("library/common"), __webpack_require__.e("sources_js_common_fancybox_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/fancybox */ "./sources/js/common/fancybox.js")).then(({
+    initFancybox
+  }) => {
+    initFancybox();
+  });
+}
 
 /***/ }),
 
@@ -249,8 +184,7 @@ __webpack_require__.r(__webpack_exports__);
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["library/swiper","library/common","library/fancyapps"], () => (__webpack_exec__("./sources/js/script.js"), __webpack_exec__("./sources/scss/style.scss")));
-/******/ var __webpack_exports__ = __webpack_require__.O();
+/******/ var __webpack_exports__ = (__webpack_exec__("./sources/js/script.js"), __webpack_exec__("./sources/scss/style.scss"));
 /******/ }
 ]);
 //# sourceMappingURL=main.js.map

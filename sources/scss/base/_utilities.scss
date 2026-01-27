@@ -9,7 +9,7 @@
  */
 
 %container {
-	--gutter: #{$gutters};
+	--gutter: var(--gutters);
 
 	width: min(100% - var(--gutter) * 2, var(--container-width, 100%));
 	margin-right: auto;
@@ -21,7 +21,7 @@
 }
 
 .container {
-	--container-width: #{$container-width};
+	--container-width: var(--container-width);
 
 	@extend %container;
 
@@ -33,16 +33,16 @@
 [class*="cell-"] {
 	position: relative;
 	width: 100%;
-	padding-right: $row-gutters * 0.5;
-	padding-left: $row-gutters * 0.5;
+	padding-right: calc(var(--row-gutters) * 0.5);
+	padding-left: calc(var(--row-gutters) * 0.5);
 }
 
 /* row and column */
 .row {
 	display: flex;
 	flex-wrap: wrap;
-	margin-right: $row-gutters * -0.5;
-	margin-left: $row-gutters * -0.5;
+	margin-right: calc(var(--row-gutters) * -0.5);
+	margin-left: calc(var(--row-gutters) * -0.5);
 
 	&.no-gutters {
 		margin-right: 0;
@@ -349,6 +349,6 @@ $sides-x: left, right;
 }
 
 .alignwide {
-	--container-width: #{$container-width};
+	--container-width: var(--container-width);
 	@extend %container;
 }
