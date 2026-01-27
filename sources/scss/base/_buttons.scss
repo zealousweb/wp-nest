@@ -145,5 +145,5 @@ input[type="reset"],
 input[type="submit"] {
 	@extend %btn;
 
-	appearance: button;
+	appearance: auto;
 }

@@ -1,11 +1,11 @@
 "use strict";
 (globalThis["webpackChunkwpnest"] = globalThis["webpackChunkwpnest"] || []).push([["modules/ajax-scripts"],{
 
-/***/ "./sources/js/modules/ajax-scripts.js":
+/***/ "./sources/js/modules/ajax-scripts.js"
 /*!********************************************!*\
   !*** ./sources/js/modules/ajax-scripts.js ***!
   \********************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* eslint-env browser */
@@ -64,7 +64,7 @@ document.addEventListener('click', function (e) {
   }
 });
 
-/***/ })
+/***/ }
 
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
