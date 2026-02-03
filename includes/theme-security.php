@@ -13,7 +13,7 @@
 // add_filter('rest_authentication_errors', function ($result) {
 
 //     if (! is_user_logged_in()) {
-//         return new WP_Error('rest_disabled', __('REST API restricted.', 'textdomain'), array( 'status' => 403 ));
+//         return new WP_Error('rest_disabled', __('REST API restricted.', 'wpnest'), array( 'status' => 403 ));
 //     }
 
 //     return $result;

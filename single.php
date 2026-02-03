@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 
-<?php echo entry_banner(); ?>
+<?php entry_banner(); ?>
 
 <main id="content" class="main-content">
     
@@ -26,7 +26,7 @@ get_header();
 
             <?php
             the_content(sprintf(wp_kses(/* translators: %s: Name of current post. Only visible to screen readers */
-                __('Continue reading<span class="screen-reader-text"> "%s"</span>', 'textdomain'),
+                __('Continue reading<span class="screen-reader-text"> "%s"</span>', 'wpnest'),
                 array(
                     'span' => array(
                         'class' => array(),
@@ -35,7 +35,7 @@ get_header();
             ), wp_kses_post(get_the_title())));
 
             wp_link_pages(array(
-                'before' => '<div class="page-links">' . esc_html__('Pages:', 'textdomain'),
+                'before' => '<div class="page-links">' . esc_html__('Pages:', 'wpnest'),
                 'after'  => '</div>',
             ));
             ?>
@@ -46,8 +46,8 @@ get_header();
 
         <?php
         the_post_navigation(array(
-            'prev_text' => '<span class="nav-subtitle">' . esc_html__('Previous:', 'textdomain') . '</span> <span class="nav-title">%title</span>',
-            'next_text' => '<span class="nav-subtitle">' . esc_html__('Next:', 'textdomain') . '</span> <span class="nav-title">%title</span>',
+            'prev_text' => '<span class="nav-subtitle">' . esc_html__('Previous:', 'wpnest') . '</span> <span class="nav-title">%title</span>',
+            'next_text' => '<span class="nav-subtitle">' . esc_html__('Next:', 'wpnest') . '</span> <span class="nav-title">%title</span>',
         ));
 
         // If comments are open or we have at least one comment, load up the comment template.
