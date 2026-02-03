@@ -23,13 +23,13 @@ if (!defined('ABSPATH')) {
 </head>
 <body <?php body_class() ?>>
 <div class="wrapper">
-    <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'textdomain'); ?></a>
+    <a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'wpnest'); ?></a>
     <?php $brand_logo = get_template_directory_uri() . '/sources/images/logo.svg'; ?>
     <header class="main-header">
         <div class="container d-flex justify-content-between align-items-center flex-nowrap">
             <?php if ($brand_logo) { ?>
-                <a href="<?php echo home_url('/'); ?>" class="brand">
-                    <img src="<?php echo $brand_logo; ?>" alt="<?php echo get_bloginfo('name'); ?>">
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="brand">
+                    <img src="<?php echo esc_url($brand_logo); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
                 </a>
             <?php } ?>
             

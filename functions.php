@@ -73,8 +73,8 @@ function wpnest_setup()
      * This theme uses wp_nav_menu() in one location.
      */
     register_nav_menus(array(
-        'menu-1' => esc_html__('Primary', 'textdomain'),
-        'menu-2' => esc_html__('Secondary', 'textdomain'),
+        'menu-1' => esc_html__('Primary', 'wpnest'),
+        'menu-2' => esc_html__('Secondary', 'wpnest'),
     ));
 }
 add_action('after_setup_theme', 'wpnest_setup');

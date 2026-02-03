@@ -14,7 +14,16 @@ $decimal-value: true !default;
 @function rem($target, $context: $base) {
     $result: math.div($target, $context);
     
-    @return if($decimal-value, round-to($result, 3), $result) * 1rem;
+    @if $decimal-value {
+        @return round-to($result, 3) * 1rem;
+    } @else {
+        @return $result * 1rem;
+    }
+}
+
+// convert px to percent
+@function pxtopercent($target, $context: $base) {
+    @return math.div($target, $context) * 100%;
 }
 
 // aspect-ratio

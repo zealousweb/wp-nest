@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 
-<?php echo entry_banner(); ?>
+<?php entry_banner(); ?>
 
 <main id="content" class="main-content">
 
@@ -26,7 +26,7 @@ get_header();
         the_content();
 
         wp_link_pages(array(
-            'before' => '<div class="page-links">' . esc_html__('Pages:', 'textdomain'),
+            'before' => '<div class="page-links">' . esc_html__('Pages:', 'wpnest'),
             'after'  => '</div>',
         ));
         ?>

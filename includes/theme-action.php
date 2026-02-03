@@ -32,7 +32,7 @@ function wpnest_ajaxsearch_filter()
 {
     // Verify nonce for security
     if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'ajax-nonce')) {
-        wp_send_json_error('Security check failed!');
+        wp_send_json_error(__('Security check failed!', 'wpnest'));
     }
 
     // Sanitize input values
@@ -72,7 +72,7 @@ function wpnest_ajaxsearch_filter()
             $loop_output .= '
             <article>
                 <h2><a href="' . esc_url(get_the_permalink()) . '">' . esc_html(get_the_title()) . '</a></h2>
-                <p>' . esc_html__(get_the_excerpt(), 'textdomain') . '</p>
+                <p>' . esc_html(get_the_excerpt()) . '</p>
             </article>';
         endwhile;
 
@@ -97,7 +97,7 @@ function wpnest_ajaxsearch_filter()
 
         $loop_output .= "</div>";
     } else {
-        $loop_output .= '<p>' . esc_html__('No posts found.', 'textdomain') . '</p>';
+        $loop_output .= '<p>' . esc_html__('No posts found.', 'wpnest') . '</p>';
     }
 
     // Output the generated content

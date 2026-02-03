@@ -3,10 +3,6 @@
 @use "@scss/abstracts/mixins" as *;
 
 :root {
-	--space-lg: #{rem(100px)};
-	--space-md: #{rem(75px)};
-	--space-sm: #{rem(50px)};
-
 	@include respond-below(xl) {
 		--space-lg: #{rem(50px)};
 		--space-md: #{rem(50px)};
@@ -78,7 +74,7 @@
 .bg-secondary,
 .inner-text-white {
 	*:not(.btn) {
-		color: $white;
+		color: var(--color-white);
 	}
 }
 
@@ -101,11 +97,11 @@
 		padding: 0;
 
 		font-weight: 700;
-		color: rgba($primary-100, 0.60);
+		color: color-mix(in srgb, var(--color-primary), transparent 40%);
 
 		a {
 			&:hover {
-				color: $secondary-100 !important;
+				color: var(--color-secondary) !important;
 			}
 		}
 
@@ -115,20 +111,20 @@
 
 			font-weight: 700;
 			line-height: 1;
-			color: rgba($primary-100, 0.60);
+			color: color-mix(in srgb, var(--color-primary), transparent 40%);
 			text-decoration: none;
 
 			transition: 0.4s ease background-color, 0.4s ease color;
 
 			&.active {
-				border-color: $primary-100;
+				border-color: var(--color-primary);
 			}
 		}
 
 		.prev,
 		.next {
 			cursor: pointer;
-			color: $primary-100;
+			color: var(--color-primary);
 			text-decoration: none;
 
 			&::after {
@@ -137,7 +133,7 @@
 				position: absolute;
 				inset: -2px -4px;
 
-				border: 1px solid $gray;
+				border: 1px solid var(--color-gray-200);
 				border-radius: rem(6px);
 
 				visibility: hidden;
@@ -145,7 +141,7 @@
 			}
 
 			&:hover {
-				color: $secondary-100;
+				color: var(--color-secondary);
 			}
 
 			&:focus {
@@ -163,7 +159,7 @@
 		}
 
 		.current {
-			color: $primary-100;
+			color: var(--color-primary);
 		}
 	}
 }
