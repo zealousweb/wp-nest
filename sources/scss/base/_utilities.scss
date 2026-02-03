@@ -147,27 +147,6 @@
 	&-content-center {
 		align-content: center;
 	}
-
-	&none {
-		float: none;
-		margin: rem(20px) 0;
-	}
-
-	&center {
-		clear: both;
-		display: block;
-		margin: rem(20px) auto;
-	}
-
-	&left {
-		float: left;
-		margin: 0 rem(20px) rem(20px) 0;
-	}
-
-	&right {
-		float: right;
-		margin: 0 0 rem(20px) rem(20px);
-	}
 }
 
 .justify {
@@ -288,6 +267,12 @@ $sides-x: left, right;
 	}
 }
 
+@for $i from 1 through $grid-columns {
+	.grid-cols-#{$i} {
+		grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+	}
+}
+
 @if $spacing == true {
 	@each $space in $spaceamounts {
 		@each $side in $sides-y {
@@ -335,6 +320,12 @@ $sides-x: left, right;
 			}
 		}
 
+		@for $i from 1 through $grid-columns {
+			.grid-cols-#{$bp-key}-#{$i} {
+				grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
+			}
+		}
+
 		@if $spacing == true {
 			@each $space in $spaceamounts {
 				@each $side in $sides-y {
@@ -366,6 +357,10 @@ $sides-x: left, right;
 						padding-#{$side}: #{math.div($space, 16)}rem;
 					}
 				}
+
+				.gap-#{$bp-key}-#{$space} {
+					gap: #{math.div($space, 16)}rem;
+				}
 			}
 		}
 
@@ -385,6 +380,10 @@ $sides-x: left, right;
 
 				&-grid {
 					display: grid;
+
+					&-inline {
+						display: inline-grid;
+					}
 				}
 			}
 
@@ -403,6 +402,42 @@ $sides-x: left, right;
 
 				&-content-center {
 					align-content: center;
+				}
+			}
+
+			.justify-#{$bp-key}-items {
+				&-start {
+					justify-items: start;
+				}
+
+				&-center {
+					justify-items: center;
+				}
+
+				&-end {
+					justify-items: end;
+				}
+
+				&-stretch {
+					justify-items: stretch;
+				}
+			}
+
+			.place-#{$bp-key}-items {
+				&-start {
+					place-items: start;
+				}
+
+				&-center {
+					place-items: center;
+				}
+
+				&-end {
+					place-items: end;
+				}
+
+				&-stretch {
+					place-items: stretch;
 				}
 			}
 

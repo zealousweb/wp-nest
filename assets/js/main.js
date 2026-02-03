@@ -12,27 +12,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 const DeviceMenu = () => {
-  var _document$querySelect;
+  var _document$querySelect2;
   /* Responsive Navigation */
   const hamBurger = document.querySelector('.hamburger');
   const overlay = document.querySelector('.mbnav__backdrop');
   const mbnav = document.querySelector('.mbnav');
   const menuWrap = document.querySelector('.mbnav .menu-wrap');
+  if (!hamBurger || !mbnav) {
+    return;
+  }
   const menuClose = () => {
     hamBurger.classList.remove('is-clicked');
     document.body.classList.remove('scroll-fixed');
     mbnav.classList.remove('is-open');
     if (menuWrap) {
+      var _document$querySelect;
       const menuItems = menuWrap.querySelectorAll('li');
       menuItems.forEach(item => item.classList.remove('is-open'));
-      document.querySelector('.mbnav__inner > .menu-wrap').style.setProperty('--leftSlide', '0');
+      (_document$querySelect = document.querySelector('.mbnav__inner > .menu-wrap')) === null || _document$querySelect === void 0 || _document$querySelect.style.setProperty('--leftSlide', '0');
     }
   };
 
   /* Mobile overlay click */
-  overlay.addEventListener('click', () => {
-    menuClose();
-  });
+  if (overlay) {
+    overlay.addEventListener('click', () => {
+      menuClose();
+    });
+  }
   hamBurger.addEventListener('click', function () {
     if (hamBurger.classList.contains('is-clicked')) {
       menuClose();
@@ -42,7 +48,7 @@ const DeviceMenu = () => {
       document.body.classList.add('scroll-fixed');
     }
   });
-  const clickable = (_document$querySelect = document.querySelector('.mbnav__state')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.getAttribute('data-clickable');
+  const clickable = (_document$querySelect2 = document.querySelector('.mbnav__state')) === null || _document$querySelect2 === void 0 ? void 0 : _document$querySelect2.getAttribute('data-clickable');
   const listItemsWithSubMenu = document.querySelectorAll('.mbnav li:has(ul)');
   listItemsWithSubMenu.forEach(item => item.classList.add('has-sub'));
   const subMenus = document.querySelectorAll('.mbnav li > ul');
@@ -151,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // Load Home slider only if homepage element exists
 if (document.querySelector('.home-slider')) {
-  Promise.all(/*! import() */[__webpack_require__.e("library/common"), __webpack_require__.e("library/swiper"), __webpack_require__.e("sources_js_common_swiperInit_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/swiperInit.js */ "./sources/js/common/swiperInit.js")).then(({
+  Promise.all(/*! import() */[__webpack_require__.e("library/.pnpm"), __webpack_require__.e("library/common"), __webpack_require__.e("sources_js_common_swiperInit_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/swiperInit.js */ "./sources/js/common/swiperInit.js")).then(({
     initHomeSlider
   }) => {
     initHomeSlider();
@@ -160,7 +166,7 @@ if (document.querySelector('.home-slider')) {
 
 // Load Fancybox only if gallery/trigger elements exist
 if (document.querySelector('[data-fancybox]')) {
-  Promise.all(/*! import() */[__webpack_require__.e("library/common"), __webpack_require__.e("library/fancyapps"), __webpack_require__.e("sources_js_common_fancybox_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/fancybox */ "./sources/js/common/fancybox.js")).then(({
+  Promise.all(/*! import() */[__webpack_require__.e("library/.pnpm"), __webpack_require__.e("library/common"), __webpack_require__.e("sources_js_common_fancybox_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/fancybox */ "./sources/js/common/fancybox.js")).then(({
     initFancybox
   }) => {
     initFancybox();
