@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 
-<?php echo entry_banner(); ?>
+<?php entry_banner(); ?>
 
 <main id="content" class="main-content">
 

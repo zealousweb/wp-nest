@@ -24,13 +24,13 @@
 
         padding: 15px;
 
-        background-color: rgba(0 0 0 / 75%);
+        background-color: color-mix(in srgb, var(--color-black), transparent 25%);
     }
 
     .entry-title {
         margin: 0;
         font-size: 2rem;
-        color: $white;
+        color: var(--color-white);
         text-transform: uppercase;
     }
 }

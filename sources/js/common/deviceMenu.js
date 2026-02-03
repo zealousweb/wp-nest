@@ -5,6 +5,10 @@ const DeviceMenu = () => {
     const mbnav = document.querySelector('.mbnav');
     const menuWrap = document.querySelector('.mbnav .menu-wrap');
 
+    if (!hamBurger || !mbnav) {
+        return;
+    }
+
     const menuClose = () => {
         hamBurger.classList.remove('is-clicked');
         document.body.classList.remove('scroll-fixed');
@@ -14,14 +18,16 @@ const DeviceMenu = () => {
             menuItems.forEach((item) => item.classList.remove('is-open'));
             document
                 .querySelector('.mbnav__inner > .menu-wrap')
-                .style.setProperty('--leftSlide', '0');
+                ?.style.setProperty('--leftSlide', '0');
         }
     };
 
     /* Mobile overlay click */
-    overlay.addEventListener('click', () => {
-        menuClose();
-    });
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            menuClose();
+        });
+    }
 
     hamBurger.addEventListener('click', function() {
         if (hamBurger.classList.contains('is-clicked')) {

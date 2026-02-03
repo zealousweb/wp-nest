@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 
-<?php echo entry_banner(); ?>
+<?php entry_banner(); ?>
 
 <main id="content" class="main-content">
 
@@ -23,9 +23,9 @@ get_header();
 
         <div class="container">
 
-            <h1><?php esc_html_e('404', 'textdomain'); ?></h1>
+            <h1><?php esc_html_e('404', 'wpnest'); ?></h1>
             
-            <p><?php esc_html_e('Oops! That page can&rsquo;t be found.', 'textdomain'); ?></p>
+            <p><?php esc_html_e('Oops! That page can&rsquo;t be found.', 'wpnest'); ?></p>
 
         </div>
 

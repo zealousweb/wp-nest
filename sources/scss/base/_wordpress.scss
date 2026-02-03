@@ -1,0 +1,148 @@
+@use "@scss/abstracts/variables" as *;
+@use "@scss/abstracts/function" as *;
+
+/* -----------------------------------------------------------------------------
+ * WordPress Core Specific Styles
+ * This file contains styles for standard WordPress classes, Gutenberg blocks, 
+ * and accessibility requirements.
+ * ----------------------------------------------------------------------------- */
+
+/**
+ * 1. Accessibility / Screen Reader
+ */
+.screen-reader-text {
+	position: absolute !important;
+
+	overflow: hidden;
+
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+
+	overflow-wrap: normal !important;
+
+	clip-path: inset(50%);
+
+	&:focus {
+		z-index: 100000;
+		top: rem(5px);
+		left: rem(5px);
+
+		display: block;
+
+		width: auto;
+		height: auto;
+		padding: rem(15px) rem(23px) rem(14px);
+		border-radius: rem(3px);
+
+		font-size: rem(14px);
+		font-weight: 700;
+		line-height: normal;
+		color: var(--color-primary);
+		text-decoration: none;
+
+		background-color: var(--color-white);
+		clip-path: none;
+		box-shadow: 0 0 2px 2px rgb(0 0 0 / 60%);
+
+
+	}
+}
+
+/**
+ * 2. Standard Alignments
+ */
+.alignleft {
+	float: left;
+	margin-right: rem(20px);
+	margin-bottom: rem(20px);
+}
+
+.alignright {
+	float: right;
+	margin-bottom: rem(20px);
+	margin-left: rem(20px);
+}
+
+.aligncenter {
+	clear: both;
+	display: block;
+
+	margin-right: auto;
+	margin-bottom: rem(20px);
+	margin-left: auto;
+}
+
+// Ensure full and wide alignments work as expected
+.alignfull {
+	width: 100vw;
+	max-width: 100vw;
+	margin-right: calc(50% - 50vw);
+	margin-left: calc(50% - 50vw);
+}
+
+.alignwide {
+	max-width: unset;
+	margin-right: min(rem(-50px), calc(50% - 50vw));
+	margin-left: min(rem(-50px), calc(50% - 50vw));
+}
+
+/**
+ * 3. Captions
+ */
+.wp-caption,
+.wp-block-image figcaption {
+	max-width: 100%;
+	margin-bottom: rem(20px);
+
+	.wp-caption-text {
+		padding: rem(10px) 0;
+
+		font-size: var(--text-sm);
+		font-style: italic;
+		color: var(--color-foreground);
+
+		opacity: 0.8;
+	}
+}
+
+/**
+ * 4. Gallery & Images
+ */
+.wp-block-gallery {
+	margin-bottom: rem(30px);
+}
+
+.entry-content img {
+	max-width: 100%;
+	height: auto;
+}
+
+/**
+ * 5. Admin Bar Overrides
+ * Adjusts fixed/absolute elements when the WP Admin Bar is visible
+ */
+.admin-bar {
+	.main-header {
+		top: 32px;
+
+		@media screen and (width <= 782px) {
+			top: 46px;
+		}
+	}
+}
+
+/**
+ * 6. Sticky Posts & Comments
+ */
+.sticky {
+	padding: rem(20px);
+	border: 1px solid var(--color-primary);
+	background-color: color-mix(in srgb, var(--color-primary), transparent 95%);
+}
+
+// .bypostauthor {
+// 	// Style for comments by the post author
+// }

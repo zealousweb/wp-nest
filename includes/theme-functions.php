@@ -19,7 +19,7 @@ function wpnest_edit_post_link()
         echo '<div class="entry-footer">';
         edit_post_link(
             sprintf(
-                __('Edit <span class="screen-reader-text">%s</span>', 'textdomain'),
+                __('Edit <span class="screen-reader-text">%s</span>', 'wpnest'),
                 get_the_title()
             ),
             '<span class="edit-link">',
@@ -141,7 +141,7 @@ function acf_link($link, $link_class = '')
 
     // Extract link values.
     $link_url    = esc_url($link['url']);
-    $link_title  = ! empty($link['title']) ? esc_html($link['title']) : __('Read More', 'textdomain'); // Fallback title.
+    $link_title  = ! empty($link['title']) ? esc_html($link['title']) : __('Read More', 'wpnest'); // Fallback title.
     $link_target = ! empty($link['target']) ? '_blank' : '_self';
     $rel_attr    = ('_blank' === $link_target) ? 'noopener noreferrer' : 'nofollow';
     $link_class  = esc_attr($link_class ? $link_class : 'btn');
@@ -221,7 +221,7 @@ function wpnest_archive_post()
     ob_start();
 
     // Display search heading and search form
-    echo "<div>" . esc_html__('Search', 'textdomain') . "</div>";
+    echo "<div>" . esc_html__('Search', 'wpnest') . "</div>";
 
     get_search_form();
 
@@ -234,10 +234,10 @@ function wpnest_archive_post()
 
     // Display category dropdown if categories exist
     if (!empty($categories)) {
-        echo "<div>" . esc_html__('Filter by Category', 'textdomain') . "</div>";
+        echo "<div>" . esc_html__('Filter by Category', 'wpnest') . "</div>";
         echo "
         <select name='postcategory' id='postcategory'>
-            <option value=''>" . esc_html__('Select Category', 'textdomain') . "</option>";
+            <option value=''>" . esc_html__('Select Category', 'wpnest') . "</option>";
         foreach ($categories as $category) {
             echo '<option value="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</option>';
         }
@@ -246,7 +246,7 @@ function wpnest_archive_post()
 
     // Loading indicator for AJAX requests
     echo "
-    <div class='loading' style='display:none;'>" . esc_html__('Loading...', 'textdomain') . "</div>
+    <div class='loading' style='display:none;'>" . esc_html__('Loading...', 'wpnest') . "</div>
     <div class='blog-listing'>";
 
     // Check if there are posts available
@@ -278,7 +278,7 @@ function wpnest_archive_post()
         echo "</div>"; // End of pagination
     else :
         // Display message if no posts are found
-        echo "<p>" . esc_html__('No posts found.', 'textdomain') . "</p>";
+        echo "<p>" . esc_html__('No posts found.', 'wpnest') . "</p>";
     endif;
 
     echo "</div>"; // End of blog listing container

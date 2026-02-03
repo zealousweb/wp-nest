@@ -9,7 +9,7 @@
  */
 
 %container {
-	--gutter: #{$gutters};
+	--gutter: var(--spacing-container-gutter);
 
 	width: min(100% - var(--gutter) * 2, var(--container-width, 100%));
 	margin-right: auto;
@@ -21,7 +21,7 @@
 }
 
 .container {
-	--container-width: #{$container-width};
+	--container-width: var(--container-width);
 
 	@extend %container;
 
@@ -33,16 +33,16 @@
 [class*="cell-"] {
 	position: relative;
 	width: 100%;
-	padding-right: $row-gutters * 0.5;
-	padding-left: $row-gutters * 0.5;
+	padding-right: calc(var(--spacing-row-gutter) * 0.5);
+	padding-left: calc(var(--spacing-row-gutter) * 0.5);
 }
 
 /* row and column */
 .row {
 	display: flex;
 	flex-wrap: wrap;
-	margin-right: $row-gutters * -0.5;
-	margin-left: $row-gutters * -0.5;
+	margin-right: calc(var(--spacing-row-gutter) * -0.5);
+	margin-left: calc(var(--spacing-row-gutter) * -0.5);
 
 	&.no-gutters {
 		margin-right: 0;
@@ -77,10 +77,55 @@
 			align-self: center;
 		}
 	}
+
+	&-grid {
+		display: grid;
+
+		&-inline {
+			display: inline-grid;
+		}
+	}
 }
 
 .flex-nowrap {
 	flex-wrap: nowrap;
+}
+
+/* grid helpers */
+.justify-items {
+	&-start {
+		justify-items: start;
+	}
+
+	&-center {
+		justify-items: center;
+	}
+
+	&-end {
+		justify-items: end;
+	}
+
+	&-stretch {
+		justify-items: stretch;
+	}
+}
+
+.place-items {
+	&-start {
+		place-items: start;
+	}
+
+	&-center {
+		place-items: center;
+	}
+
+	&-end {
+		place-items: end;
+	}
+
+	&-stretch {
+		place-items: stretch;
+	}
 }
 
 /* alignment helpers */
@@ -101,27 +146,6 @@
 
 	&-content-center {
 		align-content: center;
-	}
-
-	&none {
-		float: none;
-		margin: rem(20px) 0;
-	}
-
-	&center {
-		clear: both;
-		display: block;
-		margin: rem(20px) auto;
-	}
-
-	&left {
-		float: left;
-		margin: 0 rem(20px) rem(20px) 0;
-	}
-
-	&right {
-		float: right;
-		margin: 0 0 rem(20px) rem(20px);
 	}
 }
 
@@ -153,8 +177,29 @@
 	}
 }
 
-/* text alignment */
-.text {
+// Font Weight
+
+.font{
+    &-normal{
+        font-weight: var(--font-weight-normal);
+    }
+
+    &-medium{
+        font-weight: var(--font-weight-medium);
+    }
+
+    &-semi-bold{
+        font-weight: var(--font-weight-semibold);
+    }
+
+    &-bold{
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+// text size and transform
+
+.text{
 	&-center {
 		text-align: center;
 	}
@@ -165,6 +210,38 @@
 
 	&-left {
 		text-align: left;
+	}
+
+	&-base{
+		font-size: var(--text-base);
+	}
+
+	&-xs{
+		font-size: var(--text-xs);
+	}
+
+	&-sm{
+		font-size: var(--text-sm);
+	}
+
+	&-lg{
+		font-size: var(--text-lg);
+	}
+
+	&-xl{
+		font-size: var(--text-xl);
+	}
+
+	&-uppercase{
+		text-transform: uppercase;
+	}
+
+	&-lowercase{
+		text-transform: lowercase;
+	}
+
+	&-capitalize{
+		text-transform: capitalize;
 	}
 }
 
@@ -187,6 +264,12 @@ $sides-x: left, right;
 @for $i from 1 through $grid-columns {
 	.cell-#{$i} {
 		width: math.percentage(math.div($i, $grid-columns));
+	}
+}
+
+@for $i from 1 through $grid-columns {
+	.grid-cols-#{$i} {
+		grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
 	}
 }
 
@@ -221,6 +304,10 @@ $sides-x: left, right;
 				padding-#{$side}: #{math.div($space, 16)}rem;
 			}
 		}
+
+		.gap-#{$space} {
+			gap: #{math.div($space, 16)}rem;
+		}
 	}
 }
 
@@ -230,6 +317,12 @@ $sides-x: left, right;
 		@for $i from 1 through $grid-columns {
 			.cell-#{$bp-key}-#{$i} {
 				width: math.percentage(math.div($i, $grid-columns));
+			}
+		}
+
+		@for $i from 1 through $grid-columns {
+			.grid-cols-#{$bp-key}-#{$i} {
+				grid-template-columns: repeat(#{$i}, minmax(0, 1fr));
 			}
 		}
 
@@ -264,6 +357,10 @@ $sides-x: left, right;
 						padding-#{$side}: #{math.div($space, 16)}rem;
 					}
 				}
+
+				.gap-#{$bp-key}-#{$space} {
+					gap: #{math.div($space, 16)}rem;
+				}
 			}
 		}
 
@@ -279,6 +376,14 @@ $sides-x: left, right;
 
 				&-flex {
 					display: flex;
+				}
+
+				&-grid {
+					display: grid;
+
+					&-inline {
+						display: inline-grid;
+					}
 				}
 			}
 
@@ -297,6 +402,42 @@ $sides-x: left, right;
 
 				&-content-center {
 					align-content: center;
+				}
+			}
+
+			.justify-#{$bp-key}-items {
+				&-start {
+					justify-items: start;
+				}
+
+				&-center {
+					justify-items: center;
+				}
+
+				&-end {
+					justify-items: end;
+				}
+
+				&-stretch {
+					justify-items: stretch;
+				}
+			}
+
+			.place-#{$bp-key}-items {
+				&-start {
+					place-items: start;
+				}
+
+				&-center {
+					place-items: center;
+				}
+
+				&-end {
+					place-items: end;
+				}
+
+				&-stretch {
+					place-items: stretch;
 				}
 			}
 
@@ -343,12 +484,4 @@ $sides-x: left, right;
 	}
 }
 
-/* WordPress default alignment */
-.alignfull {
-	width: 100%;
-}
 
-.alignwide {
-	--container-width: #{$container-width};
-	@extend %container;
-}

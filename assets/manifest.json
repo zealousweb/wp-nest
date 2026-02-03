@@ -3,14 +3,16 @@
   "main.js": "/js/main.js",
   "modules/ajax-scripts.js": "/js/modules/ajax-scripts.js",
   "runtime.js": "/js/runtime.js",
-  "library/swiper.js": "/js/library/swiper.js",
+  "js/sources_js_common_swiperInit_js.js": "/js/sources_js_common_swiperInit_js.js",
+  "js/sources_js_common_fancybox_js.js": "/js/sources_js_common_fancybox_js.js",
+  "library/.pnpm.js": "/js/library/.pnpm.js",
   "library/common.css": "/css/library/common.css",
-  "library/fancyapps.js": "/js/library/fancyapps.js",
   "main.css.map": "/css/main.css.map",
   "main.js.map": "/js/main.js.map",
   "ajax-scripts.js.map": "/js/modules/ajax-scripts.js.map",
   "runtime.js.map": "/js/runtime.js.map",
-  "swiper.js.map": "/js/library/swiper.js.map",
-  "common.css.map": "/css/library/common.css.map",
-  "fancyapps.js.map": "/js/library/fancyapps.js.map"
+  "sources_js_common_swiperInit_js.js.map": "/js/sources_js_common_swiperInit_js.js.map",
+  "sources_js_common_fancybox_js.js.map": "/js/sources_js_common_fancybox_js.js.map",
+  ".pnpm.js.map": "/js/library/.pnpm.js.map",
+  "common.css.map": "/css/library/common.css.map"
 }

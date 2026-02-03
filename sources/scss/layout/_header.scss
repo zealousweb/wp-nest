@@ -11,8 +11,8 @@
 	height: auto;
 	padding: 15px 0;
 
-	background-color: $white;
-	box-shadow: 0 0 10px 0 rgba($black, 0.2);
+	background-color: var(--color-white);
+	box-shadow: 0 0 10px 0 color-mix(in srgb, var(--color-black), transparent 80%);
 
 	.brand {
 		display: block;
@@ -72,8 +72,8 @@
 
 								width: 10px;
 								height: 10px;
-								border-top: 1px solid $primary-100;
-								border-right: 1px solid $primary-100;
+								border-top: 1px solid var(--color-primary);
+								border-right: 1px solid var(--color-primary);
 
 								transition: border-color 0.3s;
 							}
@@ -82,11 +82,11 @@
 
 					&:hover {
 						> a {
-							color: $white;
-							background-color: $primary-100;
+							color: var(--color-white);
+							background-color: var(--color-primary);
 
 							&::after {
-								border-color: $white;
+								border-color: var(--color-white);
 							}
 						}
 
@@ -118,8 +118,8 @@
 					li {
 						a {
 							display: block;
-							color: $white;
-							background-color: $primary-100;
+							color: var(--color-white);
+							background-color: var(--color-primary);
 						}
 
 						&.menu-item-has-children {
@@ -127,25 +127,25 @@
 								&::after {
 									top: 17px;
 									transform: rotate(45deg);
-									border-color: $white;
+									border-color: var(--color-white);
 								}
 							}
 						}
 
 						&:hover {
 							> a {
-								color: $primary-100;
-								background-color: $white;
+								color: var(--color-primary);
+								background-color: var(--color-white);
 
 								&::after {
-									border-color: $primary-100;
+									border-color: var(--color-primary);
 								}
 							}
 						}
 						
 						&:not(:last-child) {
 							a {
-								border-bottom: 1px solid rgba($white, 0.3);
+								border-bottom: 1px solid color-mix(in srgb, var(--color-white), transparent 70%);
 							}
 						}
 					}
