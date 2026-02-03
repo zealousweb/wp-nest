@@ -21,6 +21,11 @@ $decimal-value: true !default;
     }
 }
 
+// convert px to percent
+@function pxtopercent($target, $context: $base) {
+    @return math.div($target, $context) * 100%;
+}
+
 // aspect-ratio
 @function aspect-ratio($width, $height) {
     @return math.div($height, $width) * 100%;

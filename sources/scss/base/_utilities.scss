@@ -396,12 +396,4 @@ $sides-x: left, right;
 	}
 }
 
-/* WordPress default alignment */
-.alignfull {
-	width: 100%;
-}
 
-.alignwide {
-	--container-width: var(--container-width);
-	@extend %container;
-}

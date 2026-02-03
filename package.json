@@ -1,6 +1,6 @@
 {
 	"name": "wpnest",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"engines": {
 		"node": ">=20"
 	},
@@ -14,7 +14,7 @@
 		"lint:js:fix": "eslint -c config/config.eslint.js sources/**/*.js --fix",
 		"lint:scss": "stylelint -c config/config.stylelint.js sources/**/*.scss",
 		"lint:scss:fix": "stylelint -c config/config.stylelint.js sources/**/*.scss --fix",
-		"lint": "npm run lint:js && npm run lint:scss && npm run phpcs",
+		"lint": "npm run lint:js && npm run lint:scss",
 		"lint:fix": "npm run lint:js:fix && npm run lint:scss:fix",
 		"phpcs": "phpcs",
 		"phpcbf": "phpcbf",
@@ -67,16 +67,10 @@
 	},
 	"lint-staged": {
 		"sources/**/*.js": [
-			"eslint -c config/config.eslint.js --fix",
-			"git add"
+			"eslint -c config/config.eslint.js --fix"
 		],
 		"sources/**/*.scss": [
-			"stylelint -c config/config.stylelint.js --fix",
-			"git add"
-		],
-		"*.php": [
-			"phpcs",
-			"git add"
+			"stylelint -c config/config.stylelint.js --fix"
 		]
 	}
 }

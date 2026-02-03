@@ -10,14 +10,14 @@
  * @return mixed|WP_Error Modified result or error object.
  */
 
-add_filter('rest_authentication_errors', function ($result) {
+// add_filter('rest_authentication_errors', function ($result) {
 
-    if (! is_user_logged_in()) {
-        return new WP_Error('rest_disabled', __('REST API restricted.', 'textdomain'), array( 'status' => 403 ));
-    }
+//     if (! is_user_logged_in()) {
+//         return new WP_Error('rest_disabled', __('REST API restricted.', 'textdomain'), array( 'status' => 403 ));
+//     }
 
-    return $result;
-});
+//     return $result;
+// });
 /**
  * Restrict access to the `/wp/v2/users` REST API endpoint for non-logged-in users.
  *
