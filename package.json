@@ -71,6 +71,9 @@
 		],
 		"sources/**/*.scss": [
 			"stylelint -c config/config.stylelint.cjs --fix"
+		],
+		"*.php": [
+			"phpcs --standard=WordPress"
 		]
 	}
 }
