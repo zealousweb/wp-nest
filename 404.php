@@ -1,15 +1,14 @@
 <?php
-
 /**
- * The template for displaying 404
+ * The template for displaying 404 error page.
  *
  * @package WPNest
  */
 
-if (!defined('ABSPATH')) {
-    header('Status: 403 Forbidden');
-    header('HTTP/1.1 403 Forbidden');
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
 }
 
 get_header();
@@ -19,17 +18,17 @@ get_header();
 
 <main id="content" class="main-content">
 
-    <div class="error-404 not-found space-lg text-center">
+	<div class="error-404 not-found space-lg text-center">
 
-        <div class="container">
+		<div class="container">
 
-            <h1><?php esc_html_e('404', 'wpnest'); ?></h1>
-            
-            <p><?php esc_html_e('Oops! That page can&rsquo;t be found.', 'wpnest'); ?></p>
+			<h1><?php esc_html_e( '404', 'wpnest' ); ?></h1>
 
-        </div>
+			<p><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'wpnest' ); ?></p>
 
-    </div>
+		</div>
+
+	</div>
 
 </main><!-- #main -->
 
