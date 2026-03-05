@@ -21,6 +21,7 @@
 		"test:js": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
 		"test:php": "vendor/bin/phpunit",
 		"test": "npm run test:js && npm run test:php",
+		"make:test": "node config/make-test.js",
 		"prepare": "husky install"
 	},
 	"keywords": [

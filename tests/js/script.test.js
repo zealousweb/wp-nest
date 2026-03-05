@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 
 // For an entry script like script.js that immediately invokes functions on import,
 // testing it directly via Jest requires a complex jest.isolateModules structure for ESM.
