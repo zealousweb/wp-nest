@@ -1,0 +1,48 @@
+name: 🔎 PR Check
+
+on:
+    pull_request:
+        branches:
+            - master
+            - stage
+        types: [opened, synchronize, reopened]
+
+jobs:
+    pr-lint:
+        name: 📋 PR Title & Description Check
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check PR title length
+              run: |
+                  TITLE="${{ github.event.pull_request.title }}"
+                  LENGTH=${#TITLE}
+                  echo "PR Title: $TITLE"
+                  echo "Length: $LENGTH"
+                  if [ "$LENGTH" -lt 10 ]; then
+                    echo "❌ PR title is too short (min 10 chars)"
+                    exit 1
+                  fi
+                  if [ "$LENGTH" -gt 99 ]; then
+                    echo "❌ PR title is too long (max 99 chars)"
+                    exit 1
+                  fi
+                  echo "✅ PR title length is valid"
+
+    size-check:
+        name: 📏 PR Size Check
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Check PR diff size
+              run: |
+                  FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l)
+                  echo "Files changed: $FILES"
+                  if [ "$FILES" -gt 50 ]; then
+                    echo "⚠️ Large PR detected ($FILES files). Consider splitting into smaller PRs."
+                  else
+                    echo "✅ PR size is manageable ($FILES files)"
+                  fi

@@ -1,15 +1,14 @@
 <?php
-
 /**
- * The template for displaying all pages
+ * The template for displaying all pages.
  *
  * @package WPNest
  */
 
-if (!defined('ABSPATH')) {
-    header('Status: 403 Forbidden');
-    header('HTTP/1.1 403 Forbidden');
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
 }
 
 get_header();
@@ -19,21 +18,25 @@ get_header();
 
 <main id="content" class="main-content">
 
-    <?php while (have_posts()) :
-        the_post(); ?>
+	<?php
+	while ( have_posts() ) :
+		the_post();
+		?>
 
-        <?php
-        the_content();
+		<?php
+		the_content();
 
-        wp_link_pages(array(
-            'before' => '<div class="page-links">' . esc_html__('Pages:', 'wpnest'),
-            'after'  => '</div>',
-        ));
-        ?>
+		wp_link_pages(
+			array(
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wpnest' ),
+				'after'  => '</div>',
+			)
+		);
+		?>
 
-        <?php wpnest_edit_post_link(); ?>
+		<?php wpnest_edit_post_link(); ?>
 
-    <?php endwhile; ?>
+	<?php endwhile; ?>
 
 </main><!-- #main -->
 

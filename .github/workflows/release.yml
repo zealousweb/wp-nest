@@ -1,0 +1,70 @@
+name: 🚀 Release Build
+
+on:
+    push:
+        tags:
+            - "v*.*.*" # Trigger on version tags like v1.0.0, v1.2.3
+
+jobs:
+    release:
+        name: 📦 Build & Package Theme
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.2"
+                  tools: composer
+
+            - name: Install Node dependencies
+              run: npm ci
+
+            - name: Install PHP dependencies
+              run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+            - name: Run all lints
+              run: npm run lint
+
+            - name: Run PHPCS
+              run: vendor/bin/phpcs
+
+            - name: Build production assets
+              run: npm run build
+
+            - name: Package theme (exclude dev files)
+              run: |
+                  mkdir -p release/wp-nest
+                  rsync -av --exclude='node_modules' \
+                            --exclude='.git' \
+                            --exclude='.github' \
+                            --exclude='.husky' \
+                            --exclude='sources' \
+                            --exclude='config' \
+                            --exclude='.editorconfig' \
+                            --exclude='.nvmrc' \
+                            --exclude='*.lock' \
+                            --exclude='*.yaml' \
+                            --exclude='composer.json' \
+                            --exclude='package.json' \
+                            --exclude='webpack.config.js' \
+                            --exclude='.phpcs.xml' \
+                            --exclude='.vscode' \
+                            . release/wp-nest/
+                  cd release && zip -r wp-nest-${{ github.ref_name }}.zip wp-nest/
+
+            - name: Create GitHub Release
+              uses: softprops/action-gh-release@v2
+              with:
+                  files: release/wp-nest-${{ github.ref_name }}.zip
+                  generate_release_notes: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

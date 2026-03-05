@@ -1,0 +1,98 @@
+{
+    // ─── Editor Core ─────────────────────────────────────────────────────────
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,
+    "editor.trimAutoWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    // ─── Code Actions on Save (runs AFTER formatOnSave) ──────────────────────
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+
+    // ─── ESLint (JavaScript) ──────────────────────────────────────────────────
+    "eslint.enable": true,
+    "eslint.useFlatConfig": true,
+    "eslint.options": {
+        "overrideConfigFile": "${workspaceFolder}/config/config.eslint.js"
+    },
+    "eslint.validate": [
+        "javascript"
+    ],
+    "eslint.workingDirectories": [
+        "${workspaceFolder}"
+    ],
+
+    // ─── Stylelint (SCSS / CSS) ───────────────────────────────────────────────
+    "stylelint.enable": true,
+    "stylelint.configFile": "${workspaceFolder}/config/config.stylelint.cjs",
+    "stylelint.validate": [
+        "css",
+        "scss"
+    ],
+    "stylelint.packageManager": "npm",
+    "css.validate": false,
+    "scss.validate": false,
+    "less.validate": false,
+
+    // ─── PHP (PHPCS / PHPCBF) ─────────────────────────────────────────────────
+    "phpcs.enable": true,
+    "phpcs.standard": "${workspaceFolder}/.phpcs.xml",
+    "phpcbf.enable": true,
+    "phpcbf.standard": "${workspaceFolder}/.phpcs.xml",
+    "phpcbf.onsave": true,
+
+    // ─── Per-Language Formatter Settings ─────────────────────────────────────
+    // NOTE: ESLint & Stylelint fixes run via codeActionsOnSave, not as formatters.
+    // Built-in formatters handle structure; linters handle code style rules.
+    "[php]": {
+        "editor.defaultFormatter": "vscode.php-language-features",
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features",
+        "editor.formatOnSave": true
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features",
+        "editor.formatOnSave": true
+    },
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features",
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
+    },
+
+    // ─── File Associations ───────────────────────────────────────────────────
+    "files.associations": {
+        "*.scss": "scss",
+        "*.php": "php"
+    },
+
+    // ─── Files to Exclude from Explorer ─────────────────────────────────────
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/vendor": true,
+        "**/.git": true,
+        "**/assets": false
+    },
+
+    // ─── Search Exclusions ───────────────────────────────────────────────────
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/vendor": true,
+        "**/pnpm-lock.yaml": true,
+        "**/composer.lock": true
+    },
+
+    // ─── Recommended Extensions ───────────────────────────────────────────────
+    "extensions.ignoreRecommendations": false
+}

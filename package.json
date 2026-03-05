@@ -12,12 +12,12 @@
 		"build": "webpack --mode production",
 		"lint:js": "eslint -c config/config.eslint.js sources/**/*.js",
 		"lint:js:fix": "eslint -c config/config.eslint.js sources/**/*.js --fix",
-		"lint:scss": "stylelint -c config/config.stylelint.js sources/**/*.scss",
-		"lint:scss:fix": "stylelint -c config/config.stylelint.js sources/**/*.scss --fix",
+		"lint:scss": "stylelint -c config/config.stylelint.cjs sources/**/*.scss",
+		"lint:scss:fix": "stylelint -c config/config.stylelint.cjs sources/**/*.scss --fix",
 		"lint": "npm run lint:js && npm run lint:scss",
 		"lint:fix": "npm run lint:js:fix && npm run lint:scss:fix",
-		"phpcs": "phpcs",
-		"phpcbf": "phpcbf",
+		"phpcs": "vendor\\bin\\phpcs",
+		"phpcbf": "vendor\\bin\\phpcbf",
 		"prepare": "husky install"
 	},
 	"keywords": [
@@ -70,7 +70,7 @@
 			"eslint -c config/config.eslint.js --fix"
 		],
 		"sources/**/*.scss": [
-			"stylelint -c config/config.stylelint.js --fix"
+			"stylelint -c config/config.stylelint.cjs --fix"
 		]
 	}
 }

@@ -1,23 +1,28 @@
 <?php
-
 /**
- * Restrict REST API access to logged-in users only.
+ * Theme security functions.
  *
- * Prevents unauthenticated users from accessing the REST API by
- * returning a 403 error when they are not logged in.
- *
- * @param mixed $result Current REST authentication result.
- * @return mixed|WP_Error Modified result or error object.
+ * @package WPNest
  */
 
-// add_filter('rest_authentication_errors', function ($result) {
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
+}
 
-//     if (! is_user_logged_in()) {
-//         return new WP_Error('rest_disabled', __('REST API restricted.', 'wpnest'), array( 'status' => 403 ));
-//     }
+/*
+ * REST API access restriction (disabled — uncomment to enable).
+ * Restricts REST API to logged-in users only.
+ *
+ * add_filter( 'rest_authentication_errors', function( $result ) {
+ *     if ( ! is_user_logged_in() ) {
+ *         return new WP_Error( 'rest_disabled', __( 'REST API restricted.', 'wpnest' ), array( 'status' => 403 ) );
+ *     }
+ *     return $result;
+ * } );
+ */
 
-//     return $result;
-// });
 /**
  * Restrict access to the `/wp/v2/users` REST API endpoint for non-logged-in users.
  *
@@ -27,14 +32,17 @@
  * @param array $endpoints Array of available REST API endpoints.
  * @return array Modified endpoints array.
  */
-add_filter('rest_endpoints', function ($endpoints) {
+add_filter(
+	'rest_endpoints',
+	function ( $endpoints ) {
 
-    if (! is_user_logged_in() && isset($endpoints['/wp/v2/users'])) {
-        unset($endpoints['/wp/v2/users']);
-    }
+		if ( ! is_user_logged_in() && isset( $endpoints['/wp/v2/users'] ) ) {
+			unset( $endpoints['/wp/v2/users'] );
+		}
 
-    return $endpoints;
-});
+		return $endpoints;
+	}
+);
 
 /**
  * Redirect users away from author archive pages.
@@ -44,12 +52,11 @@ add_filter('rest_endpoints', function ($endpoints) {
  *
  * @return void
  */
-function disable_author_archive()
-{
+function disable_author_archive() {
 
-    if (is_author()) {
-        wp_redirect(home_url());
-        exit;
-    }
+	if ( is_author() ) {
+		wp_safe_redirect( home_url() );
+		exit;
+	}
 }
-add_action('template_redirect', 'disable_author_archive');
+add_action( 'template_redirect', 'disable_author_archive' );

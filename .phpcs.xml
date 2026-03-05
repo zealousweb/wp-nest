@@ -1,15 +1,56 @@
 <?xml version="1.0"?>
-<ruleset name="CustomRuleset">
-  <description>PHP_CodeSniffer config for WP Starter Theme</description>
+<ruleset name="WPNest Theme">
+  <description>PHP coding standards for WordPress custom theme</description>
 
-  <rule ref="PSR12" />
+  <!--
+    Dynamic file scanning: scans the entire theme directory.
+    No need to list individual files — any new PHP file or folder
+    added to the theme will be picked up automatically.
+  -->
+  <file>.</file>
 
-  <!-- Disable the side effects warning -->
-  <rule ref="PSR1.Files.SideEffects">
-    <severity>0</severity>
+  <!-- Exclude non-theme and build directories -->
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+  <exclude-pattern>*/assets/*</exclude-pattern>
+  <exclude-pattern>*/acf-json/*</exclude-pattern>
+  <exclude-pattern>*/sources/*</exclude-pattern>
+  <exclude-pattern>*/.git/*</exclude-pattern>
+  <exclude-pattern>*/.github/*</exclude-pattern>
+  <exclude-pattern>*/.husky/*</exclude-pattern>
+  <exclude-pattern>*/.vscode/*</exclude-pattern>
+
+  <arg name="basepath" value="."/>
+  <arg name="extensions" value="php"/>
+  <arg name="parallel" value="8"/>
+  <arg value="sp"/>
+
+  <rule ref="WordPress">
+    <!-- File/naming exclusions -->
+    <exclude name="Generic.Files.LineLength"/>
+    <exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+    <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+    <exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+
+    <!-- camelCase function names are intentional in this theme (themeManifest, themeCSS, themeJS) -->
+    <exclude name="WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid"/>
+
+    <!-- file_get_contents is used for LOCAL files only (manifest.json, SVG), not remote URLs -->
+    <exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
+
+    <!-- Commented-out code in theme-security.php is intentional (disabled REST filter) -->
+    <exclude name="Squiz.PHP.CommentedOutCode.Found"/>
+
+    <!-- $class parameter name is conventional in WordPress theme development -->
+    <exclude name="Universal.NamingConventions.NoReservedKeywordParameterNames.classFound"/>
+
+    <!-- Slow query warning: tax_query usage is required for the AJAX filter feature -->
+    <exclude name="WordPress.DB.SlowDBQuery.slow_db_query_tax_query"/>
+
+    <!-- Unused parameter $mimes in fix_svg_filetype_check is required by the filter hook signature -->
+    <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed"/>
   </rule>
 
-  <!-- Disable line length rule -->
   <rule ref="Generic.Files.LineLength">
     <properties>
       <property name="lineLimit" value="250"/>
@@ -17,21 +58,12 @@
     </properties>
   </rule>
 
-  <file>archive.php</file>
-  <file>comments.php</file>
-  <file>footer.php</file>
-  <file>functions.php</file>
-  <file>header.php</file>
-  <file>index.php</file>
-  <file>page.php</file>
-  <file>single.php</file>
-  <file>404.php</file>
+  <rule ref="WordPress.WP.I18n">
+    <properties>
+      <property name="text_domain" type="array">
+        <element value="wpnest"/>
+      </property>
+    </properties>
+  </rule>
 
-  <file>includes</file>
-  <file>template-parts</file>
-  <file>templates</file>
-
-  <exclude-pattern>*/vendor/*</exclude-pattern>
-  <exclude-pattern>*/node_modules/*</exclude-pattern>
-  <exclude-pattern>*/assets/*</exclude-pattern>
 </ruleset>
