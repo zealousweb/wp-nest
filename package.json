@@ -73,7 +73,8 @@
 			"stylelint -c config/config.stylelint.cjs --fix"
 		],
 		"*.php": [
-			"phpcs --standard=WordPress"
+			"vendor\\bin\\phpcbf",
+			"vendor\\bin\\phpcs"
 		]
 	}
 }
