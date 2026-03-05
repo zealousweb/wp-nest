@@ -16,10 +16,10 @@
 		"lint:scss:fix": "stylelint -c config/config.stylelint.cjs sources/**/*.scss --fix",
 		"lint": "npm run lint:js && npm run lint:scss",
 		"lint:fix": "npm run lint:js:fix && npm run lint:scss:fix",
-		"phpcs": "vendor\\bin\\phpcs",
-		"phpcbf": "vendor\\bin\\phpcbf",
+		"phpcs": "vendor/bin/phpcs",
+		"phpcbf": "vendor/bin/phpcbf",
 		"test:js": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-		"test:php": "vendor\\bin\\phpunit",
+		"test:php": "vendor/bin/phpunit",
 		"test": "npm run test:js && npm run test:php",
 		"prepare": "husky install"
 	},
@@ -80,8 +80,8 @@
 			"stylelint -c config/config.stylelint.cjs --fix"
 		],
 		"*.php": [
-			"vendor\\bin\\phpcbf",
-			"vendor\\bin\\phpcs"
+			"vendor/bin/phpcbf",
+			"vendor/bin/phpcs"
 		]
 	}
 }
