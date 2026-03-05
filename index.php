@@ -1,15 +1,14 @@
 <?php
-
 /**
  * The template for displaying blog page.
  *
  * @package WPNest
  */
 
-if (!defined('ABSPATH')) {
-    header('Status: 403 Forbidden');
-    header('HTTP/1.1 403 Forbidden');
-    exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	header( 'Status: 403 Forbidden' );
+	header( 'HTTP/1.1 403 Forbidden' );
+	exit;
 }
 
 get_header();
@@ -19,7 +18,7 @@ get_header();
 
 <main id="content" class="main-content">
 
-    <?php echo wpnest_archive_post(); ?>
+	<?php echo wp_kses_post( wpnest_archive_post() ); ?>
 
 </main><!-- #main -->
 

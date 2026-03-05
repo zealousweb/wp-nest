@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        // ─── JavaScript / ESLint ──────────────────────────────────────────
+        "dbaeumer.vscode-eslint",
+
+        // ─── SCSS / Stylelint ─────────────────────────────────────────────
+        "stylelint.vscode-stylelint",
+
+        // ─── PHP ──────────────────────────────────────────────────────────
+        "bmewburn.vscode-intelephense-client",
+        "persoderlind.vscode-phpcbf",
+        "ikappas.phpcs",
+
+        // ─── Editor Quality ───────────────────────────────────────────────
+        "editorconfig.editorconfig",
+        "streetsidesoftware.code-spell-checker",
+
+        // ─── Git & Code Quality ───────────────────────────────────────────
+        "eamodio.gitlens",
+        "usernamehw.errorlens"
+    ]
+}

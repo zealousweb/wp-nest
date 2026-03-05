@@ -68,7 +68,7 @@ class NativeLintPlugin {
 					files: file,
 					configFile: path.resolve(
 						this.rootDir,
-						"config/config.stylelint.js"
+						"config/config.stylelint.cjs"
 					),
 					fix: this.isDev,
 				})

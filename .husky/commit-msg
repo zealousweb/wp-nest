@@ -35,9 +35,6 @@ if [ "$has_error" -eq 1 ]; then
   exit 1
 fi
 
-echo "✅ No spelling mistakes found and message length is valid!"
-echo "🚀 Pushing to remote..."
-
-git push
+echo "✅ Commit message is valid — good to go!"
 
 exit 0
