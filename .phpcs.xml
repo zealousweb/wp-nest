@@ -19,6 +19,7 @@
   <exclude-pattern>*/.github/*</exclude-pattern>
   <exclude-pattern>*/.husky/*</exclude-pattern>
   <exclude-pattern>*/.vscode/*</exclude-pattern>
+  <exclude-pattern>*/tests/*</exclude-pattern>
 
   <arg name="basepath" value="."/>
   <arg name="extensions" value="php"/>
