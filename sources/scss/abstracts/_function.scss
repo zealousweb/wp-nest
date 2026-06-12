@@ -1,3 +1,5 @@
+@use "sass:meta";
+@use "sass:list";
 @use "sass:math";
 
 $base: 16px !default;
@@ -5,53 +7,86 @@ $decimal-value: true !default;
 
 // generate rounded value
 @function round-to($value, $digits: 3) {
-    $multiplier: math.pow(10, $digits);
+	$multiplier: math.pow(10, $digits);
 
-    @return math.div(math.round($value * $multiplier), $multiplier);
+	@return math.div(math.round($value * $multiplier), $multiplier);
 }
 
 // convert px to rem
 @function rem($target, $context: $base) {
-    $result: math.div($target, $context);
-    
-    @if $decimal-value {
-        @return round-to($result, 3) * 1rem;
-    } @else {
-        @return $result * 1rem;
-    }
+	$result: math.div($target, $context);
+
+	@if $decimal-value {
+		@return round-to($result, 3) * 1rem;
+	} @else {
+		@return $result * 1rem;
+	}
+}
+
+// convert list px to rem
+@function rem-calc($value) {
+	@if meta.type-of($value)=="list" {
+		$rem-list: (
+		);
+
+	@each $val in $value {
+		@if meta.type-of($val)=="number" {
+			$rem-list: list.append($rem-list, #{math.div($val, 16)}rem);
+		} @else {
+			$rem-list: list.append($rem-list, $val);
+		}
+	}
+
+	@return $rem-list;
+} @else {
+	@if meta.type-of($value)=="number" {
+		@return #{math.div($value, 16)}rem;
+	} @else {
+		@return $value;
+	}
+}
+}
+
+// PX to EM function
+@function em($target, $context: $base) {
+	@if $decimal-value ==true {
+		@return math.ceil(math.div($target, $context))+em;
+	} @else {
+		@return math.div($target, $context)+em;
+	}
 }
 
 // convert px to percent
 @function pxtopercent($target, $context: $base) {
-    @return math.div($target, $context) * 100%;
+	@return math.div($target, $context) * 100%;
 }
 
 // aspect-ratio
 @function aspect-ratio($width, $height) {
-    @return math.div($height, $width) * 100%;
+	@return math.div($height, $width) * 100%;
 }
 
 // common folder path
 @function assets($filetype, $filename) {
-    @return url("../" + $filetype + "/" + $filename);
+	@return url("../" + $filetype + "/" + $filename);
 }
 
 // image path
 @function image($filename) {
-    @return assets("images", $filename);
+	@return assets("images", $filename);
 }
 
 // fonts path
 @function font($filename) {
-    @return assets("fonts", $filename);
+	@return assets("fonts", $filename);
 }
 
 // icons path
 @function icon-font($filename) {
-    @return assets("fonts/icons-fonts", $filename);
+	@return assets("fonts/icons-fonts", $filename);
 }
 
 // letter spacing add in px
 @function ls($val) {
-    @return ($val * 0.001) * 1em;
+	@return ($val * 0.001) * 1em;
 }

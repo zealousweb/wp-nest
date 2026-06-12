@@ -11,240 +11,232 @@
 // ––––––––––––––––––––––––––––––––––––––––––––––––––
 // @include respond-above(sm) {}
 @mixin respond-above($breakpoint) {
-    // If the breakpoint exists in the map.
-    @if map.has-key($breakpoints, $breakpoint) {
-        // Get the breakpoint value.
-        $breakpoint-value: map.get($breakpoints, $breakpoint);
+	// If the breakpoint exists in the map.
+	@if map.has-key($breakpoints, $breakpoint) {
+		// Get the breakpoint value.
+		$breakpoint-value: map.get($breakpoints, $breakpoint);
 
-        // Write the media query.
-        @media (min-width: $breakpoint-value) {
-            @content;
-        }
+		// Write the media query.
+		@media (min-width: $breakpoint-value) {
+			@content;
+		}
 
-        // If the breakpoint doesn't exist in the map.
-    } @else {
-        // Log a warning.
-        @warn 'Invalid breakpoint: #{$breakpoint}.';
-    }
+		// If the breakpoint doesn't exist in the map.
+	} @else {
+		// Log a warning.
+		@warn 'Invalid breakpoint: #{$breakpoint}.';
+	}
 }
 
 //  RESPOND BELOW
 // ––––––––––––––––––––––––––––––––––––––––––––––––––
 // @include respond-below(sm) {}
 @mixin respond-below($breakpoint) {
-    // If the breakpoint exists in the map.
-    @if map.has-key($breakpoints, $breakpoint) {
-        // Get the breakpoint value.
-        $breakpoint-value: map.get($breakpoints, $breakpoint);
+	// If the breakpoint exists in the map.
+	@if map.has-key($breakpoints, $breakpoint) {
+		// Get the breakpoint value.
+		$breakpoint-value: map.get($breakpoints, $breakpoint);
 
-        // Write the media query.
-        @media (max-width: ($breakpoint-value - 1)) {
-            @content;
-        }
+		// Write the media query.
+		@media (max-width: ($breakpoint-value - 1)) {
+			@content;
+		}
 
-        // If the breakpoint doesn't exist in the map.
-    } @else {
-        // Log a warning.
-        @warn 'Invalid breakpoint: #{$breakpoint}.';
-    }
+		// If the breakpoint doesn't exist in the map.
+	} @else {
+		// Log a warning.
+		@warn 'Invalid breakpoint: #{$breakpoint}.';
+	}
 }
 
 //  RESPOND BETWEEN
 // ––––––––––––––––––––––––––––––––––––––––––––––––––
 // @include respond-between(sm, md) {}
 @mixin respond-between($lower, $upper) {
-    // If both the lower and upper breakpoints exist in the map.
-    @if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
-        // Get the lower and upper breakpoints.
-        $lower-breakpoint: map.get($breakpoints, $lower);
-        $upper-breakpoint: map.get($breakpoints, $upper);
+	// If both the lower and upper breakpoints exist in the map.
+	@if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+		// Get the lower and upper breakpoints.
+		$lower-breakpoint: map.get($breakpoints, $lower);
+		$upper-breakpoint: map.get($breakpoints, $upper);
 
-        // Write the media query.
-        @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
-            @content;
-        }
+		// Write the media query.
+		@media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+			@content;
+		}
 
-        // If one or both of the breakpoints don't exist.
-    } @else {
-        // If lower breakpoint is invalid.
-        @if map.has-key($breakpoints, $lower) == false {
-            // Log a warning.
-            @warn 'Your lower breakpoint was invalid: #{$lower}.';
-        }
+		// If one or both of the breakpoints don't exist.
+	} @else {
+		// If lower breakpoint is invalid.
+		@if map.has-key($breakpoints, $lower)==false {
+			// Log a warning.
+			@warn 'Your lower breakpoint was invalid: #{$lower}.';
+		}
 
-        // If upper breakpoint is invalid.
-        @if map.has-key($breakpoints, $upper) == false {
-            // Log a warning.
-            @warn 'Your upper breakpoint was invalid: #{$upper}.';
-        }
-    }
+		// If upper breakpoint is invalid.
+		@if map.has-key($breakpoints, $upper)==false {
+			// Log a warning.
+			@warn 'Your upper breakpoint was invalid: #{$upper}.';
+		}
+	}
 }
 
 // REM font baseline
 @mixin rem-baseline($value: $base) {
-    font-size: pxtopercent($value);
+	font-size: pxtopercent($value);
 }
 
 /* mini laptop resolution 1349 X 662 and 1246 X 681 and 1218 X 672 */
 @mixin mini-laptop {
-    @media (width >= 1100px) and (height <= 800px) {
-        @content;
-    }
+	@media (width >=1100px) and (height <=800px) {
+		@content;
+	}
 }
 
 // mobile
 @mixin mobile {
-    @media (width <= 720px) and (orientation: portrait) {
-        @content;
-    }
+	@media (width <=720px) and (orientation: portrait) {
+		@content;
+	}
 
-    @media (width <= 992px) and (orientation: landscape) {
-        @content;
-    }
+	@media (width <=992px) and (orientation: landscape) {
+		@content;
+	}
 }
 
 // portrait
 @mixin mobile-portrait {
-    @media (width <= 720px) and (orientation: portrait) {
-        @content;
-    }
+	@media (width <=720px) and (orientation: portrait) {
+		@content;
+	}
 }
 
 // Landscape
 @mixin mobile-landscape {
-    @media (width <= 992px) and (orientation: landscape) {
-        @content;
-    }
+	@media (width <=992px) and (orientation: landscape) {
+		@content;
+	}
 }
 
 // row space
 @mixin row-space($value) {
-    margin-right: rem(-$value * 0.5);
-    margin-left: rem(-$value * 0.5);
+	margin-right: rem(-$value * 0.5);
+	margin-left: rem(-$value * 0.5);
 
-    [class*="cell-"] {
-        padding-right: rem($value * 0.5);
-        padding-left: rem($value * 0.5);
-    }
+	[class*="cell-"] {
+		padding-right: rem($value * 0.5);
+		padding-left: rem($value * 0.5);
+	}
 }
 
 // input placeholder style
 @mixin placeholder {
-    &::placeholder {
-        @content;
-    }
+	&::placeholder {
+		@content;
+	}
 }
 
 // icon font : @include icon("\67");
 @mixin icon($content) {
-    content: $content;
+	content: $content;
 
-    font-family: var(--font-icon);
-    font-weight: normal;
-    font-style: normal;
-    font-variant: normal;
-    text-transform: none;
+	font-family: var(--font-icon);
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	text-transform: none;
 }
 
 // custom scroll
 @mixin custom-scroll($color1: var(--color-secondary)) {
-    &::-webkit-scrollbar {
-        width: 10px;
-    }
+	&::-webkit-scrollbar {
+		width: 10px;
+	}
 
-    &::-webkit-scrollbar-track {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px color-mix(in srgb, var(--color-black), transparent 70%);
-    }
+	&::-webkit-scrollbar-track {
+		border-radius: 10px;
+		-webkit-box-shadow: inset 0 0 6px color-mix(in srgb, var(--color-black), transparent 70%);
+	}
 
-    &::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        background: color-mix(in srgb, #{$color1}, transparent 20%);
-        -webkit-box-shadow: inset 0 0 6px color-mix(in srgb, var(--color-black), transparent 50%);
-    }
+	&::-webkit-scrollbar-thumb {
+		border-radius: 10px;
+		background: color-mix(in srgb, #{$color1}, transparent 20%);
+		-webkit-box-shadow: inset 0 0 6px color-mix(in srgb, var(--color-black), transparent 50%);
+	}
 
-    &::-webkit-scrollbar-thumb:window-inactive {
-        background: var(--color-primary);
-    }
+	&::-webkit-scrollbar-thumb:window-inactive {
+		background: var(--color-primary);
+	}
 }
 
 // Container Spacing
 @mixin container-space($position: "", $value: var(--container-full)) {
-    @if $position == "left" {
-        padding-left: calc((100% - (#{$value})) / 2);
+	@if $position =="left" {
+		padding-left: calc((100% - (#{$value})) / 2);
 
-        >div {
-            padding-left: var(--spacing-container-gutter);
+		>div {
+			padding-left: var(--gutter);
+		}
+	} @else if $position =="right" {
+		padding-right: calc((100% - (#{$value})) / 2);
 
-            @include respond-below(md) {
-                padding-left: rem(20px);
-            }
-        }
-    } @else if $position == "right" {
-        padding-right: calc((100% - (#{$value})) / 2);
-
-        >div {
-            padding-right: var(--spacing-container-gutter);
-
-            @include respond-below(md) {
-                padding-right: rem(20px);
-            }
-        }
-    } @else {
-        @error 'Wrong input container-space(#{$position}), Please use container-space(left) or container-space(right)';
-    }
+		>div {
+			padding-right: var(--gutter);
+		}
+	} @else {
+		@error 'Wrong input container-space(#{$position}), Please use container-space(left) or container-space(right)';
+	}
 }
 
 // All heading
 @mixin hgroup {
-    @for $i from 1 through 6 {
+	@for $i from 1 through 6 {
 
-        h#{$i},
-        .h#{$i} {
-            @content;
-        }
-    }
+		h#{$i},
+		.h#{$i} {
+			@content;
+		}
+	}
 }
 
 // Picture Image
 @mixin pictureimg($pos: absolute) {
-    position: relative;
+	position: relative;
 
-    picture {
-        position: $pos;
-        top: 0;
-        left: 0;
+	picture {
+		position: $pos;
+		top: 0;
+		left: 0;
 
-        display: block;
+		display: block;
 
-        width: 100%;
-        height: 100%;
+		width: 100%;
+		height: 100%;
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 }
 
 // Img fit
 @mixin imgfit($pos: absolute) {
-    img {
-        position: $pos;
-        top: 0;
-        left: 0;
+	img {
+		position: $pos;
+		top: 0;
+		left: 0;
 
-        width: 100%;
-        height: 100%;
+		width: 100%;
+		height: 100%;
 
-        object-fit: cover;
-    }
+		object-fit: cover;
+	}
 }
 
 // Flex-center
 @mixin flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

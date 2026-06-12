@@ -1,16 +1,16 @@
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.104.1/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/postcss-loader@8.2.0_postcss@8.5.6_webpack@5.104.1/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/.pnpm/sass-loader@16.0.6_sass@1.97.3_webpack@5.104.1/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/swiper@12.0.3/node_modules/swiper/swiper-bundle.css ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/swiper/swiper-bundle.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
 /**
- * Swiper 12.0.3
+ * Swiper 12.2.0
  * Most modern mobile touch slider and framework with hardware accelerated transitions
  * https://swiperjs.com
  *
- * Copyright 2014-2025 Vladimir Kharlampidi
+ * Copyright 2014-2026 Vladimir Kharlampidi
  *
  * Released under the MIT License
  *
- * Released on: October 21, 2025
+ * Released on: May 27, 2026
  */
 :root {
   --swiper-theme-color: #007aff;
@@ -134,11 +134,29 @@
       -webkit-scroll-snap-type: x mandatory;
               scroll-snap-type: x mandatory;
     }
+    > .swiper-wrapper > .swiper-slide:first-child {
+      -webkit-margin-start: var(--swiper-slides-offset-before);
+              margin-inline-start: var(--swiper-slides-offset-before);
+      scroll-margin-inline-start: var(--swiper-slides-offset-before);
+    }
+    > .swiper-wrapper > .swiper-slide:last-child {
+      -webkit-margin-end: var(--swiper-slides-offset-after);
+              margin-inline-end: var(--swiper-slides-offset-after);
+    }
   }
   &.swiper-vertical {
     > .swiper-wrapper {
       -webkit-scroll-snap-type: y mandatory;
               scroll-snap-type: y mandatory;
+    }
+    > .swiper-wrapper > .swiper-slide:first-child {
+      -webkit-margin-before: var(--swiper-slides-offset-before);
+              margin-block-start: var(--swiper-slides-offset-before);
+      scroll-margin-block-start: var(--swiper-slides-offset-before);
+    }
+    > .swiper-wrapper > .swiper-slide:last-child {
+      -webkit-margin-after: var(--swiper-slides-offset-after);
+              margin-block-end: var(--swiper-slides-offset-after);
     }
   }
   &.swiper-free-mode {
@@ -325,6 +343,7 @@
   .swiper-navigation-disabled & {
     display: none !important;
   }
+  ::slotted(svg),
   svg {
     width: 100%;
     height: 100%;
@@ -349,6 +368,7 @@
 .swiper-button-prev {
   left: var(--swiper-navigation-sides-offset, 4px);
   right: auto;
+  ::slotted(.swiper-navigation-icon),
   .swiper-navigation-icon {
     transform: rotate(180deg);
   }
@@ -386,12 +406,14 @@
   & ~ .swiper-button-prev,
   &.swiper-rtl .swiper-button-next,
   &.swiper-rtl ~ .swiper-button-next {
+    ::slotted(.swiper-navigation-icon),
     .swiper-navigation-icon {
       transform: rotate(180deg);
     }
   }
   &.swiper-rtl .swiper-button-prev,
   &.swiper-rtl ~ .swiper-button-prev {
+    ::slotted(.swiper-navigation-icon),
     .swiper-navigation-icon {
       transform: rotate(0deg);
     }
@@ -412,6 +434,7 @@
   ~ .swiper-button-prev {
     top: var(--swiper-navigation-sides-offset, 4px);
     bottom: auto;
+    ::slotted(.swiper-navigation-icon),
     .swiper-navigation-icon {
       transform: rotate(-90deg);
     }
@@ -420,6 +443,7 @@
   ~ .swiper-button-next {
     bottom: var(--swiper-navigation-sides-offset, 4px);
     top: auto;
+    ::slotted(.swiper-navigation-icon),
     .swiper-navigation-icon {
       transform: rotate(90deg);
     }
@@ -886,9 +910,9 @@
     overflow: hidden;
   }
 }
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/.pnpm/css-loader@7.1.2_webpack@5.104.1/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/.pnpm/postcss-loader@8.2.0_postcss@8.5.6_webpack@5.104.1/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/.pnpm/sass-loader@16.0.6_sass@1.97.3_webpack@5.104.1/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/.pnpm/@fancyapps+ui@6.1.9/node_modules/@fancyapps/ui/dist/fancybox/fancybox.css ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[1].use[3]!./node_modules/@fancyapps/ui/dist/fancybox/fancybox.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
 :root {
   --f-button-width: 40px;
   --f-button-height: 40px;
@@ -1388,6 +1412,10 @@ html.with-panzoom-in-fullscreen {
   background: var(--f-html-bg);
 }
 
+.is-loading > .f-html {
+  opacity: 0;
+}
+
 .f-html.is-error {
   text-align: center;
 }
@@ -1413,6 +1441,7 @@ html.with-panzoom-in-fullscreen {
   color: var(--f-caption-color);
   background: var(--f-caption-bg);
   font: var(--f-caption-font);
+  text-wrap: balance;
 }
 
 .has-html5video .f-html, .has-youtube .f-html, .has-vimeo .f-html {
@@ -2164,7 +2193,7 @@ html.with-fancybox body.hide-scrollbar {
   overflow-y: visible;
 }
 
-.fancybox__container > *:not(.fancybox__carousel), .fancybox__container .fancybox__carousel > *:not(.fancybox__viewport), .fancybox__container .fancybox__carousel > .fancybox__viewport > .fancybox__slide:not(.is-selected), .fancybox__container .fancybox__carousel > .fancybox__viewport > .fancybox__slide.is-selected > *:not(.f-html, .f-panzoom__wrapper, .f-spinner) {
+.fancybox__container > *:not(.fancybox__carousel), .fancybox__container .fancybox__carousel > *:not(.fancybox__grid, .fancybox__viewport), .fancybox__container .fancybox__column > *:not(.fancybox__viewport), .fancybox__container .fancybox__slide:not(.is-selected), .fancybox__container .fancybox__slide.is-selected > *:not(.f-html, .f-panzoom__wrapper, .f-spinner) {
   opacity: var(--f-drag-opacity, 1);
 }
 
@@ -2172,11 +2201,11 @@ html.with-fancybox body.hide-scrollbar {
   visibility: hidden;
 }
 
-.fancybox__container.is-revealing > *:not(.fancybox__carousel), .fancybox__container.is-revealing .fancybox__carousel > *:not(.fancybox__viewport), .fancybox__container.is-revealing .fancybox__carousel > .fancybox__viewport > .fancybox__slide:not(.is-selected), .fancybox__container.is-revealing .fancybox__carousel > .fancybox__viewport > .fancybox__slide.is-selected > *:not(.f-html, .f-panzoom__wrapper, .f-spinner) {
+.fancybox__container.is-revealing > *:not(.fancybox__carousel), .fancybox__container.is-revealing .fancybox__carousel > *:not(.fancybox__grid, .fancybox__viewport), .fancybox__container.is-revealing .fancybox__column > *:not(.fancybox__viewport), .fancybox__container.is-revealing .fancybox__slide:not(.is-selected), .fancybox__container.is-revealing .fancybox__slide.is-selected > *:not(.f-html, .f-panzoom__wrapper) {
   animation: var(--f-interface-enter-duration, 0.35s) ease none f-fadeIn;
 }
 
-.fancybox__container.is-hiding > *:not(.fancybox__carousel), .fancybox__container.is-hiding .fancybox__carousel > *:not(.fancybox__viewport), .fancybox__container.is-hiding .fancybox__carousel > .fancybox__viewport > .fancybox__slide.is-selected > *:not(.f-html, .f-panzoom__wrapper) {
+.fancybox__container.is-hiding > *:not(.fancybox__carousel), .fancybox__container.is-hiding .fancybox__carousel > *:not(.fancybox__grid, .fancybox__viewport), .fancybox__container.is-hiding .fancybox__column > *:not(.fancybox__viewport), .fancybox__container.is-hiding .fancybox__slide.is-selected > *:not(.f-html, .f-panzoom__wrapper) {
   animation: var(--f-interface-exit-duration, 0.35s) ease forwards f-fadeOut;
 }
 
@@ -2211,6 +2240,8 @@ html.with-fancybox body.hide-scrollbar {
   inset: 0;
   z-index: -1;
   background: var(--fancybox-backdrop-bg);
+  -webkit-filter: var(--fancybox-backdrop-filter);
+          filter: var(--fancybox-backdrop-filter);
 }
 
 .fancybox__carousel {
@@ -2322,6 +2353,11 @@ html.with-fancybox body.hide-scrollbar {
   padding: 8px;
 }
 
+.fancybox__slide.has-iframe {
+  overflow: hidden;
+  padding: 8px 0;
+}
+
 .fancybox__slide.has-close-btn {
   padding-top: 34px;
 }
@@ -2338,7 +2374,7 @@ html.with-fancybox body.hide-scrollbar {
   visibility: hidden;
 }
 
-.fancybox__container.is-closing .fancybox__carousel {
+.fancybox__container.is-closing .fancybox__carousel, .fancybox__container.is-closing .fancybox__viewport, .fancybox__container.is-closing .fancybox__slide.is-selected {
   overflow: visible;
 }
 
@@ -2358,6 +2394,10 @@ html.with-fancybox body.hide-scrollbar {
   top: calc((var(--f-button-height) + 2px) * -1);
   right: 0;
   z-index: 10;
+}
+
+.is-loading .f-button.is-close-button {
+  visibility: hidden;
 }
 
 .fancybox__thumbs {

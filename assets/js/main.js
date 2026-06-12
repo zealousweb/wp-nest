@@ -1,6 +1,18 @@
 "use strict";
 (globalThis["webpackChunkwpnest"] = globalThis["webpackChunkwpnest"] || []).push([["main"],{
 
+/***/ "./sources/scss/style.scss"
+/*!*********************************!*\
+  !*** ./sources/scss/style.scss ***!
+  \*********************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
 /***/ "./sources/js/common/deviceMenu.js"
 /*!*****************************************!*\
   !*** ./sources/js/common/deviceMenu.js ***!
@@ -157,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // Load Home slider only if homepage element exists
 if (document.querySelector('.home-slider')) {
-  Promise.all(/*! import() */[__webpack_require__.e("library/.pnpm"), __webpack_require__.e("library/common"), __webpack_require__.e("sources_js_common_swiperInit_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/swiperInit.js */ "./sources/js/common/swiperInit.js")).then(({
+  Promise.all(/*! import() */[__webpack_require__.e("library/common"), __webpack_require__.e("library/swiper"), __webpack_require__.e("sources_js_common_swiperInit_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/swiperInit.js */ "./sources/js/common/swiperInit.js")).then(({
     initHomeSlider
   }) => {
     initHomeSlider();
@@ -166,24 +178,12 @@ if (document.querySelector('.home-slider')) {
 
 // Load Fancybox only if gallery/trigger elements exist
 if (document.querySelector('[data-fancybox]')) {
-  Promise.all(/*! import() */[__webpack_require__.e("library/.pnpm"), __webpack_require__.e("library/common"), __webpack_require__.e("sources_js_common_fancybox_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/fancybox */ "./sources/js/common/fancybox.js")).then(({
+  Promise.all(/*! import() */[__webpack_require__.e("library/common"), __webpack_require__.e("library/fancyapps"), __webpack_require__.e("sources_js_common_fancybox_js")]).then(__webpack_require__.bind(__webpack_require__, /*! @js/common/fancybox */ "./sources/js/common/fancybox.js")).then(({
     initFancybox
   }) => {
     initFancybox();
   });
 }
-
-/***/ },
-
-/***/ "./sources/scss/style.scss"
-/*!*********************************!*\
-  !*** ./sources/scss/style.scss ***!
-  \*********************************/
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
 
 /***/ }
 
