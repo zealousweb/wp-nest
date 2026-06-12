@@ -44,11 +44,11 @@
 		"babel-loader": "^10.0.0",
 		"cspell": "^9.6.2",
 		"css-loader": "^7.1.2",
-		"css-minimizer-webpack-plugin": "^7.0.4",
+		"css-minimizer-webpack-plugin": "^8.0.0",
 		"eslint": "^9.39.2",
 		"glob": "^13.0.0",
 		"husky": "^9.1.7",
-		"jest": "^30.2.0",
+		"jest": "^26.6.3",
 		"jest-environment-jsdom": "^30.2.0",
 		"lint-staged": "^16.2.7",
 		"mini-css-extract-plugin": "^2.10.0",
@@ -62,7 +62,7 @@
 		"stylelint-config-standard-scss": "^17.0.0",
 		"terser-webpack-plugin": "^5.3.16",
 		"webpack": "^5.104.1",
-		"webpack-build-notifier": "^3.1.0",
+		"webpack-build-notifier": "^2.0.1",
 		"webpack-cli": "^6.0.1",
 		"webpack-manifest-plugin": "^6.0.1",
 		"webpackbar": "^7.0.0"
@@ -72,6 +72,12 @@
 		"fs": "^0.0.1-security",
 		"jquery": "^4.0.0",
 		"swiper": "^12.0.3"
+	},
+	"overrides": {
+		"braces": "^3.0.3",
+		"node-notifier": "^10.0.1",
+		"uuid": "^11.1.1",
+		"@tootallnate/once": "^2.0.1"
 	},
 	"lint-staged": {
 		"sources/**/*.js": [

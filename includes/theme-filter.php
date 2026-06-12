@@ -41,3 +41,40 @@ function fix_svg_filetype_check( $data, $file, $filename, $mimes ) {
 	return $data;
 }
 add_filter( 'wp_check_filetype_and_ext', 'fix_svg_filetype_check', 10, 4 );
+
+// List of script handles to defer
+add_filter('script_loader_tag', function($tag, $handle) {
+
+	// Only run on frontend
+    if ( is_admin() ) {
+        return $tag;
+    }
+
+    $defer_scripts = [
+        THEME_PREFIX . '-custom-block',
+    ];
+
+    $async_scripts = [
+		THEME_PREFIX . '-custom-block',
+    ];
+
+    if( !empty($defer_scripts) ) {
+        if ( in_array($handle, $defer_scripts) ) {
+            // Add defer if not already present
+            if ( false === strpos($tag, 'defer') ) {
+                return str_replace(' src', ' defer src', $tag);
+            }
+        }
+    }
+
+    if( !empty($async_scripts) ) {
+        if ( in_array($handle, $async_scripts) ) {
+            // Add defer if not already present
+            if ( false === strpos($tag, 'async') ) {
+                return str_replace(' src', ' async src', $tag);
+            }
+        }
+    }
+
+    return $tag;
+}, 10, 2);

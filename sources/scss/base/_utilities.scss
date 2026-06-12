@@ -8,16 +8,23 @@
  * Main content containers
  */
 
-%container {
+:root {
 	--gutter: var(--spacing-container-gutter);
 
-	width: min(100% - var(--gutter) * 2, var(--container-width, 100%));
-	margin-right: auto;
-	margin-left: auto;
+	@include respond-below(xl) {
+		--gutter: #{rem(32px)};
+	}
 
 	@include respond-below(md) {
 		--gutter: #{rem(20px)};
 	}
+}
+
+
+%container {
+	width: min(100% - var(--gutter) * 2, var(--container-width, 100%));
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .container {
@@ -179,27 +186,27 @@
 
 // Font Weight
 
-.font{
-    &-normal{
-        font-weight: var(--font-weight-normal);
-    }
+.font {
+	&-normal {
+		font-weight: var(--font-weight-normal);
+	}
 
-    &-medium{
-        font-weight: var(--font-weight-medium);
-    }
+	&-medium {
+		font-weight: var(--font-weight-medium);
+	}
 
-    &-semi-bold{
-        font-weight: var(--font-weight-semibold);
-    }
+	&-semi-bold {
+		font-weight: var(--font-weight-semibold);
+	}
 
-    &-bold{
-        font-weight: var(--font-weight-bold);
-    }
+	&-bold {
+		font-weight: var(--font-weight-bold);
+	}
 }
 
 // text size and transform
 
-.text{
+.text {
 	&-center {
 		text-align: center;
 	}
@@ -212,35 +219,35 @@
 		text-align: left;
 	}
 
-	&-base{
+	&-base {
 		font-size: var(--text-base);
 	}
 
-	&-xs{
+	&-xs {
 		font-size: var(--text-xs);
 	}
 
-	&-sm{
+	&-sm {
 		font-size: var(--text-sm);
 	}
 
-	&-lg{
+	&-lg {
 		font-size: var(--text-lg);
 	}
 
-	&-xl{
+	&-xl {
 		font-size: var(--text-xl);
 	}
 
-	&-uppercase{
+	&-uppercase {
 		text-transform: uppercase;
 	}
 
-	&-lowercase{
+	&-lowercase {
 		text-transform: lowercase;
 	}
 
-	&-capitalize{
+	&-capitalize {
 		text-transform: capitalize;
 	}
 }
@@ -273,7 +280,7 @@ $sides-x: left, right;
 	}
 }
 
-@if $spacing == true {
+@if $spacing ==true {
 	@each $space in $spaceamounts {
 		@each $side in $sides-y {
 
@@ -326,7 +333,7 @@ $sides-x: left, right;
 			}
 		}
 
-		@if $spacing == true {
+		@if $spacing ==true {
 			@each $space in $spaceamounts {
 				@each $side in $sides-y {
 
@@ -364,7 +371,7 @@ $sides-x: left, right;
 			}
 		}
 
-		@if $advance-utilities == true {
+		@if $advance-utilities ==true {
 			.d-#{$bp-key} {
 				&-none {
 					display: none;
@@ -483,5 +490,3 @@ $sides-x: left, right;
 		}
 	}
 }
-
-
