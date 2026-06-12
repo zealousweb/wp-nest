@@ -58,7 +58,12 @@ function acf_svg( $attachment_id ) {
 
 	$mime = mime_content_type( $file_path );
 	if ( strpos( $mime, 'svg' ) !== false ) {
-		return file_get_contents( $file_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$svg_content = file_get_contents( $file_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		if ( function_exists( 'wpnest_clean_svg_content' ) ) {
+			$cleaned = wpnest_clean_svg_content( $svg_content );
+			return false !== $cleaned ? $cleaned : '';
+		}
+		return $svg_content;
 	}
 
 	return '';
