@@ -67,13 +67,13 @@
 		// If one or both of the breakpoints don't exist.
 	} @else {
 		// If lower breakpoint is invalid.
-		@if map.has-key($breakpoints, $lower)==false {
+		@if map.has-key($breakpoints, $lower) == false {
 			// Log a warning.
 			@warn 'Your lower breakpoint was invalid: #{$lower}.';
 		}
 
 		// If upper breakpoint is invalid.
-		@if map.has-key($breakpoints, $upper)==false {
+		@if map.has-key($breakpoints, $upper) == false {
 			// Log a warning.
 			@warn 'Your upper breakpoint was invalid: #{$upper}.';
 		}
@@ -170,13 +170,13 @@
 
 // Container Spacing
 @mixin container-space($position: "", $value: var(--container-full)) {
-	@if $position =="left" {
+	@if $position == "left" {
 		padding-left: calc((100% - (#{$value})) / 2);
 
 		>div {
 			padding-left: var(--gutter);
 		}
-	} @else if $position =="right" {
+	} @else if $position == "right" {
 		padding-right: calc((100% - (#{$value})) / 2);
 
 		>div {

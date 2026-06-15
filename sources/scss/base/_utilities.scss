@@ -280,7 +280,7 @@ $sides-x: left, right;
 	}
 }
 
-@if $spacing ==true {
+@if $spacing == true {
 	@each $space in $spaceamounts {
 		@each $side in $sides-y {
 
@@ -333,7 +333,7 @@ $sides-x: left, right;
 			}
 		}
 
-		@if $spacing ==true {
+		@if $spacing == true {
 			@each $space in $spaceamounts {
 				@each $side in $sides-y {
 
@@ -371,7 +371,7 @@ $sides-x: left, right;
 			}
 		}
 
-		@if $advance-utilities ==true {
+		@if $advance-utilities == true {
 			.d-#{$bp-key} {
 				&-none {
 					display: none;

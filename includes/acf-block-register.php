@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Register the ACF block and sort blocks alphabetically.
  */
-if ( function_exists( 'acf_register_block' ) ) {
+if ( function_exists( 'acf_register_block_type' ) ) {
 	add_filter( 'block_categories_all', 'add_custom_block_category', 10, 2 );
 	add_filter( 'block_editor_settings_all', 'sort_blocks_alphabetically', 10, 2 );
 }

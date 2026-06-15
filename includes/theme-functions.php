@@ -164,14 +164,17 @@ function acf_image( $image_id, $size = 'medium_large', $css_class = '' ) {
 	$srcset    = wp_get_attachment_image_srcset( $image_id, $size );
 	$meta      = wp_get_attachment_metadata( $image_id );
 
+	$width  = ( is_array( $meta ) && isset( $meta['width'] ) ) ? $meta['width'] : '';
+	$height = ( is_array( $meta ) && isset( $meta['height'] ) ) ? $meta['height'] : '';
+
 	return sprintf(
 		'<img src="%s" srcset="%s" alt="%s" class="%s" loading="lazy" decoding="async" width="%s" height="%s">',
 		esc_url( $image_url ),
 		esc_attr( $srcset ),
 		$image_alt,
 		esc_attr( $css_class ),
-		esc_attr( $meta['width'] ?? '' ),
-		esc_attr( $meta['height'] ?? '' )
+		esc_attr( $width ),
+		esc_attr( $height )
 	);
 }
 

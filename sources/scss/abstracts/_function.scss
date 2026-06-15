@@ -25,12 +25,12 @@ $decimal-value: true !default;
 
 // convert list px to rem
 @function rem-calc($value) {
-	@if meta.type-of($value)=="list" {
+	@if meta.type-of($value) == "list" {
 		$rem-list: (
 		);
 
 	@each $val in $value {
-		@if meta.type-of($val)=="number" {
+		@if meta.type-of($val) == "number" {
 			$rem-list: list.append($rem-list, #{math.div($val, 16)}rem);
 		} @else {
 			$rem-list: list.append($rem-list, $val);
@@ -39,7 +39,7 @@ $decimal-value: true !default;
 
 	@return $rem-list;
 } @else {
-	@if meta.type-of($value)=="number" {
+	@if meta.type-of($value) == "number" {
 		@return #{math.div($value, 16)}rem;
 	} @else {
 		@return $value;
@@ -49,10 +49,10 @@ $decimal-value: true !default;
 
 // PX to EM function
 @function em($target, $context: $base) {
-	@if $decimal-value ==true {
-		@return math.ceil(math.div($target, $context))+em;
+	@if $decimal-value == true {
+		@return math.ceil(math.div($target, $context)) + em;
 	} @else {
-		@return math.div($target, $context)+em;
+		@return math.div($target, $context) + em;
 	}
 }
 
