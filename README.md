@@ -76,15 +76,7 @@ npm run lint:scss    # Checks SCSS files
 npm run phpcs        # Checks PHP files against WordPress standards
 ```
 
-### 🧪 Testing
 
-Run the automated unit tests for JavaScript (Jest) and PHP (PHPUnit).
-
-```bash
-npm run test         # Runs both JS and PHP tests
-npm run test:js      # Runs only JS tests (Jest)
-npm run test:php     # Runs only PHP tests (PHPUnit)
-```
 
 ### 🔧 Auto-Fixing
 
