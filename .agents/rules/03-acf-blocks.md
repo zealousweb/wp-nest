@@ -77,21 +77,6 @@ Use them on the outer wrapper.
 
 ---
 
-# Template Rules
-
-Every block should follow this structure:
-
-1. Security check.
-2. Retrieve fields.
-3. Return early when empty.
-4. Prepare wrapper variables.
-5. Render only existing content.
-6. Escape all output.
-
-Never mix rendering and business logic.
-
----
-
 # Content Rules
 
 ## Never Output Empty HTML
@@ -145,32 +130,6 @@ Never output placeholder HTML.
 
 ---
 
-## Wrapper Elements
-
-Only render parent wrappers if at least one child element will render.
-
-Correct:
-
-```php
-<?php if ( $heading || $description ) : ?>
-
-<section>
-
-	...
-
-</section>
-
-<?php endif; ?>
-```
-
-Incorrect:
-
-```php
-<section></section>
-```
-
----
-
 ## Escaping
 
 Always escape output appropriately.
@@ -202,7 +161,31 @@ Register the block inside:
 includes/acf-block-register.php
 ```
 
-Always use the shared render callback.
+Add your block configuration to the `$blocks` array. Do not call `acf_register_block_type()` manually.
+
+```php
+// Add to the $blocks array:
+array(
+    'name'        => 'my_block',
+    'title'       => __( 'My Block', 'wpnest' ),
+    'description' => __( 'Description of my block.', 'wpnest' ),
+    'category'    => 'wpnest-blocks',
+    'icon'        => 'admin-comments', // Optional Dashicon
+    'keywords'    => array( 'my_block', 'custom' ),
+    'example'     => array(
+        'attributes' => array(
+            'mode' => 'preview',
+            'data' => array(
+                'my_field' => 'Fallback content for preview',
+            ),
+        ),
+    ),
+),
+```
+
+The loop automatically assigns the shared render callback (`theme_acf_block_render_callback`) and standard supports (e.g., `align => true`).
+
+If you add an image named exactly `{block-name}.png` or `{block-name}.jpg` inside `includes/acf-block-preview/`, it will be automatically displayed as the block's preview inside the editor.
 
 Never create a new render callback.
 
@@ -281,56 +264,3 @@ Create one JavaScript module per block.
 ```
 sources/js/modules/{block-name}.js
 ```
-
-Export a named initializer.
-
-Lazy-load the module only when the block exists.
-
-Example:
-
-```javascript
-if (document.querySelector('.my-block')) {
-	import('./modules/my-block.js').then(({ initMyBlock }) => {
-		initMyBlock();
-	});
-}
-```
-
----
-
-# JavaScript Libraries
-
-When using libraries such as:
-
-- Swiper
-- Fancybox
-- GSAP
-- Splide
-- Lenis
-- AOS
-- etc.
-
-Follow these rules:
-
-- Import only when the block exists.
-- Initialize only inside the current block.
-- Never initialize globally.
-- Never query the entire document when block scoping is possible.
-
-Correct:
-
-```javascript
-blocks.forEach((block) => {
-	const sliders = block.querySelectorAll('.swiper');
-
-	...
-});
-```
-
-Incorrect:
-
-```javascript
-document.querySelectorAll('.swiper');
-```
-
----

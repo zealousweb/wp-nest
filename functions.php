@@ -111,3 +111,26 @@ require get_template_directory() . '/includes/theme-security.php';
  * Register the Custom ACF Block for this theme.
  */
 require get_template_directory() . '/includes/acf-block-register.php';
+
+/**
+ * Set custom ACF JSON save point.
+ *
+ * @return string Custom path.
+ */
+function wpnest_acf_json_save_point() {
+	return get_template_directory() . '/includes/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'wpnest_acf_json_save_point' );
+
+/**
+ * Set custom ACF JSON load point.
+ *
+ * @param array $paths Default ACF JSON load paths.
+ * @return array Modified paths.
+ */
+function wpnest_acf_json_load_point( $paths ) {
+	unset( $paths[0] );
+	$paths[] = get_template_directory() . '/includes/acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'wpnest_acf_json_load_point' );

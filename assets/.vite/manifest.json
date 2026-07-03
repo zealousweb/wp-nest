@@ -1,0 +1,67 @@
+{
+  "_fancyapps-ui-B4OYXzPe.css": {
+    "file": "css/library/fancyapps-ui-B4OYXzPe.css",
+    "src": "_fancyapps-ui-B4OYXzPe.css"
+  },
+  "_fancyapps-ui-gjEh_1JJ.js": {
+    "file": "js/library/fancyapps-ui-gjEh_1JJ.js",
+    "name": "library/fancyapps-ui",
+    "css": [
+      "css/library/fancyapps-ui-B4OYXzPe.css"
+    ]
+  },
+  "_swiper-DPXNORsm.css": {
+    "file": "css/library/swiper-DPXNORsm.css",
+    "src": "_swiper-DPXNORsm.css"
+  },
+  "_swiper-lYze1TJj.js": {
+    "file": "js/library/swiper-lYze1TJj.js",
+    "name": "library/swiper",
+    "css": [
+      "css/library/swiper-DPXNORsm.css"
+    ]
+  },
+  "sources/js/common/fancybox.js": {
+    "file": "js/fancybox-x2LquDdg.js",
+    "name": "fancybox",
+    "src": "sources/js/common/fancybox.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_fancyapps-ui-gjEh_1JJ.js"
+    ]
+  },
+  "sources/js/common/swiperInit.js": {
+    "file": "js/swiperInit-2eJFEWML.js",
+    "name": "swiperInit",
+    "src": "sources/js/common/swiperInit.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_swiper-lYze1TJj.js"
+    ]
+  },
+  "sources/js/modules/ajax-scripts.js": {
+    "file": "js/modules/ajax-scripts-Bo9O0YjZ.js",
+    "name": "modules/ajax-scripts",
+    "src": "sources/js/modules/ajax-scripts.js",
+    "isEntry": true
+  },
+  "sources/js/script.js": {
+    "file": "js/main-jz5DdQTL.js",
+    "name": "main",
+    "src": "sources/js/script.js",
+    "isEntry": true,
+    "dynamicImports": [
+      "sources/js/common/swiperInit.js",
+      "sources/js/common/fancybox.js"
+    ]
+  },
+  "sources/scss/style.scss": {
+    "file": "css/style-DRCqSkyT.css",
+    "name": "style",
+    "names": [
+      "style.css"
+    ],
+    "src": "sources/scss/style.scss",
+    "isEntry": true
+  }
+}

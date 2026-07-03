@@ -3,5 +3,7 @@
 /**
  * Silence is golden.
  *
- * Directory referenced by MrnoeAdmin::acf_settings_save_json()
+ * ACF JSON save/load directory — configured via
+ * wpnest_acf_json_save_point() and wpnest_acf_json_load_point()
+ * in functions.php.
  */
