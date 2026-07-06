@@ -71,7 +71,7 @@
 		"@fancyapps/ui": "^6.1.9",
 		"fs": "^0.0.1-security",
 		"jquery": "^4.0.0",
-		"swiper": "^12.0.3"
+		"swiper": "^12.1.2"
 	},
 	"lint-staged": {
 		"sources/**/*.js": [
