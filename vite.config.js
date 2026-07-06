@@ -25,7 +25,7 @@ const getModuleEntries = () => {
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd(), "");
 
-	const devServer = env.VITE_DEV_SERVER || "http://localhost";
+	const devServer = env.VITE_DEV_SERVER || "http://127.0.0.1";
 	const devHost = devServer.replace(/^https?:\/\//, "");
 
 	return {
@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
 
 			minify: "esbuild",
 
-		cssCodeSplit: true,
+			cssCodeSplit: true,
 
 			rollupOptions: {
 				input: {

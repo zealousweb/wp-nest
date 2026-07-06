@@ -1,61 +1,60 @@
 ---
-trigger: always_on
+trigger: glob
+globs: *.php
 ---
 
-# PHP — SITE_NAME
+# PHP
 
-## Architecture
+## Structure
 
 ```
-functions.php               → setup + requires only
-includes/theme-scripts.php  → themeCSS() / themeJS() enqueue
+functions.php                → setup + requires
+includes/theme-scripts.php   → themeCSS() / themeJS()
 includes/theme-functions.php → helpers
-includes/theme-action.php   → action hooks + AJAX handlers
-includes/theme-filter.php   → filter hooks
-includes/theme-security.php → security hardening
-includes/acf-block-register.php → block registration + render callback
-includes/acf-json/          → ACF field JSON (source of truth)
-template-parts/blocks/      → block templates
+includes/theme-action.php    → actions + AJAX
+includes/theme-filter.php    → filters
+includes/theme-security.php  → security
+includes/acf-block-register.php → ACF blocks + render
+includes/acf-json/           → ACF JSON
+template-parts/blocks/       → block templates
 ```
 
-Thin templates, fat helpers. One responsibility per include.
+**Rule:** One file = one responsibility. Thin templates, fat helpers.
 
-## Security — every PHP file
+## Security
 
-ABSPATH guard (see `03-acf-blocks.md` for exact pattern). Escaping:
+- Add `ABSPATH` guard to every PHP file.
+- Escape output:
+  - Text → `esc_html()`
+  - Attr → `esc_attr()`
+  - URL → `esc_url()`
+  - HTML → `wp_kses_post()`
+- Sanitize all input.
+- AJAX → nonce + `wp_send_json_*()`.
+- DB → `$wpdb->prepare()`.
+- Never use `eval()`, `extract()`, or `query_posts()`.
 
-| Output | Function |
-|--------|----------|
-| Text | `esc_html()` / `esc_html__()` |
-| Attrs | `esc_attr()` / `esc_attr__()` |
-| URLs display | `esc_url()` |
-| URLs store/redirect | `esc_url_raw()` / `wp_safe_redirect()` |
-| HTML | `wp_kses_post()` |
-| Sanitize input | `sanitize_text_field()`, `absint()`, `wp_unslash() + sanitize_*` |
+## Assets
 
-AJAX: `wp_verify_nonce()` + `wp_send_json_error()` + `wp_die()` — see `theme-action.php` for pattern. DB: `$wpdb->prepare()` always. Never `eval()`, `extract()`, unserialize user data.
+- Use `themeJS()` / `themeCSS()` (manifest-based).
+- Pass JS data via `wp_localize_script()`.
 
-## Enqueue (`includes/theme-scripts.php`)
+## ACF Blocks
 
-`themeJS($key)` and `themeCSS($key)` read `assets/manifest.json` — never hardcode hashed filenames. Pass PHP data to JS via `wp_localize_script()` as `wpnest_ajax_object`.
-
-## ACF blocks
-
-Render callback: `theme_acf_block_render_callback()` — defined once in `acf-block-register.php`, never duplicate. Block templates: assign → validate → early `return` → escape output. Full pattern: `acf.mdc`.
-
-## Images
-
-`wp_get_attachment_image($id, $size, false, $attrs)` only — never hardcoded `<img>`. Hero/LCP: `$attrs = ['loading' => 'eager', 'fetchpriority' => 'high']`.
+- Single `theme_acf_block_render_callback()`.
+- Template flow: assign → validate → return → escape.
+- Use `acf_link()` for link fields.
+- Use `acf_image()` for image fields.
 
 ## Queries
 
-Never `query_posts()`. `no_found_rows => true` on `WP_Query` when no pagination needed.
+- Use `WP_Query`.
+- Set `no_found_rows => true` when not paginating.
 
-## Conventions
+## Standards
 
-- `TEXT_DOMAIN` on all translatable strings
-- New helpers: prefixed with `THEME_PREFIX . '_'` · existing boilerplate helpers (`themeCSS`, `themeJS`, `acf_svg`) are unprefixed — match the file's style
-- `get_template_directory()` / `get_template_directory_uri()` for all paths
-- WPCS: tabs · cast IDs `(int)` · null coalesce `$x = $val ?? ''` · max 3 nesting levels in templates
+- Use `TEXT_DOMAIN`.
+- Use `get_template_directory()` / `_uri()`.
+- Follow WPCS (tabs, casting, max 3 nesting levels).
 
-**Never:** business logic in `functions.php` · duplicate helpers · `query_posts()` · `echo get_field()` raw.
+**Never:** Business logic in `functions.php`, duplicate helpers, raw `echo get_field()`, hardcoded `<img>`, or hardcoded asset filenames.

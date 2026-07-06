@@ -15,8 +15,26 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Get Vite Dev Server URL from .env
  */
 function viteDevServerUrl() {
-	$host = getenv( 'VITE_DEV_SERVER' ) ? getenv( 'VITE_DEV_SERVER' ) : 'http://localhost';
-	$port = getenv( 'VITE_DEV_SERVER_PORT' ) ? getenv( 'VITE_DEV_SERVER_PORT' ) : '5173';
+	static $env = null;
+	if ( is_null( $env ) ) {
+		$env      = array();
+		$env_path = get_template_directory() . '/.env';
+		if ( file_exists( $env_path ) ) {
+			$lines = file( $env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+			foreach ( $lines as $line ) {
+				if ( strpos( trim( $line ), '#' ) === 0 ) {
+					continue;
+				}
+				$parts = explode( '=', $line, 2 );
+				if ( count( $parts ) === 2 ) {
+					$env[ trim( $parts[0] ) ] = trim( $parts[1] );
+				}
+			}
+		}
+	}
+
+	$host = isset( $env['VITE_DEV_SERVER'] ) ? $env['VITE_DEV_SERVER'] : ( getenv( 'VITE_DEV_SERVER' ) ? getenv( 'VITE_DEV_SERVER' ) : 'http://127.0.0.1' );
+	$port = isset( $env['VITE_DEV_SERVER_PORT'] ) ? $env['VITE_DEV_SERVER_PORT'] : ( getenv( 'VITE_DEV_SERVER_PORT' ) ? getenv( 'VITE_DEV_SERVER_PORT' ) : '5173' );
 
 	return rtrim( $host, '/' ) . ':' . $port;
 }

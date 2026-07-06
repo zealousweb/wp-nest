@@ -2,43 +2,28 @@
 trigger: manual
 ---
 
----
-description: Quality toolchain — commands reference
-alwaysApply: false
----
-
 # Toolchain — SITE_NAME
 
-## Commands (from `package.json` and `composer.json`)
+## Commands
 
-| Task          | Command                 |
-| ------------- | ----------------------- |
-| JS lint       | `npm run lint:js`       |
-| JS lint fix   | `npm run lint:js:fix`   |
-| JS test       | `npm run test:js`       |
-| SCSS lint     | `npm run lint:scss`     |
-| SCSS lint fix | `npm run lint:scss:fix` |
-| Lint all      | `npm run lint`          |
-| Lint fix all  | `npm run lint:fix`      |
-| PHP lint      | `npm run phpcs`         |
-| Dev build     | `npm run dev`           |
-| Prod build    | `npm run build`         |
+- JS Lint → `npm run lint:js`
+- JS Lint Fix → `npm run lint:js:fix`
+- JS Test → `npm run test:js`
+- SCSS Lint → `npm run lint:scss`
+- SCSS Lint Fix → `npm run lint:scss:fix`
+- PHP Lint → `npm run phpcs`
+- Dev → `npm run dev`
+- Build → `npm run build`
 
-**Note:** There is no `npm run qa` suite or `composer run qa:php` — run the individual commands above.
+## Run After Changes
 
-## Configs
+- **PHP** → `npm run phpcs`
+- **JavaScript** → `npm run lint:js` + `npm run test:js` + `npm run build`
+- **SCSS** → `npm run lint:scss` + `npm run build`
+- **New Block** → Run all relevant checks + build
 
-`config/config.eslint.js` · `config/config.stylelint.cjs` · `.phpcs.xml` · `phpunit.xml.dist` · `jest.config.js`
+## Rules
 
-## When to run
-
-- PHP change → `npm run phpcs` + `npm run test:php`
-- JS change → `npm run lint:js` + `npm run test:js` + `npm run build`
-- SCSS change → `npm run lint:scss` + `npm run build`
-- New block → all above
-- Pre-commit → Husky runs `lint-staged` automatically (ESLint, Stylelint, PHPCS on changed files)
-- Delivery → all lint + test commands pass · `npm run build` produces clean `assets/`
-
-## Agent rules
-
-Fix failures before marking done · no rule disable without inline justification · Jest for interactive JS modules · PHPUnit for new PHP helper functions.
+- Fix all lint/test errors before completion.
+- Don't disable lint rules without justification.
+- Ensure `npm run build` completes successfully.
