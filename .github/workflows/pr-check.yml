@@ -18,8 +18,8 @@ jobs:
                   LENGTH=${#TITLE}
                   echo "PR Title: $TITLE"
                   echo "Length: $LENGTH"
-                  if [ "$LENGTH" -lt 10 ]; then
-                    echo "❌ PR title is too short (min 10 chars)"
+                  if [ "$LENGTH" -lt 5 ]; then
+                    echo "❌ PR title is too short (min 5 chars)"
                     exit 1
                   fi
                   if [ "$LENGTH" -gt 99 ]; then
