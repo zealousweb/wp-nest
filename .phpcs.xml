@@ -50,6 +50,9 @@
 
     <!-- Unused parameter $mimes in fix_svg_filetype_check is required by the filter hook signature -->
     <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed"/>
+
+	 <!-- Allow centralized text domain constant/variable -->
+    <exclude name="WordPress.WP.I18n.NonSingularStringLiteralDomain"/>
   </rule>
 
   <rule ref="Generic.Files.LineLength">

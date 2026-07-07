@@ -1,0 +1,18 @@
+---
+trigger: manual
+---
+
+## Images
+- Use `wp_get_attachment_image()` — never raw `<img>`.
+- Set `loading="lazy"` by default; `eager` + `fetchpriority="high"` for hero only.
+- Use `sizes` and `srcset` via WordPress responsive image helpers.
+
+## Queries
+- Never use `query_posts()`.
+- Set `no_found_rows => true` when not paginating.
+- Cache expensive queries with `wp_cache_get()` / `wp_cache_set()`.
+- Avoid `post__not_in` on large datasets.
+
+## Assets
+- No render-blocking scripts (use `defer` / `async` where needed).
+- Bundle per-block JS, don't load all scripts globally.

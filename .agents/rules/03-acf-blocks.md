@@ -1,0 +1,72 @@
+---
+trigger: manual
+---
+
+# Create ACF Block
+
+All blocks use the shared render callback:
+
+```text
+acf/{block}
+→ template-parts/blocks/{block}.php
+```
+
+Never create a new render callback.
+
+## Template
+
+Every block must:
+
+- Add the `ABSPATH` guard.
+- Assign fields first.
+- Return early if no content.
+- Support Anchor (`$block['anchor']`).
+- Support Additional CSS Class (`$block['className']`).
+- Apply `id` and `class` to the wrapper.
+
+## Structure
+
+- Register → `includes/acf-block-register.php`
+- Template → `template-parts/blocks/{block}.php`
+- ACF JSON → `includes/acf-json/`
+- SCSS → `sources/scss/components/_block}.scss`
+- JavaScript *(optional)* → `sources/js/modules/{block}.js`
+
+## Content Rules
+
+- Validate all fields before rendering.
+- Use `have_rows()`, `the_row()`, and `get_sub_field()` for Repeater/Flexible Content fields.
+- Skip empty repeater rows.
+- Use `acf_image()` for image fields.
+- Use `acf_link()` for link fields.
+- Escape all output.
+- Never output empty wrappers.
+
+### Escape
+
+- Text → `esc_html()`
+- HTML → `wp_kses_post()`
+- URL → `esc_url()`
+- Attribute → `esc_attr()`
+
+## New Block
+
+**Required**
+
+- Register the block in `acf-block-register.php` (`$blocks` array only).
+- Set `'mode' => 'edit'` in the block `example`.
+- Create `template-parts/blocks/{block}.php`.
+- Create/update the ACF Field Group.
+- Commit the generated ACF JSON.
+- Create `sources/scss/components/_{block}.scss`.
+- Import it into `sources/scss/components/_core.scss`.
+
+**Optional**
+
+- Create `sources/js/modules/{block}.js` **only if the block has interactive behavior**.
+- Lazy-load it from `script.js`.
+
+## Block Preview Image
+- Save preview screenshot as `includes/acf-block-preview/{block}.png` (or `.jpg`).
+- The render callback auto-detects and shows it in editor preview mode.
+- This replaces live rendering during `$is_preview` — no manual check needed.

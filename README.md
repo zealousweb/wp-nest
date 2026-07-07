@@ -1,34 +1,36 @@
 # WPNest Theme
 
-A starter theme for WordPress with modern JavaScript and CSS tooling. This theme leverages Webpack, Sass, and modern JavaScript features to build a highly optimized, scalable, and automated WordPress theme.
+A WordPress starter theme with a modern **Vite 8** asset pipeline, strict code standards, and a clean ACF block architecture. Designed as a reusable project skeleton — configure once, build fast.
 
 ---
 
 ## 🚀 Features
 
-- **Webpack 5** for modern module bundling and asset optimization.
-- **Babel** for ES6+ JavaScript transpilation.
-- **Dart Sass** via sass-loader for compiling SCSS styles using the latest Sass syntax.
-- **Modular Architecture** using `@use` and `@forward` for scalable and maintainable styles.
-- **Asset Optimization**: `MiniCssExtractPlugin` (CSS extraction), `TerserPlugin` (JS minifier), and `CssMinimizerPlugin` (CSS minifier).
-- **Tree-shaking** & **PurgeCSS** to automatically remove unused code in production.
-- **Webpack Manifest Plugin** to generate an asset manifest for smart enqueuing.
-- **Husky & lint-staged** for automated pre-commit code verification and commit message checks (`cspell`, length).
+- **Vite 8** for lightning-fast HMR, module bundling, and production builds.
+- **Dart Sass** for SCSS compilation with `@use` / `@forward` modular architecture.
+- **PurgeCSS** + **Autoprefixer** + **cssnano** for production-optimised CSS.
+- **ESLint 10** (flat config) for JavaScript standards enforcement.
+- **Stylelint 17** for SCSS standards enforcement.
+- **PHP_CodeSniffer** (WPCS) for WordPress PHP standards.
+- **Husky + lint-staged** for automated pre-commit code formatting and verification.
 - **GitHub Actions CI/CD** for continuous integration and automated theme releases.
+- **ACF Block system** with a single render callback, preview image support, and synced JSON.
+- **Lazy-loaded JS modules** via native dynamic `import()` for performance.
+- **Manifest-based asset enqueuing** — no hardcoded filenames in PHP.
 
 ---
 
 ## 🛠️ Code Standards & Auto-Formatting
 
-This theme strictly enforces high-quality code standards:
+| Language | Tool | Config |
+|---|---|---|
+| JavaScript | ESLint 10 | `config/config.eslint.js` |
+| SCSS | Stylelint 17 | `config/config.stylelint.js` |
+| PHP | PHPCS (WPCS) | `.phpcs.xml` |
 
-- **JavaScript**: ESLint v9 (Custom config with strict whitespace rules)
-- **SCSS**: Stylelint v17
-- **PHP**: PHP_CodeSniffer (configured to WordPress standards via `.phpcs.xml`)
-- **VS Code Native Integration**: `settings.json` and `tasks.json` provide built-in auto-format on save.
+On every `git commit`, `lint-staged` automatically runs ESLint, Stylelint, and PHPCBF on staged files before the commit goes through.
 
-**How Auto-Format Works:**
-When running `npm run watch`, Webpack's `NativeLintPlugin` intercepts every file save and automatically runs `--fix` for ESLint and Stylelint. On commit, `lint-staged` automatically formats your `*.php`, `*.js`, and `*.scss` files before allowing the commit.
+For the best editor experience, use **VS Code** — workspace settings in `.vscode/` configure format-on-save and recommended extensions automatically.
 
 ---
 
@@ -36,17 +38,42 @@ When running `npm run watch`, Webpack's `NativeLintPlugin` intercepts every file
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (version 20 or later)
-- [Composer](https://getcomposer.org/) (for managing PHP dependencies)
+- [Node.js](https://nodejs.org/) v23.11.1 (see `engines` in `package.json`)
+- [Composer](https://getcomposer.org/) for PHP dependencies
+- [Local](https://localwp.com/) or any local WordPress environment
 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/zealousweb/wp-nest.git
-cd wp-nest
+git clone https://github.com/zealousweb/wp-nest.git wp-your-project
+cd wp-your-project
 ```
 
-### Step 2: Install Dependencies
+### Step 2: Configure for Your Project
+
+Before installing, rename the theme for your project in **4 places**:
+
+| File | What to change |
+|---|---|
+| `functions.php` lines 21–22 | Change `'wpnest'` in `THEME_PREFIX` and `TEXT_DOMAIN` |
+| `style.css` line 12 | Change `Text Domain: wpnest` |
+| `.env` line 4 | Change `VITE_DEV_THEME_NAME = wp-nest` |
+| All PHP files | Find & replace the `wpnest_` function prefix (e.g. → `myproject_`) |
+
+> **Note:** `THEME_PREFIX` is used for script handles automatically. PHP function names like `wpnest_setup()` must be renamed manually since PHP constants cannot be used in function definitions.
+
+### Step 3: Configure the Dev Environment
+
+Copy `.env` and set your local server URL:
+
+```bash
+# .env
+VITE_DEV_SERVER = http://127.0.0.1     # your local WordPress URL
+VITE_DEV_SERVER_PORT = 5173
+VITE_DEV_THEME_NAME = your-theme-name  # must match the theme folder name
+```
+
+### Step 4: Install Dependencies
 
 ```bash
 npm install
@@ -57,76 +84,110 @@ composer install
 
 ## ⌨️ Command Reference
 
-### 🔄 Development (Watch & Auto-Fix)
+### 🔄 Development
 
-The watch command automatically compiles assets **and auto-fixes JS/SCSS errors on save**.
-
-```bash
-npm run watch
-```
-
-### 🧹 Linting (Check Only)
-
-Check if your files match the coding standards.
+Start the Vite dev server with HMR and live reload:
 
 ```bash
-npm run lint         # Checks both JS and SCSS
-npm run lint:js      # Checks JavaScript files
-npm run lint:scss    # Checks SCSS files
-npm run phpcs        # Checks PHP files against WordPress standards
-```
-
-### 🧪 Testing
-
-Run the automated unit tests for JavaScript (Jest) and PHP (PHPUnit).
-
-```bash
-npm run test         # Runs both JS and PHP tests
-npm run test:js      # Runs only JS tests (Jest)
-npm run test:php     # Runs only PHP tests (PHPUnit)
-```
-
-### 🔧 Auto-Fixing
-
-Manually force the linters to fix all fixable errors in your codebase.
-
-```bash
-npm run lint:fix       # Auto-fixes JS and SCSS
-npm run lint:js:fix    # Auto-fixes JavaScript only
-npm run lint:scss:fix  # Auto-fixes SCSS only
-npm run phpcbf         # Auto-fixes PHP files
+npm run dev
 ```
 
 ### 🏗️ Production Build
 
-Build the theme for production. This will minify JS/CSS, generate the asset manifest, and run PurgeCSS.
+Build and optimise all assets for production (minification, PurgeCSS, autoprefixer):
 
 ```bash
 npm run build
 ```
 
+### 🧹 Linting (Check Only)
+
+```bash
+npm run lint          # Check both JS and SCSS
+npm run lint:js       # Check JavaScript only
+npm run lint:scss     # Check SCSS only
+npm run phpcs         # Check PHP against WordPress Coding Standards
+```
+
+### 🔧 Auto-Fixing
+
+```bash
+npm run lint:fix      # Auto-fix JS and SCSS
+npm run lint:js:fix   # Auto-fix JavaScript only
+npm run lint:scss:fix # Auto-fix SCSS only
+npm run phpcbf        # Auto-fix PHP files
+```
+
+---
+
+## 📁 Theme Architecture
+
+```
+functions.php                 → Bootstrap (requires only, no logic)
+includes/
+├── theme-scripts.php         → Asset enqueuing (Vite manifest)
+├── theme-functions.php       → Helper functions
+├── theme-action.php          → Actions & AJAX handlers
+├── theme-filter.php          → Filters
+├── theme-security.php        → Security hardening
+├── acf-block-register.php    → ACF block registration & render callback
+└── acf-json/                 → ACF field group JSON (auto-synced)
+
+template-parts/blocks/        → ACF block templates ({block-slug}.php)
+includes/acf-block-preview/   → Block preview images ({block-slug}.jpg)
+
+sources/
+├── js/
+│   ├── script.js             → Main entry (eager: menu; lazy: modules)
+│   ├── modules/              → Lazy-loaded ES modules
+│   └── common/               → Named export modules
+└── scss/
+    ├── style.scss            → Main entry
+    ├── abstracts/            → Variables, mixins, functions
+    ├── base/                 → Reset, typography, global
+    └── components/           → One partial per block (_block-name.scss)
+
+assets/                       → Compiled output — never edit directly
+config/                       → Linting and build configs
+```
+
+### Key Constants (`functions.php`)
+
+```php
+define( 'THEME_PREFIX', 'your-project' ); // Used for script/style handles
+define( 'TEXT_DOMAIN', 'your-project' );  // Used in all __() translation calls
+```
+
+Change **only these two lines** to migrate the text domain for a new project.
+
+---
+
+## 🧱 Adding a New ACF Block
+
+Follow these 4 steps:
+
+1. **Register** — add the block array to `includes/acf-block-register.php`
+2. **Template** — create `template-parts/blocks/{block-slug}.php`
+3. **Styles** — create `sources/scss/components/_{block-slug}.scss` and import in `_core.scss`
+4. **ACF JSON** — export field group to `includes/acf-json/group_{block-slug}.json`
+
+Optionally add `includes/acf-block-preview/{block-slug}.jpg` for the block preview image in the editor.
+
 ---
 
 ## 🤖 CI/CD Pipeline (GitHub Actions)
 
-We have three automated workflows running on GitHub Actions:
+Three automated workflows run on push:
 
-1. **Code Standards (CI)**
-   _Runs on push to feature/stage/master branches._
-   Parallel execution of ESLint, Stylelint, and PHPCS. If they pass, it runs the Webpack build to ensure nothing is broken.
-
-2. **Release Build (CD)**
-   _Runs when a version tag (e.g., `v1.0.3`) is pushed._
-   Runs all linters, creates a production build, packages the theme (excluding dev files), and automatically publishes a GitHub Release with the ZIP file.
-
-3. **Pull Request Checks**
-   _Runs on all PRs targetting master/stage._
-   Validates PR title length and warns if the PR modifies too many files.
+| Workflow | Trigger | What it does |
+|---|---|---|
+| `code-standards.yml` | Push to `feature/*`, `stage`, `master` | Runs ESLint, Stylelint, PHPCS in parallel, then Vite build |
+| `release.yml` | Tag push (e.g. `v1.0.3`) | Lints, builds, packages theme ZIP, publishes GitHub Release |
+| `pr-check.yml` | All PRs to `master` / `stage` | Validates PR title length, warns if >50 files changed |
 
 ---
 
 ## 📚 Documentation
 
-For rules on commit messages, creating pull requests, and the branching strategy, please read the **[CONTRIBUTING.md](CONTRIBUTING.md)** file.
-
-For the version history of this theme, see the **[CHANGELOG.md](CHANGELOG.md)** file.
+- **Contributing guidelines, branching strategy & commit rules** → [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Version history** → [CHANGELOG.md](CHANGELOG.md)

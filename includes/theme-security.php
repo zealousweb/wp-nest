@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * add_filter( 'rest_authentication_errors', function( $result ) {
  *     if ( ! is_user_logged_in() ) {
- *         return new WP_Error( 'rest_disabled', __( 'REST API restricted.', 'wpnest' ), array( 'status' => 403 ) );
+ *         return new WP_Error( 'rest_disabled', __( 'REST API restricted.', TEXT_DOMAIN ), array( 'status' => 403 ) );
  *     }
  *     return $result;
  * } );
@@ -60,3 +60,30 @@ function disable_author_archive() {
 	}
 }
 add_action( 'template_redirect', 'disable_author_archive' );
+
+/**
+ * Disable XML-RPC for security.
+ *
+ * XML-RPC is heavily exploited by attackers for DDoS and brute-force attacks.
+ * Since most modern sites use the REST API, XML-RPC is generally obsolete.
+ */
+add_filter( 'xmlrpc_enabled', '__return_false' );
+
+/**
+ * Disable comments on media attachments.
+ *
+ * Media attachment pages are a huge target for comment spam.
+ * This ensures comments are closed on all images and files.
+ */
+add_filter(
+	'comments_open',
+	function ( $open, $post_id ) {
+		$post = get_post( $post_id );
+		if ( $post && 'attachment' === $post->post_type ) {
+			return false;
+		}
+		return $open;
+	},
+	10,
+	2
+);

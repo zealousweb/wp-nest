@@ -16,13 +16,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <div class="wrapper">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wpnest' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', TEXT_DOMAIN ); ?></a>
 	<?php $brand_logo = get_template_directory_uri() . '/sources/images/logo.svg'; ?>
 	<header class="main-header">
 		<div class="container d-flex justify-content-between align-items-center flex-nowrap">
@@ -47,9 +47,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</nav>
 					</div>
 				<?php } ?>
-				<a href="#" role="button" aria-label="Button Title" class="btn">Button</a>
 				<!-- Hamburger -->
-				<a href="javascript:;" class="hamburger" role="button" aria-label="Hamburger"><span></span></a>
+				<button type="button" class="hamburger" aria-label="<?php esc_attr_e( 'Toggle mobile menu', TEXT_DOMAIN ); ?>"><span></span></button>
 			</div>
 		</div>
 

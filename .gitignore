@@ -53,3 +53,4 @@ node_modules
 
 # Ignore source maps
 *.map
+.env

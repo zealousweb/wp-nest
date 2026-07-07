@@ -19,6 +19,7 @@ if ( ! defined( '_THEME_VERSION' ) ) {
  * Define the default constant that will be used throughout your theme.
  */
 define( 'THEME_PREFIX', 'wpnest' );
+define( 'TEXT_DOMAIN', 'wpnest' );
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -43,6 +44,11 @@ function wpnest_setup() {
 	 * Enable support for Post Thumbnails on posts and pages.
 	 */
 	add_theme_support( 'post-thumbnails' );
+
+	/**
+	 * Enable responsive embeds (YouTube, Vimeo, etc).
+	 */
+	add_theme_support( 'responsive-embeds' );
 
 	/**
 	 * Enable support for wide alignment.
@@ -75,8 +81,8 @@ function wpnest_setup() {
 	 */
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'wpnest' ),
-			'menu-2' => esc_html__( 'Secondary', 'wpnest' ),
+			'menu-1' => esc_html__( 'Primary', TEXT_DOMAIN ),
+			'menu-2' => esc_html__( 'Secondary', TEXT_DOMAIN ),
 		)
 	);
 }
@@ -111,3 +117,31 @@ require get_template_directory() . '/includes/theme-security.php';
  * Register the Custom ACF Block for this theme.
  */
 require get_template_directory() . '/includes/acf-block-register.php';
+
+/**
+ * Register Custom Post Types and Taxonomies.
+ */
+require get_template_directory() . '/includes/theme-cpt.php';
+
+/**
+ * Set custom ACF JSON save point.
+ *
+ * @return string Custom path.
+ */
+function wpnest_acf_json_save_point() {
+	return get_template_directory() . '/includes/acf-json';
+}
+add_filter( 'acf/settings/save_json', 'wpnest_acf_json_save_point' );
+
+/**
+ * Set custom ACF JSON load point.
+ *
+ * @param array $paths Default ACF JSON load paths.
+ * @return array Modified paths.
+ */
+function wpnest_acf_json_load_point( $paths ) {
+	unset( $paths[0] );
+	$paths[] = get_template_directory() . '/includes/acf-json';
+	return $paths;
+}
+add_filter( 'acf/settings/load_json', 'wpnest_acf_json_load_point' );
