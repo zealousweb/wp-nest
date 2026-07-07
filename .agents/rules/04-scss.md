@@ -1,0 +1,63 @@
+---
+trigger: glob
+globs: *.scss
+---
+
+# WPNest — SCSS Rules
+
+## Structure
+
+```text
+sources/scss/
+├── abstracts/     → variables, mixins, functions
+├── base/
+├── components/
+├── layout/
+├── templates/
+└── style.scss     → Entry
+```
+
+## Imports
+
+- Always use `@use`.
+
+```scss
+@use "@scss/abstracts/variables" as *;
+@use "@scss/abstracts/mixins" as *;
+@use "@scss/abstracts/function" as *;
+```
+
+## ACF Block Structure
+
+```html
+<section class="{block}">
+    <div class="container">
+        <div class="{prefix}-header">
+```
+
+### Rules
+
+- Section wrapper = block name (use `comp-` only if needed).
+- Always use `.container`.
+- Use a short prefix (`bn`, `wws`, `faq`).
+- Class format:
+  - `{prefix}-header`
+  - `{prefix}-title`
+  - `{prefix}-card`
+  - `{prefix}-card-image`
+- Use `&` nesting.
+- Never use BEM (`__`).
+
+## Standards
+
+- Always use `rem(32px)` (include `px`).
+- Never hardcode colors—use variables.
+- Add new color tokens to `_variables.scss`.
+- Use `respond-above()`, `respond-below()`, or `respond-between()` for media queries.
+- Move repeated CSS into `_mixins.scss`.
+
+## New Files
+
+- **Component** → `components/_name.scss` → import in `components/_core.scss`
+- **Layout** → `layout/_name.scss` → import in `layout/_core.scss`
+- **Template** → `templates/_name.scss` → import in `templates/_core.scss`

@@ -6,83 +6,87 @@
 // -----------------------------------------------------------------------------
 
 :root {
-  // Fonts
-  --font-sans: 'Open Sans', 'Arial', sans-serif;
-  --font-serif: 'Times New Roman', times, serif;
-  --font-icon: "iconfontfamily";
+	// Fonts
+	--font-sans: 'Open Sans', 'Arial', sans-serif;
+	--font-serif: 'Times New Roman', times, serif;
+	--font-icon: "iconfontfamily";
 
-  // Colors
-  --color-primary: #1eb2a6;
-  --color-secondary: #ffa34d;
-  --color-white: #fff;
-  --color-black: #000;
-  --color-gray-200: #dee3e2;
+	// Colors
+	--color-primary: #1eb2a6;
+	--color-secondary: #ffa34d;
+	--color-white: #fff;
+	--color-black: #000;
+	--color-gray-200: #dee3e2;
 
-  // Background/Foreground
-  --color-background: var(--color-white);
-  --color-foreground: var(--color-black);
-  
-  // Typography
-  --leading-normal: 1.5;
-  --leading-tight: 1.1;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
+	// Background/Foreground
+	--color-background: var(--color-white);
+	--color-foreground: var(--color-black);
 
-  // text size
-  --text-xs: #{rem(12px)};
-  --text-sm: #{rem(14px)};
-  --text-base: #{rem(16px)};
-  --text-lg: #{rem(18px)};
-  --text-xl: #{rem(20px)};
-  --text-2xl: #{rem(24px)};
-  --text-3xl: #{rem(30px)};
-  --text-4xl: #{rem(36px)};
-  --text-5xl: #{rem(48px)};
+	// Typography
+	--leading-normal: 1.5;
+	--leading-tight: 1.1;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
 
-  // Spacing & Containers
-  --container-width: #{rem(1170px)};
-  --spacing-container-gutter: #{rem(50px)};
-  --spacing-row-gutter: #{rem(30px)};
-  --container-full: calc(var(--container-width) + (var(--spacing-container-gutter) * 2));
-  --spacing-heading-margin: #{rem(16px)};
-  --space-lg: #{rem(96px)};
+	// text size
+	--text-xs: #{rem(12px)};
+	--text-sm: #{rem(14px)};
+	--text-base: #{rem(16px)};
+	--text-lg: #{rem(18px)};
+	--text-xl: #{rem(20px)};
+	--text-2xl: #{rem(24px)};
+	--text-3xl: #{rem(30px)};
+	--text-4xl: #{rem(36px)};
+	--text-5xl: #{rem(48px)};
+
+	// Spacing & Containers
+	--container-width: #{rem(1170px)};
+	--spacing-container-gutter: #{rem(50px)};
+	--spacing-row-gutter: #{rem(30px)};
+	--container-full: calc(var(--container-width) + (var(--spacing-container-gutter) * 2));
+	--spacing-heading-margin: #{rem(16px)};
+	--space-lg: #{rem(96px)};
 	--space-md: #{rem(72px)};
 	--space-sm: #{rem(60px)};
 
-  // Forms
-  --text-label: #{rem(14px)};
-  --font-weight-label: 400;
-  --input-background: var(--color-white);
-  --radius-input: 0;
-  --height-input: #{rem(42px)};
-  --color-input-border: var(--color-secondary);
-  --height-textarea: #{rem(150px)};
+	// Forms
+	--text-label: #{rem(14px)};
+	--font-weight-label: 400;
+	--input-background: var(--color-white);
+	--radius-input: 0;
+	--height-input: #{rem(42px)};
+	--color-input-border: var(--color-secondary);
+	--height-textarea: #{rem(150px)};
 
-  // Mobile Menu
-  --text-menu-1: #{rem(18px)};
-  --text-menu-2: #{rem(16px)};
-  --text-menu-3: #{rem(14px)};
+	// Mobile Menu
+	--text-menu-1: #{rem(18px)};
+	--text-menu-2: #{rem(16px)};
+	--text-menu-3: #{rem(14px)};
 }
 
 // Heading font Size
 $heading-size: (
-  'h1': var(--text-5xl),
-  'h2': var(--text-4xl),
-  'h3': var(--text-3xl),
-  'h4': var(--text-2xl),
-  'h5': var(--text-xl),
-  'h6': var(--text-lg),
+	'h1': var(--text-5xl),
+	'h2': var(--text-4xl),
+	'h3': var(--text-3xl),
+	'h4': var(--text-2xl),
+	'h5': var(--text-xl),
+	'h6': var(--text-lg),
 );
 
 // Media Query breakpoints.
 $breakpoints: (
-  'sm': 576px, // Mobile Devices
-  'md': 768px, // Mobile Devices
-  'lg': 992px, // Tablet Devices
-  'xl': 1200px, // Laptop Devices
-  'xxl': 1400px // Desktop Devices
+	'sm': 576px,
+	// Mobile Devices
+	'md': 782px,
+	// Mobile Devices
+	'lg': 992px,
+	// Tablet Devices
+	'xl': 1200px,
+	// Laptop Devices
+	'xxl': 1400px // Desktop Devices
 );
 
 // Advance utilities
@@ -90,12 +94,14 @@ $advance-utilities: true;
 
 // Spacing : padding and margin
 $spacing: true;
-$spaceamounts: (30);
+$spaceamounts: (
+	30
+);
 
 // Background and Text color classes(ex: .bg-white and .text-white)
 $bgcolor-map: (
-  'white' : var(--color-white),
-  'dark' : var(--color-black)
+	'white' : var(--color-white),
+	'dark' : var(--color-black)
 );
 
 /* Note: If need Disable Decimal-value functionilty open function.scss file */

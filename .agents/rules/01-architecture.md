@@ -1,0 +1,41 @@
+---
+trigger: always_on
+---
+
+# WPNest — Architecture Rules
+
+## Structure
+
+```text
+functions.php              → Bootstrap (requires only)
+includes/                  → PHP modules
+├── theme-scripts.php      → Assets
+├── theme-functions.php    → Helpers
+├── theme-action.php       → Actions
+├── theme-filter.php       → Filters
+├── theme-security.php     → Security
+├── acf-block-register.php → ACF Blocks
+└── acf-json/              → ACF JSON
+
+template-parts/blocks/     → Block templates
+sources/                   → SCSS & JS source
+assets/                    → Compiled files (never edit)
+```
+
+## Rules
+
+- `functions.php` = **requires only**, no business logic.
+- One responsibility per file.
+- Never edit `assets/`.
+- Keep `includes/acf-json/` synced.
+- Block template filename must match the block slug.
+
+## New ACF Block
+
+1. Register in `acf-block-register.php`.
+2. Create `template-parts/blocks/{block}.php`.
+3. Create `sources/scss/components/_{block}.scss`.
+4. Import in `sources/scss/components/_core.scss`.
+5. Create `includes/acf-json/group_{block}.json`.
+
+**Rule:** Every new block must include **PHP + SCSS + ACF JSON + Registration**.

@@ -1,0 +1,41 @@
+---
+trigger: glob
+globs: *.js
+---
+
+# WPNest — JavaScript Rules
+
+## Aliases
+
+```text
+@js    → sources/js/
+@scss  → sources/scss/
+```
+
+## Entry Pattern
+
+- **Eager imports** → Global UI only (menu, navigation).
+- **Lazy imports** → Use `import()` with a DOM check.
+
+```js
+import deviceMenu from '@js/common/deviceMenu.js';
+deviceMenu();
+
+if (document.querySelector('.home-slider')) {
+	import('@js/common/swiperInit.js').then(({ initHomeSlider }) => initHomeSlider());
+}
+```
+
+## Modules
+
+- One file = one feature.
+- Use named exports.
+- Keep DOM logic inside `init()`.
+
+## Standards
+
+- Use `const` / `let` only.
+- Never use `var`.
+- No inline `<script>` in PHP.
+- New module → lazy-load from `script.js`.
+- AJAX → `sources/js/modules/ajax-scripts.js`.

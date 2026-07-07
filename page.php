@@ -28,7 +28,7 @@ get_header();
 
 		wp_link_pages(
 			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wpnest' ),
+				'before' => '<div class="page-links">' . esc_html__( 'Pages:', TEXT_DOMAIN ),
 				'after'  => '</div>',
 			)
 		);

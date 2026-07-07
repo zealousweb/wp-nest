@@ -22,7 +22,7 @@ export const initTestimonialSlider = () => {
     return new Swiper('.testimonial-slider', {
         modules: [Navigation, Pagination],
         loop: true,
-        slidesPerView: 2,
+        slidesPerView: 1,
         spaceBetween: 30,
         pagination: {
             el: '.testimonial-pagination',
@@ -30,7 +30,7 @@ export const initTestimonialSlider = () => {
         },
         breakpoints: {
             768: {
-                slidesPerView: 1,
+                slidesPerView: 2,
             },
         },
     });
