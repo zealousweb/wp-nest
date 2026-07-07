@@ -1,5 +1,5 @@
 ---
-trigger: glob
+description: SCSS architecture, imports, and styling rules.
 globs: *.scss
 ---
 

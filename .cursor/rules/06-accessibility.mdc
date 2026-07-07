@@ -1,5 +1,6 @@
 ---
-trigger: manual
+description: Accessibility standards, WCAG 2.1 AA rules, and screen reader text.
+globs: *.php, *.html
 ---
 
 # Accessibility — WCAG 2.1 AA

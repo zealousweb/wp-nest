@@ -1,5 +1,6 @@
 ---
-trigger: manual
+description: SEO best practices, meta tags, and JSON-LD schema rules.
+globs: *.php, header.php, footer.php
 ---
 
 # SEO — SITE_NAME
