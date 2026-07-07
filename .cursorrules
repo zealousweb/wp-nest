@@ -1,0 +1,3 @@
+# Project Rules
+We use `.cursor/rules/*.mdc` for context-specific rules. 
+Always follow the architecture guidelines in `.cursor/rules/01-architecture.mdc`.

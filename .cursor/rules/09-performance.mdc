@@ -1,5 +1,6 @@
 ---
-trigger: manual
+description: WordPress performance rules for images, queries, and assets.
+globs: *.php, *.js
 ---
 
 ## Images

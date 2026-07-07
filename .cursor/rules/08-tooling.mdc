@@ -1,5 +1,6 @@
 ---
-trigger: manual
+description: Commands for linting, testing, and building the project.
+alwaysApply: false
 ---
 
 # Toolchain — SITE_NAME

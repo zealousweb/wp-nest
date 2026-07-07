@@ -1,5 +1,6 @@
 ---
-trigger: manual
+description: Git version control and conventional commits guidelines.
+alwaysApply: false
 ---
 
 ## Commits

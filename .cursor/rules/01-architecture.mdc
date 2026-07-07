@@ -1,5 +1,6 @@
 ---
-trigger: always_on
+description: Project architecture, file structure, and general ACF block rules.
+alwaysApply: true
 ---
 
 # WPNest — Architecture Rules
