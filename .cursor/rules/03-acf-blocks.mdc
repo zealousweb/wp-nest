@@ -1,5 +1,6 @@
 ---
-trigger: manual
+description: Creating and modifying ACF blocks, templates, and configurations.
+globs: template-parts/blocks/*.php, includes/acf-block-register.php
 ---
 
 # Create ACF Block
