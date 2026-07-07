@@ -22,7 +22,7 @@ function wpnest_edit_post_link() {
 		edit_post_link(
 			sprintf(
 				/* translators: %s: Name of current post. */
-				__( 'Edit <span class="screen-reader-text">%s</span>', 'wpnest' ),
+				__( 'Edit <span class="screen-reader-text">%s</span>', TEXT_DOMAIN ),
 				get_the_title()
 			),
 			'<span class="edit-link">',
@@ -87,11 +87,11 @@ function entry_banner() {
 	} elseif ( is_search() ) {
 		$title = sprintf(
 			/* translators: %s: search query. */
-			esc_html__( 'Search Results for: %s', 'wpnest' ),
+			esc_html__( 'Search Results for: %s', TEXT_DOMAIN ),
 			get_search_query()
 		);
 	} elseif ( is_404() ) {
-		$title = esc_html__( 'Page Not Found', 'wpnest' );
+		$title = esc_html__( 'Page Not Found', TEXT_DOMAIN );
 	} else {
 		$title = get_the_title();
 	}
@@ -121,7 +121,7 @@ function acf_link( $link, $css_class = '' ) {
 	}
 
 	$link_url    = esc_url( $link['url'] );
-	$link_title  = ! empty( $link['title'] ) ? esc_html( $link['title'] ) : __( 'Read More', 'wpnest' );
+	$link_title  = ! empty( $link['title'] ) ? esc_html( $link['title'] ) : __( 'Read More', TEXT_DOMAIN );
 	$link_target = ! empty( $link['target'] ) ? '_blank' : '_self';
 	$rel_attr    = ( '_blank' === $link_target ) ? 'noopener noreferrer' : 'nofollow';
 	$link_class  = esc_attr( $css_class ? $css_class : 'btn' );
@@ -181,7 +181,7 @@ function wpnest_archive_post() {
 	ob_start();
 
 	// Display search heading and search form.
-	echo '<div>' . esc_html__( 'Search', 'wpnest' ) . '</div>';
+	echo '<div>' . esc_html__( 'Search', TEXT_DOMAIN ) . '</div>';
 
 	get_search_form();
 
@@ -194,9 +194,9 @@ function wpnest_archive_post() {
 
 	// Display category dropdown if categories exist.
 	if ( ! empty( $categories ) ) {
-		echo '<div>' . esc_html__( 'Filter by Category', 'wpnest' ) . '</div>';
+		echo '<div>' . esc_html__( 'Filter by Category', TEXT_DOMAIN ) . '</div>';
 		echo "<select name='postcategory' id='postcategory'>
-            <option value=''>" . esc_html__( 'Select Category', 'wpnest' ) . '</option>';
+            <option value=''>" . esc_html__( 'Select Category', TEXT_DOMAIN ) . '</option>';
 		foreach ( $categories as $category ) {
 			echo '<option value="' . esc_attr( $category->slug ) . '">' . esc_html( $category->name ) . '</option>';
 		}
@@ -205,7 +205,7 @@ function wpnest_archive_post() {
 
 	// Loading indicator for AJAX requests.
 	echo "
-    <div class='loading' style='display:none;'>" . esc_html__( 'Loading...', 'wpnest' ) . "</div>
+    <div class='loading' style='display:none;'>" . esc_html__( 'Loading...', TEXT_DOMAIN ) . "</div>
     <div class='blog-listing'>";
 
 	// Check if there are posts available.
@@ -240,7 +240,7 @@ function wpnest_archive_post() {
 
 		echo '</div>';
 	else :
-		echo '<p>' . esc_html__( 'No posts found.', 'wpnest' ) . '</p>';
+		echo '<p>' . esc_html__( 'No posts found.', TEXT_DOMAIN ) . '</p>';
 	endif;
 
 	echo '</div>';

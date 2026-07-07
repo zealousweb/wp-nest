@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </head>
 <body <?php body_class(); ?>>
 <div class="wrapper">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wpnest' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', TEXT_DOMAIN ); ?></a>
 	<?php $brand_logo = get_template_directory_uri() . '/sources/images/logo.svg'; ?>
 	<header class="main-header">
 		<div class="container d-flex justify-content-between align-items-center flex-nowrap">
@@ -48,7 +48,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</div>
 				<?php } ?>
 				<!-- Hamburger -->
-				<button type="button" class="hamburger" aria-label="<?php esc_attr_e( 'Toggle mobile menu', 'wpnest' ); ?>"><span></span></button>
+				<button type="button" class="hamburger" aria-label="<?php esc_attr_e( 'Toggle mobile menu', TEXT_DOMAIN ); ?>"><span></span></button>
 			</div>
 		</div>
 

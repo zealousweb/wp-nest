@@ -22,8 +22,8 @@ function register_acf_blocks() {
 		$blocks = array(
 			array(
 				'name'        => 'custom_block',
-				'title'       => __( 'Custom Block', 'wpnest' ),
-				'description' => __( 'A dynamically rendered ACF block.', 'wpnest' ),
+				'title'       => __( 'Custom Block', TEXT_DOMAIN ),
+				'description' => __( 'A dynamically rendered ACF block.', TEXT_DOMAIN ),
 				'category'    => 'wpnest-blocks',
 				'icon'        => 'admin-comments',
 				'keywords'    => array( 'custom', 'acf' ),
@@ -39,8 +39,8 @@ function register_acf_blocks() {
 			),
 			array(
 				'name'        => 'wysiwyg',
-				'title'       => __( 'WYSIWYG', 'wpnest' ),
-				'description' => __( 'A WYSIWYG content block.', 'wpnest' ),
+				'title'       => __( 'WYSIWYG', TEXT_DOMAIN ),
+				'description' => __( 'A WYSIWYG content block.', TEXT_DOMAIN ),
 				'category'    => 'wpnest-blocks',
 				'icon'        => 'editor-paragraph',
 				'keywords'    => array( 'wysiwyg', 'content', 'text' ),
@@ -123,7 +123,7 @@ function wpnest_block_categories( $categories, $block_editor_context ) {
 		array(
 			array(
 				'slug'  => 'wpnest-blocks',
-				'title' => __( 'WPNest Blocks', 'wpnest' ),
+				'title' => __( 'WPNest Blocks', TEXT_DOMAIN ),
 				'icon'  => 'layout', // Dashicon.
 			),
 		)

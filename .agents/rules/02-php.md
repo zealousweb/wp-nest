@@ -9,7 +9,6 @@ globs: *.php
 
 ```
 functions.php                → setup + requires
-includes/theme-scripts.php   → themeCSS() / themeJS()
 includes/theme-functions.php → helpers
 includes/theme-action.php    → actions + AJAX
 includes/theme-filter.php    → filters
@@ -34,11 +33,6 @@ template-parts/blocks/       → block templates
 - DB → `$wpdb->prepare()`.
 - Never use `eval()`, `extract()`, or `query_posts()`.
 
-## Assets
-
-- Use `themeJS()` / `themeCSS()` (manifest-based).
-- Pass JS data via `wp_localize_script()`.
-
 ## ACF Blocks
 
 - Single `theme_acf_block_render_callback()`.
@@ -53,7 +47,7 @@ template-parts/blocks/       → block templates
 
 ## Standards
 
-- Use `TEXT_DOMAIN`.
+- Use the `TEXT_DOMAIN` constant for all translation functions, and `THEME_PREFIX` for all hook handles.
 - Use `get_template_directory()` / `_uri()`.
 - Follow WPCS (tabs, casting, max 3 nesting levels).
 

@@ -5,6 +5,7 @@ import liveReload from "vite-plugin-live-reload";
 
 import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 const getModuleEntries = () => {
 	const entries = {};
@@ -29,7 +30,14 @@ export default defineConfig(({ mode }) => {
 	const devHost = devServer.replace(/^https?:\/\//, "");
 
 	return {
-		plugins: [liveReload(["./**/*.php"])],
+		plugins: [
+			liveReload(["./**/*.php"]),
+			ViteImageOptimizer({
+				png: { quality: 80 },
+				jpeg: { quality: 80 },
+				jpg: { quality: 80 },
+			})
+		],
 
 		base:
 			mode === "development"

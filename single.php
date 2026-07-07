@@ -29,7 +29,7 @@ get_header();
 			the_content(
 				sprintf(
 					wp_kses(/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'wpnest' ),
+						__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', TEXT_DOMAIN ),
 						array(
 							'span' => array(
 								'class' => array(),
@@ -42,7 +42,7 @@ get_header();
 
 			wp_link_pages(
 				array(
-					'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'wpnest' ),
+					'before' => '<div class="page-links">' . esc_html__( 'Pages:', TEXT_DOMAIN ),
 					'after'  => '</div>',
 				)
 			);
@@ -55,8 +55,8 @@ get_header();
 		<?php
 		the_post_navigation(
 			array(
-				'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'wpnest' ) . '</span> <span class="nav-title">%title</span>',
-				'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'wpnest' ) . '</span> <span class="nav-title">%title</span>',
+				'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', TEXT_DOMAIN ) . '</span> <span class="nav-title">%title</span>',
+				'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', TEXT_DOMAIN ) . '</span> <span class="nav-title">%title</span>',
 			)
 		);
 

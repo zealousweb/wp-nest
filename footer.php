@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 	<footer class="main-footer">
-		<h2>Footer goes here...</h2>
+		<!-- Footer content goes here -->
 	</footer>
 
 </div>

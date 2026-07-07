@@ -234,7 +234,7 @@ function themeScripts() {
 	// Localize AJAX.
 	wp_localize_script(
 		THEME_PREFIX . '-ajax-scripts',
-		'wpnest_ajax_object',
+		THEME_PREFIX . '_ajax_object',
 		array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( 'ajax-nonce' ),

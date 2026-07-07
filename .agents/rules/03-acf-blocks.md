@@ -65,3 +65,8 @@ Every block must:
 
 - Create `sources/js/modules/{block}.js` **only if the block has interactive behavior**.
 - Lazy-load it from `script.js`.
+
+## Block Preview Image
+- Save preview screenshot as `includes/acf-block-preview/{block}.png` (or `.jpg`).
+- The render callback auto-detects and shows it in editor preview mode.
+- This replaces live rendering during `$is_preview` — no manual check needed.

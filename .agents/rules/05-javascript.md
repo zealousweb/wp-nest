@@ -39,5 +39,3 @@ if (document.querySelector('.home-slider')) {
 - No inline `<script>` in PHP.
 - New module → lazy-load from `script.js`.
 - AJAX → `sources/js/modules/ajax-scripts.js`.
-- Use **Swiper** for sliders (scope to the block only).
-- Use **Fancybox** for popups and galleries.
