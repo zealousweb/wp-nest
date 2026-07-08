@@ -1,0 +1,61 @@
+{
+	"name": "acf/wysiwyg",
+	"title": "WYSIWYG",
+	"description": "A WYSIWYG content block.",
+	"category": "wpnest-blocks",
+	"icon": "editor-paragraph",
+	"keywords": [
+		"wysiwyg",
+		"content",
+		"text"
+	],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"supports": {
+		"align": true,
+		"jsx": true,
+		"color": {
+			"text": true,
+			"background": true,
+			"link": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fontWeight": true
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": true
+		},
+		"border": {
+			"color": true,
+			"radius": true,
+			"width": true,
+			"style": true
+		}
+	},
+	"styles": [
+		{
+			"name": "default",
+			"label": "Default",
+			"isDefault": true
+		},
+		{
+			"name": "dark",
+			"label": "Dark Mode"
+		}
+	],
+	"example": {
+		"attributes": {
+			"mode": "preview",
+			"data": {
+				"wys_heading": "WYSIWYG Sample",
+				"wys_description": "<p>This is a sample preview for the WYSIWYG block.</p>"
+			}
+		}
+	}
+}

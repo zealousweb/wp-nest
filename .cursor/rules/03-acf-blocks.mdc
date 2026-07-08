@@ -1,20 +1,19 @@
 ---
-description: Creating and modifying ACF blocks, templates, and configurations.
-globs: template-parts/blocks/*.php, includes/acf-block-register.php
+description: Creating and modifying ACF blocks, templates, and configurations using ACF Blocks V2 (block.json).
+globs: template-parts/blocks/*/*.php, template-parts/blocks/*/block.json, includes/acf-block-register.php
 ---
 
-# Create ACF Block
+# Create ACF Block (V2 Architecture)
 
-All blocks use the shared render callback:
+All blocks must use the modern `block.json` architecture.
 
 ```text
-acf/{block}
-→ template-parts/blocks/{block}.php
+template-parts/blocks/{block-name}/
+├── block.json
+└── render.php
 ```
 
-Never create a new render callback.
-
-## Template
+## Template (`render.php`)
 
 Every block must:
 
@@ -27,11 +26,12 @@ Every block must:
 
 ## Structure
 
-- Register → `includes/acf-block-register.php`
-- Template → `template-parts/blocks/{block}.php`
+- Register → Add block path to `$blocks` array in `includes/acf-block-register.php`
+- Metadata → `template-parts/blocks/{block-name}/block.json`
+- Template → `template-parts/blocks/{block-name}/render.php`
 - ACF JSON → `includes/acf-json/`
-- SCSS → `sources/scss/components/_block}.scss`
-- JavaScript *(optional)* → `sources/js/modules/{block}.js`
+- SCSS → `sources/scss/components/_{block-name}.scss`
+- JavaScript *(optional)* → `sources/js/modules/{block-name}.js`
 
 ## Content Rules
 
@@ -50,24 +50,20 @@ Every block must:
 - URL → `esc_url()`
 - Attribute → `esc_attr()`
 
-## New Block
+## New Block Checklist
 
 **Required**
 
-- Register the block in `acf-block-register.php` (`$blocks` array only).
-- Set `'mode' => 'edit'` in the block `example`.
-- Create `template-parts/blocks/{block}.php`.
+- Create the folder `template-parts/blocks/{block-name}`.
+- Create `block.json` inside the folder with ACF metadata.
+- Create `render.php` inside the folder.
+- Register the block path in `acf-block-register.php`.
 - Create/update the ACF Field Group.
 - Commit the generated ACF JSON.
-- Create `sources/scss/components/_{block}.scss`.
+- Create `sources/scss/components/_{block-name}.scss`.
 - Import it into `sources/scss/components/_core.scss`.
 
 **Optional**
 
-- Create `sources/js/modules/{block}.js` **only if the block has interactive behavior**.
+- Create `sources/js/modules/{block-name}.js` **only if the block has interactive behavior**.
 - Lazy-load it from `script.js`.
-
-## Block Preview Image
-- Save preview screenshot as `includes/acf-block-preview/{block}.png` (or `.jpg`).
-- The render callback auto-detects and shows it in editor preview mode.
-- This replaces live rendering during `$is_preview` — no manual check needed.

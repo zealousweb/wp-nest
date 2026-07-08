@@ -12,13 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Allow SVG uploads for all users.
+ * Allow SVG uploads for administrators only.
+ *
+ * Restricting SVG uploads to users with manage_options capability
+ * prevents XSS attacks from malicious SVG files uploaded by lower-role users.
  *
  * @param array $mimes Allowed MIME types.
  * @return array Modified MIME types array.
  */
 function allow_svg_upload( $mimes ) {
-	$mimes['svg'] = 'image/svg+xml';
+	if ( current_user_can( 'manage_options' ) ) {
+		$mimes['svg'] = 'image/svg+xml';
+	}
 	return $mimes;
 }
 add_filter( 'upload_mimes', 'allow_svg_upload' );
@@ -33,6 +38,9 @@ add_filter( 'upload_mimes', 'allow_svg_upload' );
  * @return array Modified file data array.
  */
 function fix_svg_filetype_check( $data, $file, $filename, $mimes ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return $data;
+	}
 	$ext = pathinfo( $filename, PATHINFO_EXTENSION );
 	if ( strtolower( $ext ) === 'svg' ) {
 		$data['type'] = 'image/svg+xml';
