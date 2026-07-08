@@ -34,7 +34,38 @@
 .main-content {
 	flex-grow: 1;
 	width: 100%;
+	padding-top: rem(50px);
+	padding-bottom: rem(70px);
+
+	@include respond-below(md) {
+		padding-top: rem(30px);
+		padding-bottom: rem(40px);
+	}
 }
+
+// Skip link
+.skip-link {
+	&:focus {
+		position: fixed;
+		z-index: 9999;
+		top: rem(10px);
+		left: rem(10px);
+
+		display: block;
+
+		padding: rem(6px) rem(14px);
+		border-radius: rem(4px);
+
+		font-size: var(--text-sm);
+		color: var(--color-white);
+		text-decoration: none;
+
+		background-color: var(--color-primary);
+		outline: rem(3px) solid var(--color-secondary);
+		outline-offset: rem(2px);
+	}
+}
+
 
 // Section Spacing
 .space {

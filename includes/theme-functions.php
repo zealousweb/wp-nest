@@ -44,10 +44,12 @@ function placeholder_image( $title = 'Banner' ) {
 }
 
 /**
- * Return the raw SVG markup for an attachment.
+ * Return the sanitised SVG markup for an attachment.
+ *
+ * Strips script tags and unsafe event-handler attributes to prevent XSS.
  *
  * @param int $attachment_id The image attachment ID.
- * @return string SVG markup or empty string.
+ * @return string Sanitised SVG markup or empty string.
  */
 function acf_svg( $attachment_id ) {
 	$file_path = get_attached_file( $attachment_id );
@@ -57,11 +59,22 @@ function acf_svg( $attachment_id ) {
 	}
 
 	$mime = mime_content_type( $file_path );
-	if ( strpos( $mime, 'svg' ) !== false ) {
-		return file_get_contents( $file_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	if ( strpos( $mime, 'svg' ) === false ) {
+		return '';
 	}
 
-	return '';
+	$svg = file_get_contents( $file_path ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+	if ( empty( $svg ) ) {
+		return '';
+	}
+
+	// Strip <script> tags and on* event attributes for XSS safety.
+	$svg = preg_replace( '/<script[\s\S]*?<\/script>/i', '', $svg );
+	$svg = preg_replace( '/\s+on\w+="[^"]*"/i', '', $svg );
+	$svg = preg_replace( "/\s+on\w+='[^']*'/i", '', $svg );
+
+	return $svg;
 }
 
 /**
@@ -98,7 +111,7 @@ function entry_banner() {
 
 	echo '<section class="entry-banner">';
 	if ( ! empty( $banner_image_id ) ) {
-		echo wp_get_attachment_image( $banner_image_id, 'full' );
+		echo wp_get_attachment_image( $banner_image_id, 'wpnest-banner' );
 	} else {
 		echo wp_kses_post( placeholder_image( $title ) );
 	}
@@ -156,18 +169,16 @@ function acf_image( $image_id, $size = 'medium_large', $css_class = '' ) {
 /**
  * Trim text to a specific word count.
  *
+ * Uses wp_trim_words() which is i18n-safe and handles multibyte character sets.
+ *
  * @param string $text  The text to trim.
  * @param int    $limit The word limit.
- * @return string Trimmed and escaped text.
+ * @return string Trimmed text.
  */
 function trim_excerpt( $text, $limit = 55 ) {
-	if ( str_word_count( $text, 0 ) > $limit ) {
-		$words = str_word_count( $text, 2 );
-		$pos   = array_keys( $words );
-		$text  = substr( $text, 0, $pos[ $limit ] ) . '...';
-	}
-	return esc_html( $text );
+	return wp_trim_words( $text, $limit, '&hellip;' );
 }
+
 
 /**
  * Build and return the archive/blog listing HTML.
@@ -194,7 +205,7 @@ function wpnest_archive_post() {
 
 	// Display category dropdown if categories exist.
 	if ( ! empty( $categories ) ) {
-		echo '<div>' . esc_html__( 'Filter by Category', TEXT_DOMAIN ) . '</div>';
+		echo '<div><label for="postcategory">' . esc_html__( 'Filter by Category', TEXT_DOMAIN ) . '</label></div>';
 		echo "<select name='postcategory' id='postcategory'>
             <option value=''>" . esc_html__( 'Select Category', TEXT_DOMAIN ) . '</option>';
 		foreach ( $categories as $category ) {
@@ -223,20 +234,23 @@ function wpnest_archive_post() {
 		echo "<div class='pagination'>";
 
 		global $wp_query;
-		$big = 999999999;
-		echo wp_kses_post(
-			paginate_links(
-				array(
-					'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-					'format'    => '?paged=%#%',
-					'current'   => max( 1, get_query_var( 'paged' ) ),
-					'total'     => $wp_query->max_num_pages,
-					'mid_size'  => 2,
-					'end_size'  => 1,
-					'prev_next' => false,
-				)
+		$big        = 999999999;
+		$pagination = paginate_links(
+			array(
+				'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+				'format'    => '?paged=%#%',
+				'current'   => max( 1, get_query_var( 'paged' ) ),
+				'total'     => $wp_query->max_num_pages,
+				'mid_size'  => 2,
+				'end_size'  => 1,
+				'prev_next' => false,
+				'type'      => 'array',
 			)
 		);
+
+		if ( ! empty( $pagination ) && is_array( $pagination ) ) {
+			echo wp_kses_post( implode( '', $pagination ) );
+		}
 
 		echo '</div>';
 	else :

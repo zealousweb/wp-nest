@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
 <div class="wrapper">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', TEXT_DOMAIN ); ?></a>
 	<?php $brand_logo = get_template_directory_uri() . '/sources/images/logo.svg'; ?>
