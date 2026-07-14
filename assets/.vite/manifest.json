@@ -10,15 +10,15 @@
       "css/library/fancyapps-ui-B4OYXzPe.css"
     ]
   },
-  "_vendor-DPXNORsm.css": {
-    "file": "css/library/vendor-DPXNORsm.css",
-    "src": "_vendor-DPXNORsm.css"
+  "_swiper-DPXNORsm.css": {
+    "file": "css/library/swiper-DPXNORsm.css",
+    "src": "_swiper-DPXNORsm.css"
   },
-  "_vendor-DZWf_-jh.js": {
-    "file": "js/library/vendor-DZWf_-jh.js",
-    "name": "library/vendor",
+  "_swiper-lYze1TJj.js": {
+    "file": "js/library/swiper-lYze1TJj.js",
+    "name": "library/swiper",
     "css": [
-      "css/library/vendor-DPXNORsm.css"
+      "css/library/swiper-DPXNORsm.css"
     ]
   },
   "sources/js/common/fancybox.js": {
@@ -31,22 +31,22 @@
     ]
   },
   "sources/js/common/swiperInit.js": {
-    "file": "js/swiperInit-BOWQ2ZA6.js",
+    "file": "js/swiperInit-2eJFEWML.js",
     "name": "swiperInit",
     "src": "sources/js/common/swiperInit.js",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-DZWf_-jh.js"
+      "_swiper-lYze1TJj.js"
     ]
   },
   "sources/js/modules/ajax-scripts.js": {
-    "file": "js/modules/ajax-scripts-Bo9O0YjZ.js",
+    "file": "js/modules/ajax-scripts-Q9NXYGGJ.js",
     "name": "modules/ajax-scripts",
     "src": "sources/js/modules/ajax-scripts.js",
     "isEntry": true
   },
   "sources/js/script.js": {
-    "file": "js/main-D-fInU3p.js",
+    "file": "js/main-jz5DdQTL.js",
     "name": "main",
     "src": "sources/js/script.js",
     "isEntry": true,
@@ -56,7 +56,7 @@
     ]
   },
   "sources/scss/style.scss": {
-    "file": "css/style-C_cd9R9O.css",
+    "file": "css/style-d4qpnURl.css",
     "name": "style",
     "names": [
       "style.css"

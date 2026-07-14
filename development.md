@@ -134,16 +134,20 @@ Below is the directory mapping of the entire theme, listing every file and its e
 │       │   ├── _typography.scss     # Body, headings, line heights
 │       │   ├── _utilities.scss      # Margin, padding, utility maps
 │       │   └── _wordpress.scss      # Standard WordPress classes (alignleft, wp-caption)
-│       ├── components/              # Block-level component styles
-│       │   ├── _core.scss           # Component index (imports _hero-banner)
+│       ├── blocks/                  # Custom ACF block styles
+│       │   ├── _core.scss           # Block styles index (imports _hero-banner)
 │       │   └── _hero-banner.scss    # Hero banner block layout
+│       ├── components/              # Reusable small component styles
+│       │   ├── _core.scss           # Component styles index (imports _search, _post-card)
+│       │   ├── _post-card.scss      # Post card component layout
+│       │   └── _search.scss         # Search component layout
 │       ├── layout/                  # Main structure components
 │       │   ├── _core.scss           # Layout index
 │       │   ├── _default.scss        # Main page container and wrappers
 │       │   ├── _device-menu.scss    # Desktop & mobile navigation drawer styles
 │       │   ├── _footer.scss         # Main footer styling variables
 │       │   └── _header.scss         # Header nav list styles
-│       ├── templates/               # Custom page layout styles
+│       ├── templates/               # Custom page template styles
 │       │   ├── _comp-hero.scss      # Custom template components
 │       │   └── _core.scss           # Page template index
 │       └── style.scss               # Main stylesheet compiling entry file
@@ -256,8 +260,8 @@ Custom ACF blocks are registered programmatically and rendered using templates.
 │     (Use $block['anchor'] and $block['className'])     │
 │                                                        │
 │  3. LAYOUT STYLE                                       │
-│     sources/scss/components/_{block}.scss              │
-│     (Import into sources/scss/components/_core.scss)   │
+│     sources/scss/blocks/_{block}.scss                  │
+│     (Import into sources/scss/blocks/_core.scss)       │
 │                                                        │
 │  4. FIELD CONFIGURATION                                │
 │     Sync JSON: includes/acf-json/group_{block}.json    │
