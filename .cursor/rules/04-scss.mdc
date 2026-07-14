@@ -11,9 +11,10 @@ globs: *.scss
 sources/scss/
 ├── abstracts/     → variables, mixins, functions
 ├── base/
-├── components/
+├── blocks/        → ACF blocks
+├── components/    → Reusable components
 ├── layout/
-├── templates/
+├── templates/     → Page templates
 └── style.scss     → Entry
 ```
 
@@ -58,6 +59,7 @@ sources/scss/
 
 ## New Files
 
-- **Component** → `components/_name.scss` → import in `components/_core.scss`
+- **Block** (ACF blocks) → `blocks/_name.scss` → import in `blocks/_core.scss`
+- **Component** (Small reusable components) → `components/_name.scss` → import in `components/_core.scss`
 - **Layout** → `layout/_name.scss` → import in `layout/_core.scss`
-- **Template** → `templates/_name.scss` → import in `templates/_core.scss`
+- **Template** (Page templates) → `templates/_name.scss` → import in `templates/_core.scss`

@@ -35,8 +35,9 @@ assets/                    → Compiled files (never edit)
 
 1. Register in `acf-block-register.php`.
 2. Create `template-parts/blocks/{block}.php`.
-3. Create `sources/scss/components/_{block}.scss`.
-4. Import in `sources/scss/components/_core.scss`.
+3. Create `sources/scss/blocks/_{block}.scss`.
+4. Import in `sources/scss/blocks/_core.scss`.
 5. Create `includes/acf-json/group_{block}.json`.
 
 **Rule:** Every new block must include **PHP + SCSS + ACF JSON + Registration**.
+

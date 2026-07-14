@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
 		base:
 			mode === "development"
 				? "/"
-				: `/wp-content/themes/${env.VITE_DEV_THEME_NAME || "wpnest"}/assets/`,
+				: `/wp-content/themes/${env.VITE_DEV_THEME_NAME || path.basename(process.cwd())}/assets/`,
 
 		build: {
 			outDir: "assets",

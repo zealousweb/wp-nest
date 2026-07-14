@@ -30,7 +30,7 @@ Every block must:
 - Metadata → `template-parts/blocks/{block-name}/block.json`
 - Template → `template-parts/blocks/{block-name}/render.php`
 - ACF JSON → `includes/acf-json/`
-- SCSS → `sources/scss/components/_{block-name}.scss`
+- SCSS → `sources/scss/blocks/_{block-name}.scss`
 - JavaScript *(optional)* → `sources/js/modules/{block-name}.js`
 
 ## Content Rules
@@ -60,8 +60,8 @@ Every block must:
 - Register the block path in `acf-block-register.php`.
 - Create/update the ACF Field Group.
 - Commit the generated ACF JSON.
-- Create `sources/scss/components/_{block-name}.scss`.
-- Import it into `sources/scss/components/_core.scss`.
+- Create `sources/scss/blocks/_{block-name}.scss`.
+- Import it into `sources/scss/blocks/_core.scss`.
 
 **Optional**
 

@@ -145,7 +145,9 @@ sources/
     ├── style.scss            → Main entry
     ├── abstracts/            → Variables, mixins, functions
     ├── base/                 → Reset, typography, global
-    └── components/           → One partial per block (_block-name.scss)
+    ├── blocks/               → One partial per ACF block (_block-name.scss)
+    ├── components/           → Small reusable components
+    └── templates/            → Page templates
 
 assets/                       → Compiled output — never edit directly
 config/                       → Linting and build configs
@@ -168,7 +170,7 @@ Follow these 4 steps:
 
 1. **Register** — add the block array to `includes/acf-block-register.php`
 2. **Template** — create `template-parts/blocks/{block-slug}.php`
-3. **Styles** — create `sources/scss/components/_{block-slug}.scss` and import in `_core.scss`
+3. **Styles** — create `sources/scss/blocks/_{block-slug}.scss` and import in `_core.scss`
 4. **ACF JSON** — export field group to `includes/acf-json/group_{block-slug}.json`
 
 Optionally add `includes/acf-block-preview/{block-slug}.jpg` for the block preview image in the editor.
