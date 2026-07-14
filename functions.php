@@ -16,6 +16,19 @@ if ( ! defined( '_THEME_VERSION' ) ) {
 }
 
 /**
+ * Set the content width in pixels, based on the theme's design and stylesheet.
+ * This value is used by WordPress for sizing images, videos, and oEmbed frames.
+ *
+ * Priority 0 to make it available early to other code.
+ *
+ * @global int $content_width
+ */
+function wpnest_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'wpnest_content_width', 1170 );
+}
+add_action( 'after_setup_theme', 'wpnest_content_width', 0 );
+
+/**
  * Define the default constant that will be used throughout your theme.
  */
 define( 'THEME_PREFIX', 'wpnest' );
@@ -44,6 +57,13 @@ function wpnest_setup() {
 	 * Enable support for Post Thumbnails on posts and pages.
 	 */
 	add_theme_support( 'post-thumbnails' );
+
+	/**
+	 * Register custom image sizes.
+	 */
+	add_image_size( 'wpnest-banner', 1920, 600, true );
+	add_image_size( 'wpnest-card', 640, 420, true );
+	add_image_size( 'wpnest-card-sm', 400, 270, true );
 
 	/**
 	 * Enable responsive embeds (YouTube, Vimeo, etc).
@@ -85,6 +105,12 @@ function wpnest_setup() {
 			'menu-2' => esc_html__( 'Secondary', TEXT_DOMAIN ),
 		)
 	);
+
+	/**
+	 * Add support for wp_body_open() — allows plugins like GTM to inject
+	 * code immediately after the opening body tag.
+	 */
+	add_theme_support( 'body-open' );
 }
 add_action( 'after_setup_theme', 'wpnest_setup' );
 

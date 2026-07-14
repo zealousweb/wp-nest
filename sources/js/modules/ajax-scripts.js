@@ -61,17 +61,36 @@
         }
     });
 
-    /** Handle pagination clicks */
+    /**
+     * Handle pagination clicks inside .blog-listing.
+     *
+     * Supports both numbered page links and prev/next arrow links.
+     * For numbered pages: parse the page number from textContent.
+     * For prev/next links: parse the page number from the href (?paged=N).
+     */
     document.addEventListener('click', function(e) {
         const target = e.target;
         const pageLink = target.closest('.pagination .page-numbers');
-        if (pageLink) {
-            e.preventDefault();
-            const pageValue = pageLink.textContent.trim();
-            const page = parseInt(pageValue, 10);
-            if (!isNaN(page)) {
-                wpnest_ajaxPagination(page);
-            }
+
+        // Only act on links inside .blog-listing pagination
+        if (!pageLink || !pageLink.closest('.blog-listing')) {
+            return;
+        }
+
+        e.preventDefault();
+
+        // Numbered page link: textContent is a digit
+        const pageValue = parseInt(pageLink.textContent.trim(), 10);
+        if (!isNaN(pageValue)) {
+            wpnest_ajaxPagination(pageValue);
+            return;
+        }
+
+        // Prev / Next link: read page number from href ?paged=N
+        const href = pageLink.getAttribute('href') || '';
+        const match = href.match(/[?&]paged=(\d+)/);
+        if (match) {
+            wpnest_ajaxPagination(parseInt(match[1], 10));
         }
     });
 })();

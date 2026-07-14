@@ -1,0 +1,106 @@
+@use "@scss/abstracts/variables" as *;
+@use "@scss/abstracts/function" as *;
+@use "@scss/abstracts/mixins" as *;
+
+// -----------------------------------------------------------------------------
+// Search form (searchform.php)
+// -----------------------------------------------------------------------------
+
+.search-form {
+	width: 100%;
+}
+
+.search-form-inner {
+	overflow: hidden;
+	display: flex;
+	align-items: stretch;
+
+	border: rem(1px) solid var(--color-gray-200);
+	border-radius: rem(6px);
+
+	transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+	&:focus-within {
+		border-color: var(--color-primary);
+		box-shadow: 0 0 0 rem(3px) color-mix(in srgb, var(--color-primary), transparent 80%);
+	}
+}
+
+.search-field {
+	flex: 1;
+
+	height: var(--height-input);
+	padding: 0 rem(16px);
+	border: none;
+
+	font-size: var(--text-base);
+	color: var(--color-foreground);
+
+	background: var(--color-white);
+	outline: none;
+
+	&::placeholder {
+		color: color-mix(in srgb, var(--color-foreground), transparent 55%);
+	}
+}
+
+.search-submit {
+	cursor: pointer;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	height: var(--height-input);
+	padding: 0 rem(18px);
+	border-left: rem(1px) solid var(--color-gray-200);
+	border-radius: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Search results page (search.php)
+// -----------------------------------------------------------------------------
+
+.search-results-wrap {
+	padding-top: rem(30px);
+}
+
+.search-results-header {
+	display: flex;
+	flex-wrap: wrap;
+	gap: rem(20px);
+	align-items: center;
+	justify-content: space-between;
+
+	margin-bottom: rem(40px);
+
+	.search-results-title {
+		font-size: var(--text-2xl);
+
+		em {
+			font-style: normal;
+			color: var(--color-primary);
+		}
+	}
+
+	.search-form-inline {
+		flex: 0 0 auto;
+		width: 100%;
+		max-width: rem(360px);
+	}
+}
+
+.search-no-results {
+	padding: rem(60px) 0;
+	text-align: center;
+
+	p {
+		margin-bottom: rem(30px);
+		font-size: var(--text-lg);
+	}
+
+	.search-form {
+		max-width: rem(480px);
+		margin: 0 auto;
+	}
+}
