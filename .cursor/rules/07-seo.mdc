@@ -3,7 +3,7 @@ description: SEO best practices, meta tags, and JSON-LD schema rules.
 globs: *.php, header.php, footer.php
 ---
 
-# SEO — SITE_NAME
+# SEO — WPNest
 
 ## WordPress
 
@@ -37,6 +37,12 @@ globs: *.php, header.php, footer.php
 - Use `wp_safe_redirect()` for redirects.
 - Keep real 404 pages.
 - Don't disable the sitemap without an alternative.
+
+## Performance & Core Web Vitals
+
+- Tailwind v4 generates only the CSS classes actually used — no manual purging needed.
+- Ensure `npm run build` produces a single hashed CSS file loaded via the Vite manifest.
+- Use Tailwind's `hidden` / `block` / `lg:block` for responsive show/hide — do not load separate stylesheets per breakpoint.
 
 ## Never
 

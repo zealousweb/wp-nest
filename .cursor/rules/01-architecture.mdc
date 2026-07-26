@@ -19,7 +19,11 @@ includes/                  → PHP modules
 └── acf-json/              → ACF JSON
 
 template-parts/blocks/     → Block templates
-sources/                   → SCSS & JS source
+sources/                   → CSS & JS source (no SCSS)
+├── css/
+│   ├── style.css          → Tailwind v4 entry point
+│   └── menu.css           → Navigation styles (imported by style.css)
+└── js/
 assets/                    → Compiled files (never edit)
 ```
 
@@ -30,14 +34,13 @@ assets/                    → Compiled files (never edit)
 - Never edit `assets/`.
 - Keep `includes/acf-json/` synced.
 - Block template filename must match the block slug.
+- **No SCSS** — the project uses Tailwind CSS v4. Write utility classes in PHP templates; add new design tokens or `@utility` definitions to `sources/css/style.css`.
 
 ## New ACF Block
 
 1. Register in `acf-block-register.php`.
-2. Create `template-parts/blocks/{block}.php`.
-3. Create `sources/scss/blocks/_{block}.scss`.
-4. Import in `sources/scss/blocks/_core.scss`.
-5. Create `includes/acf-json/group_{block}.json`.
+2. Create `template-parts/blocks/{block-name}/block.json`.
+3. Create `template-parts/blocks/{block-name}/render.php` with Tailwind utility classes.
+4. Create `includes/acf-json/group_{block}.json`.
 
-**Rule:** Every new block must include **PHP + SCSS + ACF JSON + Registration**.
-
+**Rule:** Every new block must include **PHP + Tailwind classes + ACF JSON + Registration**. No separate CSS/SCSS file needed unless the block requires complex pseudo-element or JS-driven state styling.

@@ -19,29 +19,29 @@ get_header();
 
 <?php entry_banner(); ?>
 
-<main id="content" class="main-content">
-	<div class="container">
+<main id="content" class="grow w-full pt-12 pb-16 md:pt-8 md:pb-10">
+	<div class="max-w-container mx-auto px-5 lg:px-12 w-full">
 
-		<header class="archive-header">
+		<header class="mb-10">
 			<?php
-			the_archive_title( '<h2 class="archive-title">', '</h2>' );
-			the_archive_description( '<div class="archive-description">', '</div>' );
+			the_archive_title( '<h2 class="text-3xl font-bold mb-3">', '</h2>' );
+			the_archive_description( '<div class="text-base text-black/70">', '</div>' );
 			?>
 		</header>
 
 		<?php if ( have_posts() ) : ?>
 
-			<div class="post-list">
+			<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
 				<?php
 				while ( have_posts() ) :
 					the_post();
 					?>
-					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-						<header class="entry-header">
-							<?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+					<article id="post-<?php the_ID(); ?>" <?php post_class( 'overflow-hidden flex flex-col rounded-lg bg-white shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out p-6 border border-gray-200/50' ); ?>>
+						<header class="mb-2.5">
+							<?php the_title( '<h2 class="text-xl font-bold leading-tight"><a href="' . esc_url( get_permalink() ) . '" class="text-black hover:text-primary transition-colors duration-250" rel="bookmark">', '</a></h2>' ); ?>
 						</header>
 
-						<div class="entry-summary">
+						<div class="flex-1 text-sm leading-normal text-black/75 mb-5">
 							<?php the_excerpt(); ?>
 						</div>
 					</article>

@@ -2,10 +2,7 @@ import { defineConfig, loadEnv } from "vite";
 import path from "path";
 import { globSync } from "glob";
 import liveReload from "vite-plugin-live-reload";
-
-import autoprefixer from "autoprefixer";
-import cssnano from "cssnano";
-import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import tailwindcss from '@tailwindcss/vite'
 
 const getModuleEntries = () => {
 	const entries = {};
@@ -32,11 +29,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		plugins: [
 			liveReload(["./**/*.php"]),
-			ViteImageOptimizer({
-				png: { quality: 80 },
-				jpeg: { quality: 80 },
-				jpg: { quality: 80 },
-			})
+			tailwindcss(),
 		],
 
 		base:
@@ -57,7 +50,7 @@ export default defineConfig(({ mode }) => {
 			rollupOptions: {
 				input: {
 					main: path.resolve(process.cwd(), "sources/js/script.js"),
-					style: path.resolve(process.cwd(), "sources/scss/style.scss"),
+					style: path.resolve(process.cwd(), "sources/css/style.css"),
 					...getModuleEntries(),
 				},
 
@@ -95,7 +88,7 @@ export default defineConfig(({ mode }) => {
 
 								const packageName = scope ? `${scope}-${pkg}` : pkg;
 
-								const heavyLibs = ["swiper", "fancyapps", "gsap"];
+								const heavyLibs = ["swiper", "fancyapps"];
 
 								if (heavyLibs.some((lib) => packageName.includes(lib))) {
 									return `library/${packageName}`;
@@ -113,31 +106,11 @@ export default defineConfig(({ mode }) => {
 
 		css: {
 			devSourcemap: true,
-			postcss: {
-				plugins: [
-					autoprefixer({
-						overrideBrowserslist: [
-							"last 2 versions",
-							"Safari >= 9",
-							"iOS >= 9",
-							"not dead",
-						],
-					}),
-
-					...(mode === "production"
-						? [
-							cssnano({
-								preset: "default",
-							}),
-						]
-						: []),
-				],
-			},
 		},
 
 		resolve: {
 			alias: {
-				"@scss": path.resolve(process.cwd(), "sources/scss"),
+				"@scss": path.resolve(process.cwd(), "sources/css"),
 				"@js": path.resolve(process.cwd(), "sources/js"),
 				"@img": path.resolve(process.cwd(), "sources/images"),
 			},

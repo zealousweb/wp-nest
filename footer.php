@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-	<footer class="main-footer">
+	<footer class="self-end w-full h-auto py-12 leading-normal text-center bg-primary">
 		<!-- Footer content goes here -->
 	</footer>
 

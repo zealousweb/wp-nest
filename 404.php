@@ -16,11 +16,11 @@ get_header();
 
 <?php entry_banner(); ?>
 
-<main id="content" class="main-content">
+<main id="content" class="grow w-full pt-12 pb-16 md:pt-8 md:pb-10">
 
-	<div class="error-404 not-found space-lg text-center">
+	<div class="py-24 text-center">
 
-		<div class="container">
+		<div class="max-w-container mx-auto px-5 lg:px-12 w-full">
 
 			<h1><?php esc_html_e( '404', TEXT_DOMAIN ); ?></h1>
 

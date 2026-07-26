@@ -22,21 +22,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<div class="wrapper">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', TEXT_DOMAIN ); ?></a>
+<div class="relative overflow-hidden flex flex-col justify-between w-full min-h-screen">
+	<a class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-2.5 focus:left-2.5 focus:block focus:px-3.5 focus:py-1.5 focus:rounded focus:text-sm focus:text-white focus:no-underline focus:bg-primary focus:outline-3 focus:outline-secondary focus:outline-offset-2" href="#content"><?php esc_html_e( 'Skip to content', TEXT_DOMAIN ); ?></a>
 	<?php $brand_logo = get_template_directory_uri() . '/sources/images/logo.svg'; ?>
-	<header class="main-header">
-		<div class="container d-flex justify-content-between align-items-center flex-nowrap">
+	<header class="main-header relative z-50 w-full h-auto py-3.5 bg-white shadow-header">
+		<div class="max-w-container mx-auto px-5 lg:px-12 w-full flex justify-between items-center flex-nowrap">
 			<?php if ( $brand_logo ) { ?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="block shrink-0 w-16">
 					<img src="<?php echo esc_url( $brand_logo ); ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
 				</a>
 			<?php } ?>
 
-			<div class="nav-menu d-flex justify-content-end align-items-center flex-nowrap">
+			<div class="flex-1 pl-4 flex justify-end items-center flex-nowrap">
 				<?php if ( has_nav_menu( 'menu-1' ) ) { ?>
-					<div class="navigation">
-						<nav class="d-flex justify-content-end align-items-center flex-nowrap">
+					<div class="hidden lg:block">
+						<nav class="flex justify-end items-center flex-nowrap mr-8">
 							<?php
 							wp_nav_menu(
 								array(
@@ -55,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		<!-- Device menu -->
 		<?php if ( has_nav_menu( 'menu-1' ) ) { ?>
-			<div class="mbnav d-md-none">
+			<div class="mbnav lg:hidden">
 				<div class="mbnav__backdrop"></div>
 				<div class="mbnav__state" data-clickable="true">
 					<div class="mbnav__inner">

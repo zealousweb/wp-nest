@@ -3,17 +3,31 @@ description: WordPress performance rules for images, queries, and assets.
 globs: *.php, *.js
 ---
 
+# Performance — WPNest
+
 ## Images
+
 - Use `wp_get_attachment_image()` — never raw `<img>`.
-- Set `loading="lazy"` by default; `eager` + `fetchpriority="high"` for hero only.
+- Set `loading="lazy"` by default; `eager` + `fetchpriority="high"` for hero images only.
 - Use `sizes` and `srcset` via WordPress responsive image helpers.
+- Use Tailwind classes for sizing: `class="w-full h-full object-cover"` — no inline styles.
 
 ## Queries
+
 - Never use `query_posts()`.
 - Set `no_found_rows => true` when not paginating.
 - Cache expensive queries with `wp_cache_get()` / `wp_cache_set()`.
 - Avoid `post__not_in` on large datasets.
 
-## Assets
-- No render-blocking scripts (use `defer` / `async` where needed).
-- Bundle per-block JS, don't load all scripts globally.
+## CSS & Tailwind
+
+- Tailwind CSS v4 generates only the classes actually used via `@source` scanning — **no manual PurgeCSS needed**.
+- Do not load additional global stylesheets. Add new styles as `@utility` in `sources/css/style.css` or as a new `@import`-ed CSS file.
+- Use `hidden`, `block`, `lg:block`, `lg:hidden` for responsive show/hide — not separate stylesheets.
+- Avoid long `@apply` chains in `@utility` if the same result can be achieved with a short class list in the HTML.
+
+## JavaScript
+
+- No render-blocking scripts (all theme scripts enqueued with `type="module"`).
+- Bundle per-block JS — lazy-load with `import()` inside a DOM check.
+- Don't load all scripts globally — only eager-load global UI (menu, navigation).

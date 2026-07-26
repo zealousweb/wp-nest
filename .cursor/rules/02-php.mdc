@@ -20,6 +20,13 @@ template-parts/blocks/       → block templates
 
 **Rule:** One file = one responsibility. Thin templates, fat helpers.
 
+## Styling in PHP Templates
+
+- Write Tailwind utility classes directly in the `class=""` attribute.
+- For long or reusable class strings, define an `@utility` in `sources/css/style.css`.
+- Never write inline `style=""` attributes for layout/colours — use Tailwind utilities.
+- Never reference SCSS files or hardcode hex values in PHP.
+
 ## Security
 
 - Add `ABSPATH` guard to every PHP file.
@@ -51,4 +58,4 @@ template-parts/blocks/       → block templates
 - Use `get_template_directory()` / `_uri()`.
 - Follow WPCS (tabs, casting, max 3 nesting levels).
 
-**Never:** Business logic in `functions.php`, duplicate helpers, raw `echo get_field()`, hardcoded `<img>`, or hardcoded asset filenames.
+**Never:** Business logic in `functions.php`, duplicate helpers, raw `echo get_field()`, hardcoded `<img>`, hardcoded asset filenames, or inline CSS styles.

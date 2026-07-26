@@ -16,7 +16,7 @@ get_header();
 
 <?php entry_banner(); ?>
 
-<main id="content" class="main-content">
+<main id="content" class="grow w-full pt-12 pb-16 md:pt-8 md:pb-10">
 
 	<?php
 	while ( have_posts() ) :

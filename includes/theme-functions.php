@@ -40,7 +40,7 @@ function wpnest_edit_post_link() {
  */
 function placeholder_image( $title = 'Banner' ) {
 	$placeholder_url = get_template_directory_uri() . '/sources/images/placeholder-image.jpg';
-	return '<img src="' . esc_url( $placeholder_url ) . '" alt="' . esc_attr( $title ) . '">';
+	return '<img src="' . esc_url( $placeholder_url ) . '" alt="' . esc_attr( $title ) . '" class="block w-full h-full object-cover">';
 }
 
 /**
@@ -109,14 +109,14 @@ function entry_banner() {
 		$title = get_the_title();
 	}
 
-	echo '<section class="entry-banner">';
+	echo '<section class="relative overflow-hidden h-banner">';
 	if ( ! empty( $banner_image_id ) ) {
-		echo wp_get_attachment_image( $banner_image_id, 'wpnest-banner' );
+		echo wp_get_attachment_image( $banner_image_id, 'wpnest-banner', false, array( 'class' => 'block w-full h-full object-cover' ) );
 	} else {
 		echo wp_kses_post( placeholder_image( $title ) );
 	}
-	echo '<div class="entry-header">';
-	echo '<h1 class="entry-title">' . esc_html( $title ) . '</h1>';
+	echo '<div class="absolute inset-0 flex items-center justify-center p-3.5 bg-black/75">';
+	echo '<h1 class="m-0 text-3xl font-bold text-white uppercase">' . esc_html( $title ) . '</h1>';
 	echo '</div>';
 	echo '</section>';
 }
@@ -192,7 +192,7 @@ function wpnest_archive_post() {
 	ob_start();
 
 	// Display search heading and search form.
-	echo '<div>' . esc_html__( 'Search', TEXT_DOMAIN ) . '</div>';
+	echo '<div class="text-sm font-semibold mb-2">' . esc_html__( 'Search', TEXT_DOMAIN ) . '</div>';
 
 	get_search_form();
 
@@ -205,8 +205,8 @@ function wpnest_archive_post() {
 
 	// Display category dropdown if categories exist.
 	if ( ! empty( $categories ) ) {
-		echo '<div><label for="postcategory">' . esc_html__( 'Filter by Category', TEXT_DOMAIN ) . '</label></div>';
-		echo "<select name='postcategory' id='postcategory'>
+		echo '<div class="mt-4"><label for="postcategory" class="text-sm font-semibold mb-2 block">' . esc_html__( 'Filter by Category', TEXT_DOMAIN ) . '</label></div>';
+		echo "<select name='postcategory' id='postcategory' class='border border-gray-200 rounded px-3 py-2 text-sm bg-white outline-none focus:border-primary mb-6 w-full max-w-xs'>
             <option value=''>" . esc_html__( 'Select Category', TEXT_DOMAIN ) . '</option>';
 		foreach ( $categories as $category ) {
 			echo '<option value="' . esc_attr( $category->slug ) . '">' . esc_html( $category->name ) . '</option>';
@@ -216,17 +216,17 @@ function wpnest_archive_post() {
 
 	// Loading indicator for AJAX requests.
 	echo "
-    <div class='loading' style='display:none;'>" . esc_html__( 'Loading...', TEXT_DOMAIN ) . "</div>
-    <div class='blog-listing'>";
+    <div class='loading text-sm text-black/75 py-4' style='display:none;'>" . esc_html__( 'Loading...', TEXT_DOMAIN ) . "</div>
+    <div class='blog-listing grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8'>";
 
 	// Check if there are posts available.
 	if ( have_posts() ) :
 		while ( have_posts() ) :
 			the_post();
 			echo '
-            <article>
-                <h2><a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h2>
-                <p>' . esc_html( get_the_excerpt() ) . '</p>
+            <article class="overflow-hidden flex flex-col rounded-lg bg-white shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out p-6 border border-gray-200/50">
+                <h2 class="text-xl font-bold leading-tight mb-2.5"><a href="' . esc_url( get_the_permalink() ) . '" class="text-black hover:text-primary transition-colors duration-250">' . esc_html( get_the_title() ) . '</a></h2>
+                <p class="flex-1 text-sm leading-normal text-black/75 mb-5">' . esc_html( get_the_excerpt() ) . '</p>
             </article>';
 		endwhile;
 

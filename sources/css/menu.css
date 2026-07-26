@@ -1,0 +1,330 @@
+/* ─────────────────────────────────────────────────────────
+   menu.css — Navigation styles
+   Covers:
+   • Desktop header nav & dropdown sub-menus
+   • Mobile menu hamburger button
+   • Mobile slide-panel nav (.mbnav)
+
+   NOTE: These styles must remain as raw CSS because they
+   rely on pseudo-elements (::before / ::after), pointer-events
+   toggling, and JS-driven state classes (.is-open, .is-clicked)
+   that cannot be expressed as Tailwind HTML utilities.
+   All colours reference @theme design tokens.
+   ───────────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────────
+   WordPress admin bar — header offset
+   (class applied to <body> by WP core at runtime)
+   ───────────────────────────────────────────────────────── */
+.admin-bar .main-header {
+  top: 32px;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .main-header {
+    top: 46px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Desktop header navigation & dropdown sub-menus
+   ───────────────────────────────────────────────────────── */
+.main-header nav > ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.main-header nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.main-header nav ul li {
+  padding: 0;
+  list-style: none;
+  position: relative;
+}
+.main-header nav ul li a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.main-header nav ul li.menu-item-has-children > a {
+  padding-right: 40px;
+  position: relative;
+}
+.main-header nav ul li.menu-item-has-children > a::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  transform: rotate(135deg);
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid var(--color-primary);
+  border-right: 1px solid var(--color-primary);
+  transition: border-color 0.3s;
+}
+.main-header nav ul li:hover > a {
+  color: var(--color-white, #fff);
+  background-color: var(--color-primary);
+}
+.main-header nav ul li:hover > a::after {
+  border-color: var(--color-white, #fff);
+}
+.main-header nav ul li:hover > ul {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+.main-header nav ul.sub-menu {
+  pointer-events: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 100;
+}
+.main-header nav ul.sub-menu .sub-menu {
+  top: 0;
+  left: 100%;
+}
+.main-header nav ul.sub-menu li a {
+  color: var(--color-white, #fff);
+  background-color: var(--color-primary);
+}
+.main-header nav ul.sub-menu li.menu-item-has-children > a::after {
+  top: 17px;
+  transform: rotate(45deg);
+  border-color: var(--color-white, #fff);
+}
+.main-header nav ul.sub-menu li:hover > a {
+  color: var(--color-primary);
+  background-color: var(--color-white, #fff);
+}
+.main-header nav ul.sub-menu li:hover > a::after {
+  border-color: var(--color-primary);
+}
+.main-header nav ul.sub-menu li:not(:last-child) a {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ─────────────────────────────────────────────────────────
+   Mobile menu — hamburger icon
+   Complex ::before/::after animations toggled by .is-clicked
+   (added by deviceMenu.js)
+   ───────────────────────────────────────────────────────── */
+.hamburger {
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s;
+}
+@media (min-width: 992px) {
+  .hamburger {
+    display: none;
+  }
+}
+.hamburger span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.hamburger span::before,
+.hamburger span::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.hamburger span::before {
+  top: -8px;
+}
+.hamburger span::after {
+  bottom: -8px;
+}
+.hamburger.is-clicked span {
+  background-color: transparent !important;
+}
+.hamburger.is-clicked span::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.hamburger.is-clicked span::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* ─────────────────────────────────────────────────────────
+   Mobile device menu (.mbnav)
+   JavaScript-driven slide panel — state toggled via .is-open
+   and .is-clicked added by deviceMenu.js.
+   ───────────────────────────────────────────────────────── */
+.mbnav {
+  position: relative;
+  z-index: -1;
+  display: block;
+}
+@media (min-width: 992px) {
+  .mbnav {
+    display: none;
+  }
+}
+.mbnav__state {
+  pointer-events: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  overflow: hidden;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+.mbnav__inner {
+  pointer-events: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+}
+.mbnav .menu-wrap {
+  --leftSlide: 0;
+  position: absolute;
+  top: 0;
+  right: var(--leftSlide);
+  width: 100%;
+  height: 100%;
+  transition: 0.4s ease;
+}
+.mbnav .menu-wrap .menu-wrap {
+  right: -100%;
+  visibility: hidden;
+  opacity: 0;
+}
+.mbnav .menu-wrap > .menu-inner {
+  pointer-events: auto;
+  overflow-y: auto;
+  max-height: 100%;
+  padding-top: 85px;
+  background-color: var(--color-white, #fff);
+}
+.mbnav ul {
+  position: static;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.4s ease;
+}
+.mbnav ul li.is-open > .menu-wrap {
+  visibility: visible;
+  opacity: 1;
+}
+.mbnav ul li:not(.btn-wrap) {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--color-gray-200);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-primary);
+  list-style: none;
+}
+.mbnav ul li:not(.btn-wrap):last-child {
+  border-bottom: 0;
+}
+.mbnav ul li a {
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  display: block;
+  flex: 1 1 auto;
+  order: -1;
+  padding: 10px 0;
+  line-height: 1.3;
+  color: currentColor;
+  text-decoration: none !important;
+}
+.mbnav ul li.is-open > .mbnav__caret::before {
+  transform: rotate(90deg);
+}
+.mbnav ul li.back-click {
+  position: relative;
+  order: -1;
+  width: 100%;
+  padding: 10px 0 10px 20px;
+  font-weight: 400;
+  color: currentColor;
+  cursor: pointer;
+}
+.mbnav ul li.back-click::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 2px;
+  transform: rotate(-135deg);
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+}
+.mbnav__caret {
+  cursor: pointer;
+  z-index: 1;
+  display: grid;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30px;
+  height: auto;
+}
+.mbnav__caret::before {
+  content: "";
+  transform: rotate(45deg);
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
+  transition: transform 0.3s ease;
+}
+.mbnav__backdrop {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.45);
+  transition: all 0.4s ease-in;
+}
+.mbnav.is-open .mbnav__state {
+  left: 0;
+}
+.mbnav.is-open .mbnav__backdrop {
+  z-index: 999;
+  visibility: visible;
+  opacity: 1;
+}

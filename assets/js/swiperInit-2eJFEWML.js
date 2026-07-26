@@ -1,1 +1,0 @@
-import{n as e,r as i,t as o}from"./library/swiper-lYze1TJj.js";var n=()=>new i(".home-slider",{modules:[e,o],loop:!0,navigation:{nextEl:".home-next",prevEl:".home-prev"},pagination:{el:".home-pagination",clickable:!0}});export{n as initHomeSlider};

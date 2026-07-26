@@ -1,42 +1,51 @@
 {
-  "_fancyapps-ui-B4OYXzPe.css": {
-    "file": "css/library/fancyapps-ui-B4OYXzPe.css",
-    "src": "_fancyapps-ui-B4OYXzPe.css"
+  "_fancyapps-ui-BnGLgMVy.css": {
+    "file": "css/library/fancyapps-ui-BnGLgMVy.css",
+    "src": "_fancyapps-ui-BnGLgMVy.css"
   },
-  "_fancyapps-ui-gjEh_1JJ.js": {
-    "file": "js/library/fancyapps-ui-gjEh_1JJ.js",
+  "_fancyapps-ui-ByhY2_01.js": {
+    "file": "js/library/fancyapps-ui-ByhY2_01.js",
     "name": "library/fancyapps-ui",
     "css": [
-      "css/library/fancyapps-ui-B4OYXzPe.css"
+      "css/library/fancyapps-ui-BnGLgMVy.css"
     ]
   },
-  "_swiper-DPXNORsm.css": {
-    "file": "css/library/swiper-DPXNORsm.css",
-    "src": "_swiper-DPXNORsm.css"
+  "_swiper-D8xBziat.css": {
+    "file": "css/library/swiper-D8xBziat.css",
+    "src": "_swiper-D8xBziat.css"
   },
-  "_swiper-lYze1TJj.js": {
-    "file": "js/library/swiper-lYze1TJj.js",
+  "_swiper-DcwmQmwd.js": {
+    "file": "js/library/swiper-DcwmQmwd.js",
     "name": "library/swiper",
     "css": [
-      "css/library/swiper-DPXNORsm.css"
+      "css/library/swiper-D8xBziat.css"
     ]
   },
+  "sources/css/style.css": {
+    "file": "css/style-C96FrXNN.css",
+    "name": "style",
+    "names": [
+      "style.css"
+    ],
+    "src": "sources/css/style.css",
+    "isEntry": true
+  },
   "sources/js/common/fancybox.js": {
-    "file": "js/fancybox-x2LquDdg.js",
+    "file": "js/fancybox-DMNuFV37.js",
     "name": "fancybox",
     "src": "sources/js/common/fancybox.js",
     "isDynamicEntry": true,
     "imports": [
-      "_fancyapps-ui-gjEh_1JJ.js"
+      "_fancyapps-ui-ByhY2_01.js"
     ]
   },
   "sources/js/common/swiperInit.js": {
-    "file": "js/swiperInit-2eJFEWML.js",
+    "file": "js/swiperInit-f3BlmK0T.js",
     "name": "swiperInit",
     "src": "sources/js/common/swiperInit.js",
     "isDynamicEntry": true,
     "imports": [
-      "_swiper-lYze1TJj.js"
+      "_swiper-DcwmQmwd.js"
     ]
   },
   "sources/js/modules/ajax-scripts.js": {
@@ -46,7 +55,7 @@
     "isEntry": true
   },
   "sources/js/script.js": {
-    "file": "js/main-jz5DdQTL.js",
+    "file": "js/main-DTbUGrN9.js",
     "name": "main",
     "src": "sources/js/script.js",
     "isEntry": true,
@@ -54,14 +63,5 @@
       "sources/js/common/swiperInit.js",
       "sources/js/common/fancybox.js"
     ]
-  },
-  "sources/scss/style.scss": {
-    "file": "css/style-d4qpnURl.css",
-    "name": "style",
-    "names": [
-      "style.css"
-    ],
-    "src": "sources/scss/style.scss",
-    "isEntry": true
   }
 }

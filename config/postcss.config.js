@@ -1,4 +1,14 @@
 // postcss.config.js
+//
+// ⚠️  TAILWIND CSS v4 NOTE:
+// This project uses Tailwind CSS v4 via the @tailwindcss/vite plugin.
+// Tailwind v4 performs its own content scanning and tree-shaking natively
+// using @source directives in sources/css/style.css. The PurgeCSS plugin
+// below is therefore REDUNDANT and has no effect on Tailwind-generated
+// utility classes. It is retained here only for any non-Tailwind custom
+// CSS that may be present. If you observe style regressions in production
+// builds, consider disabling PurgeCSS below.
+//
 import autoprefixer from 'autoprefixer';
 import purgecss from '@fullhuman/postcss-purgecss';
 import { glob } from 'glob';
@@ -24,7 +34,9 @@ export default {
 			],
 		}),
 
-		// PurgeCSS — production only, matches webpack PurgeCSSPlugin behaviour
+		// PurgeCSS — production only.
+		// NOTE: Tailwind v4 handles its own tree-shaking via @source directives.
+		// PurgeCSS here only affects any remaining hand-written CSS rules.
 		...(isProd
 			? [
 				purgecss({
@@ -45,7 +57,7 @@ export default {
 						greedy: [],
 					},
 
-					defaultExtractor: (content) => content.match(/[\w-/:]+((?<!:))/g) || [],
+					defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
 					fontFace:  true,
 					keyframes: true,
 					variables: false,

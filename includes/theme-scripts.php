@@ -114,7 +114,7 @@ function themeCSS( $key, $deps = array(), $media = 'all' ) {
 	$handle = THEME_PREFIX . '-' . sanitize_title( pathinfo( $key, PATHINFO_FILENAME ) );
 
 	$source_key = 'main.css' === $key
-		? 'sources/scss/style.scss'
+		? 'sources/css/style.css'
 		: $key;
 
 	// DEV MODE.

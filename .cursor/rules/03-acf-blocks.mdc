@@ -22,7 +22,25 @@ Every block must:
 - Return early if no content.
 - Support Anchor (`$block['anchor']`).
 - Support Additional CSS Class (`$block['className']`).
-- Apply `id` and `class` to the wrapper.
+- Apply `id` and `class` to the wrapper via `get_block_wrapper_attributes()`.
+
+## Styling
+
+- Use **Tailwind CSS v4 utility classes** directly in `class=""` attributes inside `render.php`.
+- **No separate CSS/SCSS files** per block — unless the block requires pseudo-element animations or JS-driven state classes that cannot be expressed as Tailwind utilities.
+- If a class string is reused across multiple blocks, extract it to an `@utility` in `sources/css/style.css`.
+
+### Block HTML Structure
+
+```html
+<section <?php echo $wrapper_attributes; ?>>
+    <div class="max-w-container mx-auto px-5 lg:px-12 w-full">
+        <div class="[block-specific layout classes]">
+```
+
+- Section wrapper uses `get_block_wrapper_attributes()` with the block slug as the base class.
+- Always use the `max-w-container` + `px-5 lg:px-12` container pattern.
+- Use Tailwind responsive prefixes (`md:`, `lg:`, `xl:`) instead of SCSS media query mixins.
 
 ## Structure
 
@@ -30,7 +48,6 @@ Every block must:
 - Metadata → `template-parts/blocks/{block-name}/block.json`
 - Template → `template-parts/blocks/{block-name}/render.php`
 - ACF JSON → `includes/acf-json/`
-- SCSS → `sources/scss/blocks/_{block-name}.scss`
 - JavaScript *(optional)* → `sources/js/modules/{block-name}.js`
 
 ## Content Rules
@@ -56,14 +73,14 @@ Every block must:
 
 - Create the folder `template-parts/blocks/{block-name}`.
 - Create `block.json` inside the folder with ACF metadata.
-- Create `render.php` inside the folder.
+- Create `render.php` inside the folder using Tailwind utility classes.
 - Register the block path in `acf-block-register.php`.
 - Create/update the ACF Field Group.
 - Commit the generated ACF JSON.
-- Create `sources/scss/blocks/_{block-name}.scss`.
-- Import it into `sources/scss/blocks/_core.scss`.
 
 **Optional**
 
+- Add an `@utility` to `sources/css/style.css` if a class string is complex and reused.
 - Create `sources/js/modules/{block-name}.js` **only if the block has interactive behavior**.
 - Lazy-load it from `script.js`.
+- Add a dedicated `sources/css/{block-name}.css` **only if the block needs pseudo-element or JS-state CSS** that cannot be expressed as Tailwind utilities, and `@import` it from `style.css`.

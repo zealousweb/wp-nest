@@ -16,42 +16,42 @@ get_header();
 
 <?php entry_banner(); ?>
 
-<main id="content" class="main-content">
-	<div class="container">
+<main id="content" class="grow w-full pt-12 pb-16 md:pt-8 md:pb-10">
+	<div class="max-w-container mx-auto px-5 lg:px-12 w-full">
 
-		<div class="search-results-wrap">
+		<div class="pt-8">
 
 			<?php if ( have_posts() ) : ?>
 
-				<header class="search-results-header">
-					<h2 class="search-results-title">
+				<header class="flex flex-wrap gap-5 items-center justify-between mb-10">
+					<h2 class="text-2xl font-bold text-black">
 						<?php
 						echo wp_kses_post(
 							sprintf(
 								/* translators: 1: number of results, 2: search query. */
 								_n( '%1$s result for &ldquo;%2$s&rdquo;', '%1$s results for &ldquo;%2$s&rdquo;', (int) $wp_query->found_posts, TEXT_DOMAIN ),
 								esc_html( number_format_i18n( $wp_query->found_posts ) ),
-								'<em>' . esc_html( get_search_query() ) . '</em>'
+								'<em class="not-italic text-primary">' . esc_html( get_search_query() ) . '</em>'
 							)
 						);
 						?>
 					</h2>
-					<div class="search-form-inline">
+					<div class="shrink-0 w-full max-w-xs">
 						<?php get_search_form(); ?>
 					</div>
 				</header>
 
-				<div class="post-list">
+				<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
 					<?php
 					while ( have_posts() ) :
 						the_post();
 						?>
-						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-							<header class="entry-header">
-								<?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' ); ?>
+						<article id="post-<?php the_ID(); ?>" <?php post_class( 'overflow-hidden flex flex-col rounded-lg bg-white shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out p-6 border border-gray-200/50' ); ?>>
+							<header class="mb-2.5">
+								<?php the_title( '<h2 class="text-xl font-bold leading-tight"><a href="' . esc_url( get_permalink() ) . '" class="text-black hover:text-primary transition-colors duration-250" rel="bookmark">', '</a></h2>' ); ?>
 							</header>
 
-							<div class="entry-summary">
+							<div class="flex-1 text-sm leading-normal text-black/75 mb-5">
 								<?php the_excerpt(); ?>
 							</div>
 						</article>
@@ -82,9 +82,11 @@ get_header();
 
 			<?php else : ?>
 
-				<div class="search-no-results">
-					<p><?php esc_html_e( 'Sorry, no results were found. Please try a different search.', TEXT_DOMAIN ); ?></p>
-					<?php get_search_form(); ?>
+				<div class="py-16 text-center">
+					<p class="mb-8 text-lg text-black/75"><?php esc_html_e( 'Sorry, no results were found. Please try a different search.', TEXT_DOMAIN ); ?></p>
+					<div class="max-w-lg mx-auto">
+						<?php get_search_form(); ?>
+					</div>
 				</div>
 
 			<?php endif; ?>

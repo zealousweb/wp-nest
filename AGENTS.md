@@ -7,7 +7,7 @@ Apply **only** the rules needed for the current task.
 - **Architecture** → Read `.cursor/rules/01-architecture.mdc`
 - **PHP** → Read `.cursor/rules/02-php.mdc` when editing PHP.
 - **ACF Blocks** → Read `.cursor/rules/03-acf-blocks.mdc` when creating blocks.
-- **SCSS** → Read `.cursor/rules/04-scss.mdc` when styling.
+- **Tailwind CSS** → Read `.cursor/rules/04-tailwind.mdc` when styling (CSS, `@utility`, `@theme`, or Tailwind classes in PHP).
 - **JavaScript** → Read `.cursor/rules/05-javascript.mdc` when writing JS.
 - **Accessibility** → Read `.cursor/rules/06-accessibility.mdc` for UI changes.
 - **SEO** → Read `.cursor/rules/07-seo.mdc` for metadata.

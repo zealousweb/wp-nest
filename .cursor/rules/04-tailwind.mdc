@@ -1,0 +1,137 @@
+---
+description: Tailwind CSS v4 styling rules, design tokens, utilities, and CSS file structure.
+globs: *.css, *.php, *.html
+---
+
+# WPNest — Tailwind CSS v4 Rules
+
+## Overview
+
+This project uses **Tailwind CSS v4** via the `@tailwindcss/vite` plugin.
+The entry point is `sources/css/style.css`.  
+**There is no SCSS** in this project.
+
+## CSS File Structure
+
+```text
+sources/css/
+├── style.css   → Entry: @import "tailwindcss", @source, @theme, @utility, WP alignment classes
+└── menu.css    → Navigation: desktop nav, hamburger, mobile panel (imported by style.css)
+```
+
+Add new CSS files alongside these two only when a feature requires pseudo-element animations
+or JS-driven state classes that **cannot** be expressed as Tailwind HTML utilities.
+Always `@import` new files from `style.css`.
+
+## Entry File (`style.css`) Sections — In Order
+
+1. `@import "tailwindcss"` — Tailwind engine
+2. `@source` — content scanning directives
+3. `@theme {}` — design tokens
+4. `@utility` — reusable utility definitions
+5. Raw CSS — WordPress core class overrides (alignments, `.sticky`, etc.)
+6. `@import` — additional CSS files (e.g. `menu.css`)
+
+## Content Scanning
+
+Always add `@source` for every file type that uses Tailwind classes:
+
+```css
+@source "../../**/*.php";
+@source "../../**/*.js";
+@source "../../sources/**/*.css";
+```
+
+## Design Tokens (`@theme`)
+
+All colors, fonts, spacing tokens, and custom values live in `@theme {}`.
+
+```css
+@theme {
+  --color-primary:   #1eb2a6;
+  --color-secondary: #ffa34d;
+  --color-gray-200:  #dee3e2;
+
+  --font-sans: 'Open Sans', Arial, sans-serif;
+
+  --height-banner:   300px;
+  --shadow-header:   0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+```
+
+- **Never hardcode hex values** in PHP templates or CSS rules — always use `var(--color-*)`.
+- Add new color tokens to `@theme` before using them.
+- Token naming: `--color-*`, `--font-*`, `--height-*`, `--shadow-*`.
+
+## `@utility` — Reusable Utilities
+
+Use `@utility` for class strings that are too long to repeat, or semantically meaningful:
+
+```css
+@utility btn {
+  @apply inline-block px-6 py-3 text-white font-bold bg-primary hover:bg-secondary
+         rounded-sm transition-all duration-300 ease-in-out;
+}
+
+@utility container-wrap {
+  @apply mx-auto px-5 lg:px-12 w-full;
+  max-width: var(--width-container);
+}
+```
+
+- Prefer `@apply` with existing Tailwind utilities inside `@utility`.
+- Use `@utility` for: `btn`, `btn-sm`, `btn-link`, `pagination`, `skip-link`, `h-banner`, `max-w-container`, `shadow-header`, and block-specific wrappers.
+- Do **not** create `@utility` for one-off layout — write Tailwind classes directly in HTML/PHP.
+
+## Writing Tailwind Classes in PHP
+
+- Write utility classes directly in `class=""` attributes.
+- Use responsive prefixes inline: `class="text-base md:text-lg lg:text-xl"`.
+- Use state variants inline: `class="text-black hover:text-primary transition-colors duration-300"`.
+- For conditional classes, use PHP string concatenation or ternary — keep it readable.
+
+## ACF Block Pattern
+
+```html
+<section <?php echo $wrapper_attributes; ?>>
+    <div class="max-w-container mx-auto px-5 lg:px-12 w-full">
+        <div class="py-12 md:py-16">
+            <h2 class="text-3xl font-bold text-black mb-4">…</h2>
+```
+
+- Always use the `max-w-container` + `px-5 lg:px-12` container pattern.
+- Use Tailwind responsive prefixes (`md:`, `lg:`) instead of media query mixins.
+- Use `text-primary` / `text-secondary` — never hardcode colours.
+
+## Raw CSS — When It's Acceptable
+
+Write raw CSS **only** when Tailwind utilities cannot express the behaviour:
+
+| Reason | Example |
+|---|---|
+| Pseudo-elements (`::before`, `::after`) | Hamburger bars, dropdown arrows |
+| JS-driven state classes | `.is-open`, `.is-clicked` added by JS |
+| WordPress core class names | `.alignleft`, `.sticky`, `.admin-bar` |
+| Complex pointer-events toggling | Sub-menu visibility |
+
+For all other cases, use Tailwind utility classes in markup.
+
+## Responsive Design
+
+Use Tailwind breakpoint prefixes. The `@theme` breakpoints map to:
+
+| Prefix | Value |
+|---|---|
+| `sm:` | 576px |
+| `md:` | 782px |
+| `lg:` | 992px |
+| `xl:` | 1200px |
+| `xxl:` | 1400px |
+
+## Never
+
+- No SCSS / `.scss` files — the project has migrated to CSS + Tailwind v4.
+- No `@use`, `@forward`, `rem()` mixins, or SCSS variables (`$var`).
+- No hardcoded hex colors in templates or CSS rules.
+- No inline `style=""` attributes for layout/spacing/color.
+- No `!important` except for JS-toggled overrides (e.g. hamburger hide).

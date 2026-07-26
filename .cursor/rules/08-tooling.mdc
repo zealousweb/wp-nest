@@ -3,25 +3,39 @@ description: Commands for linting, testing, and building the project.
 alwaysApply: false
 ---
 
-# Toolchain — SITE_NAME
+# Toolchain — WPNest
 
 ## Commands
 
-- JS Lint → `npm run lint:js`
-- JS Lint Fix → `npm run lint:js:fix`
-- JS Test → `npm run test:js`
-- SCSS Lint → `npm run lint:scss`
-- SCSS Lint Fix → `npm run lint:scss:fix`
-- PHP Lint → `npm run phpcs`
-- Dev → `npm run dev`
-- Build → `npm run build`
+| Task | Command |
+|---|---|
+| Dev server | `npm run dev` |
+| Production build | `npm run build` |
+| JS lint | `npm run lint:js` |
+| JS lint + fix | `npm run lint:js:fix` |
+| CSS lint | `npm run lint:css` |
+| CSS lint + fix | `npm run lint:css:fix` |
+| PHP lint | `npm run phpcs` |
+| PHP auto-fix | `npm run phpcbf` |
+
+> **Note:** There are no SCSS lint commands. The project uses Tailwind CSS v4.
+> CSS linting targets `sources/**/*.css` via Stylelint.
 
 ## Run After Changes
 
-- **PHP** → `npm run phpcs`
-- **JavaScript** → `npm run lint:js` + `npm run test:js` + `npm run build`
-- **SCSS** → `npm run lint:scss` + `npm run build`
-- **New Block** → Run all relevant checks + build
+| Changed | Commands to run |
+|---|---|
+| PHP | `npm run phpcs` |
+| JavaScript | `npm run lint:js` → `npm run build` |
+| CSS / Tailwind | `npm run lint:css` → `npm run build` |
+| New ACF block | PHP + CSS + JS checks + `npm run build` |
+
+## Tailwind v4 Build Notes
+
+- The Tailwind CSS v4 plugin (`@tailwindcss/vite`) runs as part of the Vite build.
+- Content scanning is configured via `@source` directives in `sources/css/style.css` — no `tailwind.config.js` needed.
+- The compiled CSS is output to `assets/css/style-[hash].css` and referenced via `assets/.vite/manifest.json`.
+- `themeCSS('main.css')` in `includes/theme-scripts.php` reads the manifest key `sources/css/style.css`.
 
 ## Rules
 

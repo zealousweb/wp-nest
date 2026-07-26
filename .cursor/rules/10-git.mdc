@@ -4,7 +4,15 @@ alwaysApply: false
 ---
 
 ## Commits
+
 - Use conventional commits: `feat:`, `fix:`, `chore:`, `style:`, `refactor:`
 - One logical change per commit.
-- Never commit `assets/` build output (it should be gitignored or built on deploy).
+- Never commit `assets/` build output (gitignored — built on deploy).
 - Never commit credentials, `.env` files, or local config.
+- Always commit `includes/acf-json/` ACF JSON alongside block PHP changes.
+
+## Tailwind-Specific
+
+- When adding new Tailwind classes to PHP templates, run `npm run build` and verify the class appears in the compiled CSS before committing.
+- If you add a new `@utility` or `@theme` token to `sources/css/style.css`, commit `style.css` separately from PHP template changes for cleaner history.
+- Do not commit auto-generated `assets/` even if Vite regenerates it during dev — use `npm run build` intentionally before a production deploy.

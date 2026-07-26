@@ -8,9 +8,11 @@ globs: *.js
 ## Aliases
 
 ```text
-@js    → sources/js/
-@scss  → sources/scss/
+@js  → sources/js/
+@css → sources/css/
 ```
+
+> Note: The `@scss` alias has been removed. The project uses `sources/css/` (Tailwind v4).
 
 ## Entry Pattern
 
@@ -25,6 +27,12 @@ if (document.querySelector('.home-slider')) {
 	import('@js/common/swiperInit.js').then(({ initHomeSlider }) => initHomeSlider());
 }
 ```
+
+## Tailwind & JS Interaction
+
+- Toggle Tailwind classes via `classList.add()` / `classList.remove()` / `classList.toggle()`.
+- JS-driven state classes (`.is-open`, `.is-clicked`) are styled in `sources/css/menu.css` — not via Tailwind utilities — because they require pseudo-element or complex state CSS.
+- Never write inline `element.style.*` for layout/color — add or remove Tailwind classes instead.
 
 ## Modules
 

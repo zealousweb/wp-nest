@@ -8,23 +8,24 @@ globs: *.php, *.html
 ## Perceivable
 
 - Images need meaningful `alt` (decorative → `alt=""` + `aria-hidden`).
-- Maintain WCAG contrast ratios.
+- Maintain WCAG contrast ratios — use `--color-primary` / `--color-secondary` tokens which have been verified.
 - Support 200% zoom and 320px width without horizontal scroll.
 - Don't rely on color alone.
-- Use unitless `line-height: 1.5`.
+- Use Tailwind's `leading-normal` or `leading-relaxed` (maps to 1.5–1.625) for body text.
 
 ## Operable
 
 - All controls must be keyboard accessible.
-- Add a skip link to `#content`.
-- Never remove focus outlines; use `:focus-visible`.
+- Add a skip link to `#content` — use the `skip-link` `@utility` from `style.css`.
+- Never remove focus outlines — use Tailwind's `focus:outline-none` only when paired with a visible `focus:ring-*` alternative.
+- Use `focus-visible:` variants over `focus:` where possible to avoid focus rings on mouse clicks.
 - Links should be descriptive.
 
 ## Understandable
 
 - Use `language_attributes()`.
 - One `<h1>` per page; blocks start with `<h2>`.
-- Every form field needs a label.
+- Every form field needs a label — use `class="sr-only"` for visually hidden labels (Tailwind utility).
 - Show accessible error messages.
 
 ## Robust
@@ -33,12 +34,22 @@ globs: *.php, *.html
 - Add required ARIA for accordions, tabs, modals, alerts, and toggles.
 - Use `aria-live` for dynamic content.
 
+## Tailwind Accessibility Utilities
+
+| Need | Tailwind class |
+|---|---|
+| Screen reader only text | `sr-only` |
+| Reveal on focus | `focus:not-sr-only` |
+| Skip link (full pattern) | `skip-link` `@utility` |
+| Focus ring | `focus:ring-2 focus:ring-primary focus:ring-offset-2` |
+| Hide from AT | `aria-hidden="true"` (attribute, not a class) |
+
 ## Never
 
-- `outline: none`
+- `outline: none` without a visible alternative
 - `tabindex > 0`
 - Interactive `<div>`/`<span>` without keyboard support
 - Placeholder as a label
 - Color-only indicators
 
-**Always:** Include `.screen-reader-text` and perform keyboard + screen reader testing before delivery.
+**Always:** Include `sr-only` where needed and perform keyboard + screen reader testing before delivery.

@@ -24,7 +24,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 
-// Prepare wrapper attributes (This natively handles ID, Classes, and Inline Styles from block.json supports).
+// Prepare wrapper attributes (handles ID, Classes, and Inline Styles from block.json supports).
 $wrapper_attributes = get_block_wrapper_attributes(
 	array(
 		'id'    => $block_id,
@@ -34,18 +34,18 @@ $wrapper_attributes = get_block_wrapper_attributes(
 ?>
 <!-- WYSIWYG -->
 <section <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-	<div class="container">
-		<div class="wc-wrap">
+	<div class="max-w-container mx-auto px-5 lg:px-12 w-full">
+		<div class="py-12 md:py-16 w-full">
 			<?php if ( $wys_heading ) : ?>
-				<h2><?php echo esc_html( $wys_heading ); ?></h2>
+				<h2 class="text-3xl font-bold text-black mb-4"><?php echo esc_html( $wys_heading ); ?></h2>
 			<?php endif; ?>
 			<?php if ( $wys_description ) : ?>
-				<div class="wc-decs bullet-styled">
+				<div class="text-base leading-relaxed text-black/75 mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_li]:text-base [&_li]:leading-relaxed">
 					<?php echo wp_kses_post( $wys_description ); ?>
 				</div>
 			<?php endif; ?>
 
-			<div class="wc-inner-blocks">
+			<div class="mt-8">
 				<InnerBlocks />
 			</div>
 		</div>
