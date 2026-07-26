@@ -17,56 +17,58 @@ get_header();
 <?php entry_banner(); ?>
 
 <main id="content" class="grow w-full pt-12 pb-16 md:pt-8 md:pb-10">
-
-	<?php
-	while ( have_posts() ) :
-		the_post();
-		?>
-
-		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
-			<?php
-			the_content(
-				sprintf(
-					wp_kses(/* translators: %s: Name of current post. Only visible to screen readers */
-						__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', TEXT_DOMAIN ),
-						array(
-							'span' => array(
-								'class' => array(),
-							),
-						)
-					),
-					wp_kses_post( get_the_title() )
-				)
-			);
-
-			wp_link_pages(
-				array(
-					'before' => '<div class="page-links">' . esc_html__( 'Pages:', TEXT_DOMAIN ),
-					'after'  => '</div>',
-				)
-			);
-			?>
-
-			<?php wpnest_edit_post_link(); ?>
-
-		</article><!-- #post-<?php the_ID(); ?> -->
+	<div class="max-w-container mx-auto px-5 lg:px-12 w-full">
 
 		<?php
-		the_post_navigation(
-			array(
-				'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', TEXT_DOMAIN ) . '</span> <span class="nav-title">%title</span>',
-				'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', TEXT_DOMAIN ) . '</span> <span class="nav-title">%title</span>',
-			)
-		);
+		while ( have_posts() ) :
+			the_post();
+			?>
 
-		// If comments are open or we have at least one comment, load up the comment template.
-		if ( comments_open() || get_comments_number() ) :
-			comments_template();
-		endif;
-	endwhile; // End of the loop.
-	?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+				<?php
+				the_content(
+					sprintf(
+						wp_kses(/* translators: %s: Name of current post. Only visible to screen readers */
+							__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', TEXT_DOMAIN ),
+							array(
+								'span' => array(
+									'class' => array(),
+								),
+							)
+						),
+						wp_kses_post( get_the_title() )
+					)
+				);
+
+				wp_link_pages(
+					array(
+						'before' => '<div class="page-links">' . esc_html__( 'Pages:', TEXT_DOMAIN ),
+						'after'  => '</div>',
+					)
+				);
+				?>
+
+				<?php wpnest_edit_post_link(); ?>
+
+			</article><!-- #post-<?php the_ID(); ?> -->
+
+			<?php
+			the_post_navigation(
+				array(
+					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', TEXT_DOMAIN ) . '</span> <span class="nav-title">%title</span>',
+					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', TEXT_DOMAIN ) . '</span> <span class="nav-title">%title</span>',
+				)
+			);
+
+			// If comments are open or we have at least one comment, load up the comment template.
+			if ( comments_open() || get_comments_number() ) :
+				comments_template();
+			endif;
+		endwhile; // End of the loop.
+		?>
+
+	</div><!-- .container -->
 </main><!-- #main -->
 
 <?php

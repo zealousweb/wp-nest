@@ -40,7 +40,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 				<h2 class="text-3xl font-bold text-black mb-4"><?php echo esc_html( $wys_heading ); ?></h2>
 			<?php endif; ?>
 			<?php if ( $wys_description ) : ?>
-				<div class="text-base leading-relaxed text-black/75 mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_li]:text-base [&_li]:leading-relaxed">
+				<div class="wc-desc bullet-styled">
 					<?php echo wp_kses_post( $wys_description ); ?>
 				</div>
 			<?php endif; ?>

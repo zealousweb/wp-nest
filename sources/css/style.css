@@ -18,9 +18,6 @@
 
   --font-sans: 'Open Sans', Arial, sans-serif;
   --font-serif: 'Times New Roman', Times, serif;
-
-  --height-banner: 300px;
-  --shadow-header: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -70,19 +67,9 @@
   max-width: var(--width-container);
 }
 
-/* Banner section — fixed height defined by @theme token */
-@utility h-banner {
-  height: var(--height-banner);
-}
-
 /* Max-width shorthand using theme token */
 @utility max-w-container {
   max-width: var(--width-container);
-}
-
-/* Shadow shorthand using theme token */
-@utility shadow-header {
-  box-shadow: var(--shadow-header);
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -161,12 +148,6 @@
   font-style: italic;
   opacity: 0.8;
 }
-.sticky {
-  padding: 1.25rem;
-  border: 1px solid var(--color-primary);
-  background-color: color-mix(in srgb, var(--color-primary), transparent 95%);
-}
-
 
 /* ─────────────────────────────────────────────────────────
    Navigation — desktop nav, hamburger & mobile menu

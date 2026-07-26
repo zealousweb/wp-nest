@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="relative overflow-hidden flex flex-col justify-between w-full min-h-screen">
 	<a class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:top-2.5 focus:left-2.5 focus:block focus:px-3.5 focus:py-1.5 focus:rounded focus:text-sm focus:text-white focus:no-underline focus:bg-primary focus:outline-3 focus:outline-secondary focus:outline-offset-2" href="#content"><?php esc_html_e( 'Skip to content', TEXT_DOMAIN ); ?></a>
 	<?php $brand_logo = get_template_directory_uri() . '/sources/images/logo.svg'; ?>
-	<header class="main-header relative z-50 w-full h-auto py-3.5 bg-white shadow-header">
+	<header class="main-header relative z-50 w-full h-auto py-3.5 bg-white">
 		<div class="max-w-container mx-auto px-5 lg:px-12 w-full flex justify-between items-center flex-nowrap">
 			<?php if ( $brand_logo ) { ?>
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="block shrink-0 w-16">

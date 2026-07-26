@@ -1,20 +1,21 @@
 # WPNest Theme
 
-A WordPress starter theme with a modern **Vite 8** asset pipeline, strict code standards, and a clean ACF block architecture. Designed as a reusable project skeleton — configure once, build fast.
+A WordPress starter theme with a modern **Vite 8** asset pipeline, **Tailwind CSS v4**, strict code standards, and a clean ACF block architecture. Designed as a reusable project skeleton — configure once, build fast.
 
 ---
 
 ## 🚀 Features
 
 - **Vite 8** for lightning-fast HMR, module bundling, and production builds.
-- **Dart Sass** for SCSS compilation with `@use` / `@forward` modular architecture.
-- **PurgeCSS** + **Autoprefixer** + **cssnano** for production-optimised CSS.
+- **Tailwind CSS v4** (`@tailwindcss/vite`) with zero-config `@theme` design tokens and `@utility` class declarations.
+- **Pure Utility-First CSS** — no SCSS, no raw hex values, no inline styles.
+- **Autoprefixer** for cross-browser CSS support.
 - **ESLint 10** (flat config) for JavaScript standards enforcement.
-- **Stylelint 17** for SCSS standards enforcement.
+- **Stylelint 17** for CSS standards enforcement.
 - **PHP_CodeSniffer** (WPCS) for WordPress PHP standards.
 - **Husky + lint-staged** for automated pre-commit code formatting and verification.
 - **GitHub Actions CI/CD** for continuous integration and automated theme releases.
-- **ACF Block system** with a single render callback, preview image support, and synced JSON.
+- **ACF Block V2 System** (`block.json`) with Tailwind utility rendering, preview support, and synced JSON.
 - **Lazy-loaded JS modules** via native dynamic `import()` for performance.
 - **Manifest-based asset enqueuing** — no hardcoded filenames in PHP.
 
@@ -25,7 +26,7 @@ A WordPress starter theme with a modern **Vite 8** asset pipeline, strict code s
 | Language | Tool | Config |
 |---|---|---|
 | JavaScript | ESLint 10 | `config/config.eslint.js` |
-| SCSS | Stylelint 17 | `config/config.stylelint.js` |
+| CSS / Tailwind | Stylelint 17 | `config/config.stylelint.js` |
 | PHP | PHPCS (WPCS) | `.phpcs.xml` |
 
 On every `git commit`, `lint-staged` automatically runs ESLint, Stylelint, and PHPCBF on staged files before the commit goes through.
@@ -38,7 +39,7 @@ For the best editor experience, use **VS Code** — workspace settings in `.vsco
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v23.11.1 (see `engines` in `package.json`)
+- [Node.js](https://nodejs.org/) v24.15.0 (see `engines` in `package.json`)
 - [Composer](https://getcomposer.org/) for PHP dependencies
 - [Local](https://localwp.com/) or any local WordPress environment
 
@@ -55,7 +56,7 @@ Before installing, rename the theme for your project in **4 places**:
 
 | File | What to change |
 |---|---|
-| `functions.php` lines 21–22 | Change `'wpnest'` in `THEME_PREFIX` and `TEXT_DOMAIN` |
+| `functions.php` lines 34–35 | Change `'wpnest'` in `THEME_PREFIX` and `TEXT_DOMAIN` |
 | `style.css` line 12 | Change `Text Domain: wpnest` |
 | `.env` line 4 | Change `VITE_DEV_THEME_NAME = wp-nest` |
 | All PHP files | Find & replace the `wpnest_` function prefix (e.g. → `myproject_`) |
@@ -94,7 +95,7 @@ npm run dev
 
 ### 🏗️ Production Build
 
-Build and optimise all assets for production (minification, PurgeCSS, autoprefixer):
+Build and optimise all assets for production (Tailwind v4 native tree-shaking via `@source` directives):
 
 ```bash
 npm run build
@@ -103,18 +104,18 @@ npm run build
 ### 🧹 Linting (Check Only)
 
 ```bash
-npm run lint          # Check both JS and SCSS
+npm run lint          # Check both JS and CSS
 npm run lint:js       # Check JavaScript only
-npm run lint:scss     # Check SCSS only
+npm run lint:css      # Check CSS only
 npm run phpcs         # Check PHP against WordPress Coding Standards
 ```
 
 ### 🔧 Auto-Fixing
 
 ```bash
-npm run lint:fix      # Auto-fix JS and SCSS
+npm run lint:fix      # Auto-fix JS and CSS
 npm run lint:js:fix   # Auto-fix JavaScript only
-npm run lint:scss:fix # Auto-fix SCSS only
+npm run lint:css:fix  # Auto-fix CSS only
 npm run phpcbf        # Auto-fix PHP files
 ```
 
@@ -130,10 +131,10 @@ includes/
 ├── theme-action.php          → Actions & AJAX handlers
 ├── theme-filter.php          → Filters
 ├── theme-security.php        → Security hardening
-├── acf-block-register.php    → ACF block registration & render callback
+├── acf-block-register.php    → ACF block registration
 └── acf-json/                 → ACF field group JSON (auto-synced)
 
-template-parts/blocks/        → ACF block templates ({block-slug}.php)
+template-parts/blocks/        → ACF block templates ({block-name}/block.json + render.php)
 includes/acf-block-preview/   → Block preview images ({block-slug}.jpg)
 
 sources/
@@ -141,13 +142,9 @@ sources/
 │   ├── script.js             → Main entry (eager: menu; lazy: modules)
 │   ├── modules/              → Lazy-loaded ES modules
 │   └── common/               → Named export modules
-└── scss/
-    ├── style.scss            → Main entry
-    ├── abstracts/            → Variables, mixins, functions
-    ├── base/                 → Reset, typography, global
-    ├── blocks/               → One partial per ACF block (_block-name.scss)
-    ├── components/           → Small reusable components
-    └── templates/            → Page templates
+└── css/
+    ├── style.css             → Tailwind CSS v4 entry (@import "tailwindcss", @source, @theme, @utility)
+    └── menu.css              → Navigation styles (desktop dropdowns, hamburger, mobile panel)
 
 assets/                       → Compiled output — never edit directly
 config/                       → Linting and build configs
@@ -168,12 +165,12 @@ Change **only these two lines** to migrate the text domain for a new project.
 
 Follow these 4 steps:
 
-1. **Register** — add the block array to `includes/acf-block-register.php`
-2. **Template** — create `template-parts/blocks/{block-slug}.php`
-3. **Styles** — create `sources/scss/blocks/_{block-slug}.scss` and import in `_core.scss`
-4. **ACF JSON** — export field group to `includes/acf-json/group_{block-slug}.json`
+1. **Folder & Metadata** — create `template-parts/blocks/{block-name}/block.json`
+2. **Template** — create `template-parts/blocks/{block-name}/render.php` using Tailwind utility classes
+3. **Register** — add `/template-parts/blocks/{block-name}` to `$blocks` array in `includes/acf-block-register.php`
+4. **ACF JSON** — export field group to `includes/acf-json/group_{block-name}.json`
 
-Optionally add `includes/acf-block-preview/{block-slug}.jpg` for the block preview image in the editor.
+Optionally add `@utility` to `sources/css/style.css` if a class combination is complex and reused.
 
 ---
 
@@ -191,5 +188,6 @@ Three automated workflows run on push:
 
 ## 📚 Documentation
 
+- **Development Guide** → [development.md](development.md)
 - **Contributing guidelines, branching strategy & commit rules** → [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Version history** → [CHANGELOG.md](CHANGELOG.md)

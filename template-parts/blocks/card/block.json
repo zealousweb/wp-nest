@@ -1,0 +1,63 @@
+{
+	"name": "acf/card",
+	"title": "Card",
+	"description": "A repeatable card block with image, title, date, tags, and a link.",
+	"category": "wpnest-blocks",
+	"icon": "grid-view",
+	"keywords": [
+		"card",
+		"cards",
+		"post",
+		"grid"
+	],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"supports": {
+		"align": false,
+		"jsx": false,
+		"color": {
+			"background": true,
+			"text": false
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true,
+			"blockGap": false
+		}
+	},
+	"styles": [
+		{
+			"name": "default",
+			"label": "Default",
+			"isDefault": true
+		},
+		{
+			"name": "dark",
+			"label": "Dark"
+		}
+	],
+	"example": {
+		"attributes": {
+			"mode": "preview",
+			"data": {
+				"cd_heading": "Latest Articles",
+				"cd_cards": [
+					{
+						"cd_card_title": "How Expert-Led Technical SEO Improves Your Rankings",
+						"cd_card_date": "July 15, 2026",
+						"cd_card_tags": "AI Search Visibility, Technical SEO",
+						"cd_card_link": { "url": "#", "title": "Browse Posts", "target": "" }
+					},
+					{
+						"cd_card_title": "The Cost Advantage of White-Label AEO & GEO",
+						"cd_card_date": "July 13, 2026",
+						"cd_card_tags": "Digital Agency Growth, White-Label AEO",
+						"cd_card_link": { "url": "#", "title": "Browse Posts", "target": "" }
+					}
+				]
+			}
+		}
+	}
+}

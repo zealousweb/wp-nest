@@ -22,9 +22,9 @@ get_header();
 
 		<div class="max-w-container mx-auto px-5 lg:px-12 w-full">
 
-			<h1><?php esc_html_e( '404', TEXT_DOMAIN ); ?></h1>
+			<h2 class="text-6xl font-bold text-black mb-4"><?php esc_html_e( '404', TEXT_DOMAIN ); ?></h2>
 
-			<p><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', TEXT_DOMAIN ); ?></p>
+			<p class="text-lg text-black/75"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', TEXT_DOMAIN ); ?></p>
 
 		</div>
 

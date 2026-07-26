@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		plugins: [
-			liveReload(["./**/*.php"]),
+			liveReload(["**/*.php", "template-parts/**/*.php", "includes/**/*.php", "templates/**/*.php"]),
 			tailwindcss(),
 		],
 
@@ -120,12 +120,11 @@ export default defineConfig(({ mode }) => {
 			cors: true,
 			strictPort: true,
 			host: "0.0.0.0",
-			port: Number(env.VITE_DEV_SERVER_PORT),
+			port: Number(env.VITE_DEV_SERVER_PORT) || 5173,
 
 			hmr: {
-				protocol: "ws",
-				host: devHost,
-				port: Number(env.VITE_DEV_SERVER_PORT),
+				host: devHost ? devHost : "localhost",
+				port: Number(env.VITE_DEV_SERVER_PORT) || 5173,
 			},
 		},
 	};

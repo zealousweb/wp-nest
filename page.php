@@ -17,27 +17,29 @@ get_header();
 <?php entry_banner(); ?>
 
 <main id="content" class="grow w-full pt-12 pb-16 md:pt-8 md:pb-10">
-
-	<?php
-	while ( have_posts() ) :
-		the_post();
-		?>
+	<div class="max-w-container mx-auto px-5 lg:px-12 w-full">
 
 		<?php
-		the_content();
+		while ( have_posts() ) :
+			the_post();
+			?>
 
-		wp_link_pages(
-			array(
-				'before' => '<div class="page-links">' . esc_html__( 'Pages:', TEXT_DOMAIN ),
-				'after'  => '</div>',
-			)
-		);
-		?>
+			<?php
+			the_content();
 
-		<?php wpnest_edit_post_link(); ?>
+			wp_link_pages(
+				array(
+					'before' => '<div class="page-links">' . esc_html__( 'Pages:', TEXT_DOMAIN ),
+					'after'  => '</div>',
+				)
+			);
+			?>
 
-	<?php endwhile; ?>
+			<?php wpnest_edit_post_link(); ?>
 
+		<?php endwhile; ?>
+
+	</div><!-- .container -->
 </main><!-- #main -->
 
 <?php

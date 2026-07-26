@@ -72,9 +72,9 @@ function wpnest_ajaxsearch_filter() {
 		while ( $loop->have_posts() ) :
 			$loop->the_post();
 			$loop_output .= '
-            <article>
-                <h2><a href="' . esc_url( get_the_permalink() ) . '">' . esc_html( get_the_title() ) . '</a></h2>
-                <p>' . esc_html( get_the_excerpt() ) . '</p>
+            <article class="overflow-hidden flex flex-col rounded-lg bg-white shadow-md hover:-translate-y-1 hover:shadow-lg transition-all duration-300 ease-in-out p-6 border border-gray-200/50">
+                <h2 class="text-xl font-bold leading-tight mb-2.5"><a href="' . esc_url( get_the_permalink() ) . '" class="text-black hover:text-primary transition-colors duration-250">' . esc_html( get_the_title() ) . '</a></h2>
+                <p class="flex-1 text-sm leading-normal text-black/75 mb-5">' . esc_html( get_the_excerpt() ) . '</p>
             </article>';
 		endwhile;
 

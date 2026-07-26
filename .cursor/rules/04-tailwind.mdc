@@ -86,6 +86,7 @@ Use `@utility` for class strings that are too long to repeat, or semantically me
 ## Writing Tailwind Classes in PHP
 
 - Write utility classes directly in `class=""` attributes.
+- Use standard Tailwind utility classes only — **do not use arbitrary values** (e.g. `w-[320px]`, `text-[15px]`, `top-[4px]`). If a custom size, color, or value is required, define it as a token under `@theme` in `sources/css/style.css`.
 - Use responsive prefixes inline: `class="text-base md:text-lg lg:text-xl"`.
 - Use state variants inline: `class="text-black hover:text-primary transition-colors duration-300"`.
 - For conditional classes, use PHP string concatenation or ternary — keep it readable.
@@ -133,5 +134,6 @@ Use Tailwind breakpoint prefixes. The `@theme` breakpoints map to:
 - No SCSS / `.scss` files — the project has migrated to CSS + Tailwind v4.
 - No `@use`, `@forward`, `rem()` mixins, or SCSS variables (`$var`).
 - No hardcoded hex colors in templates or CSS rules.
+- No arbitrary values in utility classes (e.g., `w-[350px]`, `p-[15px]`, `top-[2px]`) — define custom tokens under `@theme` in `sources/css/style.css` or use standard Tailwind utilities.
 - No inline `style=""` attributes for layout/spacing/color.
 - No `!important` except for JS-toggled overrides (e.g. hamburger hide).

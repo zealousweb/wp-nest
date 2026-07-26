@@ -27,6 +27,7 @@ Every block must:
 ## Styling
 
 - Use **Tailwind CSS v4 utility classes** directly in `class=""` attributes inside `render.php`.
+- **Do not use arbitrary values** in utility classes (e.g. `aspect-[16/9]`, `w-[320px]`). Always use standard Tailwind utilities or define custom tokens in `@theme` in `sources/css/style.css`.
 - **No separate CSS/SCSS files** per block — unless the block requires pseudo-element animations or JS-driven state classes that cannot be expressed as Tailwind utilities.
 - If a class string is reused across multiple blocks, extract it to an `@utility` in `sources/css/style.css`.
 

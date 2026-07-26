@@ -24,7 +24,7 @@
 		"theme",
 		"starter",
 		"vite",
-		"sass"
+		"tailwindcss"
 	],
 	"author": "admin",
 	"license": "ISC",

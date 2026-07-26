@@ -17,17 +17,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 function viteDevServerUrl() {
 	static $env = null;
 	if ( is_null( $env ) ) {
-		$env      = array();
-		$env_path = get_template_directory() . '/.env';
-		if ( file_exists( $env_path ) ) {
-			$lines = file( $env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
-			foreach ( $lines as $line ) {
-				if ( strpos( trim( $line ), '#' ) === 0 ) {
-					continue;
-				}
-				$parts = explode( '=', $line, 2 );
-				if ( count( $parts ) === 2 ) {
-					$env[ trim( $parts[0] ) ] = trim( $parts[1] );
+		$env       = array();
+		$env_paths = array(
+			get_template_directory() . '/.env.local',
+			get_template_directory() . '/.env',
+		);
+		foreach ( $env_paths as $env_path ) {
+			if ( file_exists( $env_path ) ) {
+				$lines = file( $env_path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+				foreach ( $lines as $line ) {
+					if ( strpos( trim( $line ), '#' ) === 0 ) {
+						continue;
+					}
+					$parts = explode( '=', $line, 2 );
+					if ( count( $parts ) === 2 ) {
+						$key = trim( $parts[0] );
+						if ( ! isset( $env[ $key ] ) ) {
+							$env[ $key ] = trim( $parts[1] );
+						}
+					}
 				}
 			}
 		}
@@ -52,7 +60,7 @@ function isViteDev() {
 		$host = wp_parse_url( $url, PHP_URL_HOST );
 		$port = wp_parse_url( $url, PHP_URL_PORT );
 
-		$handle = @fsockopen( $host, $port, $errno, $errstr, 0.1 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged,WordPress.WP.AlternativeFunctions.file_system_operations_fsockopen
+		$handle = @fsockopen( $host, $port, $errno, $errstr, 0.5 ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged,WordPress.WP.AlternativeFunctions.file_system_operations_fsockopen
 
 		if ( $handle ) {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
