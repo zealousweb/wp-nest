@@ -23,11 +23,11 @@ A WordPress starter theme with a modern **Vite 8** asset pipeline, **Tailwind CS
 
 ## 🛠️ Code Standards & Auto-Formatting
 
-| Language | Tool | Config |
-|---|---|---|
-| JavaScript | ESLint 10 | `config/config.eslint.js` |
+| Language       | Tool         | Config                       |
+| -------------- | ------------ | ---------------------------- |
+| JavaScript     | ESLint 10    | `config/config.eslint.js`    |
 | CSS / Tailwind | Stylelint 17 | `config/config.stylelint.js` |
-| PHP | PHPCS (WPCS) | `.phpcs.xml` |
+| PHP            | PHPCS (WPCS) | `.phpcs.xml`                 |
 
 On every `git commit`, `lint-staged` automatically runs ESLint, Stylelint, and PHPCBF on staged files before the commit goes through.
 
@@ -54,12 +54,12 @@ cd wp-your-project
 
 Before installing, rename the theme for your project in **4 places**:
 
-| File | What to change |
-|---|---|
-| `functions.php` lines 34–35 | Change `'wpnest'` in `THEME_PREFIX` and `TEXT_DOMAIN` |
-| `style.css` line 12 | Change `Text Domain: wpnest` |
-| `.env` line 4 | Change `VITE_DEV_THEME_NAME = wp-nest` |
-| All PHP files | Find & replace the `wpnest_` function prefix (e.g. → `myproject_`) |
+| File                        | What to change                                                     |
+| --------------------------- | ------------------------------------------------------------------ |
+| `functions.php` lines 34–35 | Change `'wpnest'` in `THEME_PREFIX` and `TEXT_DOMAIN`              |
+| `style.css` line 12         | Change `Text Domain: wpnest`                                       |
+| `.env` line 4               | Change `VITE_DEV_THEME_NAME = wp-nest`                             |
+| All PHP files               | Find & replace the `wpnest_` function prefix (e.g. → `myproject_`) |
 
 > **Note:** `THEME_PREFIX` is used for script handles automatically. PHP function names like `wpnest_setup()` must be renamed manually since PHP constants cannot be used in function definitions.
 
@@ -153,8 +153,8 @@ config/                       → Linting and build configs
 ### Key Constants (`functions.php`)
 
 ```php
-define( 'THEME_PREFIX', 'your-project' ); // Used for script/style handles
-define( 'TEXT_DOMAIN', 'your-project' );  // Used in all __() translation calls
+define("THEME_PREFIX", "your-project"); // Used for script/style handles
+define("TEXT_DOMAIN", "your-project"); // Used in all __() translation calls
 ```
 
 Change **only these two lines** to migrate the text domain for a new project.
@@ -178,11 +178,11 @@ Optionally add `@utility` to `sources/css/style.css` if a class combination is c
 
 Three automated workflows run on push:
 
-| Workflow | Trigger | What it does |
-|---|---|---|
-| `code-standards.yml` | Push to `feature/*`, `stage`, `master` | Runs ESLint, Stylelint, PHPCS in parallel, then Vite build |
-| `release.yml` | Tag push (e.g. `v1.0.3`) | Lints, builds, packages theme ZIP, publishes GitHub Release |
-| `pr-check.yml` | All PRs to `master` / `stage` | Validates PR title length, warns if >50 files changed |
+| Workflow             | Trigger                                | What it does                                                |
+| -------------------- | -------------------------------------- | ----------------------------------------------------------- |
+| `code-standards.yml` | Push to `feature/*`, `stage`, `master` | Runs ESLint, Stylelint, PHPCS in parallel, then Vite build  |
+| `release.yml`        | Tag push (e.g. `v1.0.3`)               | Lints, builds, packages theme ZIP, publishes GitHub Release |
+| `pr-check.yml`       | All PRs to `master` / `stage`          | Validates PR title length, warns if >50 files changed       |
 
 ---
 

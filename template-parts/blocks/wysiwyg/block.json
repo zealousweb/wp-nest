@@ -4,11 +4,7 @@
 	"description": "A WYSIWYG content block.",
 	"category": "wpnest-blocks",
 	"icon": "editor-paragraph",
-	"keywords": [
-		"wysiwyg",
-		"content",
-		"text"
-	],
+	"keywords": ["wysiwyg", "content", "text"],
 	"acf": {
 		"mode": "preview",
 		"renderTemplate": "render.php"

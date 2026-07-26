@@ -2,7 +2,7 @@ import { defineConfig, loadEnv } from "vite";
 import path from "path";
 import { globSync } from "glob";
 import liveReload from "vite-plugin-live-reload";
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from "@tailwindcss/vite";
 
 const getModuleEntries = () => {
 	const entries = {};
@@ -28,7 +28,12 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		plugins: [
-			liveReload(["**/*.php", "template-parts/**/*.php", "includes/**/*.php", "templates/**/*.php"]),
+			liveReload([
+				"**/*.php",
+				"template-parts/**/*.php",
+				"includes/**/*.php",
+				"templates/**/*.php",
+			]),
 			tailwindcss(),
 		],
 
@@ -65,7 +70,9 @@ export default defineConfig(({ mode }) => {
 							return "css/[name]-[hash][extname]";
 						}
 
-						if (/\.(png|jpe?g|gif|svg|webp|avif)$/i.test(assetName)) {
+						if (
+							/\.(png|jpe?g|gif|svg|webp|avif)$/i.test(assetName)
+						) {
 							return "images/[name][extname]";
 						}
 
@@ -86,11 +93,17 @@ export default defineConfig(({ mode }) => {
 								const scope = match[1];
 								const pkg = match[2];
 
-								const packageName = scope ? `${scope}-${pkg}` : pkg;
+								const packageName = scope
+									? `${scope}-${pkg}`
+									: pkg;
 
 								const heavyLibs = ["swiper", "fancyapps"];
 
-								if (heavyLibs.some((lib) => packageName.includes(lib))) {
+								if (
+									heavyLibs.some((lib) =>
+										packageName.includes(lib),
+									)
+								) {
 									return `library/${packageName}`;
 								}
 

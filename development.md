@@ -5,6 +5,7 @@ Welcome to the **WPNest Theme** development documentation. This guide details th
 ---
 
 ## 📖 Table of Contents
+
 1. [Overview & Tech Stack](#1-overview--tech-stack)
 2. [Getting Started & Installation](#2-getting-started--installation)
 3. [Theme Rebranding & Renaming](#3-theme-rebranding--renaming)
@@ -23,48 +24,52 @@ Welcome to the **WPNest Theme** development documentation. This guide details th
 ## 1. Overview & Tech Stack
 
 **WPNest** is a WordPress starter theme built for speed, stability, and maintainability. It employs modern developer tooling to compile frontend assets and enforce coding standards:
+
 - **Core**: HTML5 semantic markup and modular PHP.
 - **Asset Compiler**: [Vite 8](https://vite.dev) with [`@tailwindcss/vite`](https://tailwindcss.com) for instant Hot Module Replacement (HMR) and production bundling.
 - **CSS Framework**: **Tailwind CSS v4** featuring `@import "tailwindcss"`, `@source` content scanning, `@theme` design tokens, and `@utility` class declarations.
 - **CSS Post-processing**: [Autoprefixer](https://github.com/postcss/autoprefixer) for vendor prefixing.
 - **Quality Assurance**:
-  - **ESLint 10** (Flat Config) for JavaScript linting.
-  - **Stylelint 17** for CSS file formatting.
-  - **PHP_CodeSniffer (PHPCS)** using the **WordPress Coding Standards (WPCS)** ruleset.
-  - **Husky** and **lint-staged** for automated pre-commit validation.
+    - **ESLint 10** (Flat Config) for JavaScript linting.
+    - **Stylelint 17** for CSS file formatting.
+    - **PHP_CodeSniffer (PHPCS)** using the **WordPress Coding Standards (WPCS)** ruleset.
+    - **Husky** and **lint-staged** for automated pre-commit validation.
 
 ---
 
 ## 2. Getting Started & Installation
 
 ### Prerequisites
+
 Ensure your local environment meets these requirements:
+
 - **Node.js**: `v24.15.0` (specified in `package.json` engines)
 - **Composer**: For PHP package management and WPCS testing
 - **Local WP / Valet**: A running WordPress local host
 - **ACF Pro**: The Advanced Custom Fields PRO plugin installed and active
 
 ### Installation Steps
+
 1. Clone the repository into your WordPress `wp-content/themes/` folder:
-   ```bash
-   git clone https://github.com/zealousweb/wp-nest.git your-theme-folder
-   cd your-theme-folder
-   ```
+    ```bash
+    git clone https://github.com/zealousweb/wp-nest.git your-theme-folder
+    cd your-theme-folder
+    ```
 2. Install npm and PHP dependencies:
-   ```bash
-   npm install
-   composer install
-   ```
+    ```bash
+    npm install
+    composer install
+    ```
 3. Copy the environment template file:
-   ```bash
-   cp .env.local .env
-   ```
+    ```bash
+    cp .env.local .env
+    ```
 4. Update the `.env` file with your local URL:
-   ```env
-   VITE_DEV_SERVER = http://your-local-site.local
-   VITE_DEV_SERVER_PORT = 5173
-   VITE_DEV_THEME_NAME = your-theme-folder
-   ```
+    ```env
+    VITE_DEV_SERVER = http://your-local-site.local
+    VITE_DEV_SERVER_PORT = 5173
+    VITE_DEV_THEME_NAME = your-theme-folder
+    ```
 
 ---
 
@@ -72,12 +77,12 @@ Ensure your local environment meets these requirements:
 
 To rebrand the theme and prevent namespace or translation domain collisions, update the following configurations in your project:
 
-| # | File Path | Scope | Target Change |
-|---|---|---|---|
-| **1** | [functions.php](functions.php) (Lines 34-35) | PHP Constants | Change `'wpnest'` to your custom identifier in `THEME_PREFIX` and `TEXT_DOMAIN` constants. |
-| **2** | [style.css](style.css) (Line 12) | Theme Metadata | Update the `Text Domain: wpnest` field and metadata headers. |
-| **3** | [.env](.env) (Line 4) | Build Config | Update `VITE_DEV_THEME_NAME = wp-nest` to match your theme directory folder name. |
-| **4** | Theme PHP Files | Global Search | Find and replace the `wpnest_` function prefix (e.g. `wpnest_setup()` → `mytheme_setup()`). |
+| #     | File Path                                    | Scope          | Target Change                                                                               |
+| ----- | -------------------------------------------- | -------------- | ------------------------------------------------------------------------------------------- |
+| **1** | [functions.php](functions.php) (Lines 34-35) | PHP Constants  | Change `'wpnest'` to your custom identifier in `THEME_PREFIX` and `TEXT_DOMAIN` constants.  |
+| **2** | [style.css](style.css) (Line 12)             | Theme Metadata | Update the `Text Domain: wpnest` field and metadata headers.                                |
+| **3** | [.env](.env) (Line 4)                        | Build Config   | Update `VITE_DEV_THEME_NAME = wp-nest` to match your theme directory folder name.           |
+| **4** | Theme PHP Files                              | Global Search  | Find and replace the `wpnest_` function prefix (e.g. `wpnest_setup()` → `mytheme_setup()`). |
 
 ---
 
@@ -150,15 +155,15 @@ Below is the directory mapping of the entire theme, listing every file and its e
 
 ### Directory Use Matrix
 
-| Directory | Target File Types | Lint Standard | Dev Actions Allowed | Prohibited / Restricted Actions |
-|---|---|---|---|---|
-| **Root (Theme Root)** | `.php`, `.css`, `.json` | PHPCS (WPCS) | Edit page templates (e.g., `page.php`, `single.php`, `archive.php`). | **Do NOT** write helper functions or business logic here. Keep code thin. Bootstrap in `functions.php` only. |
-| **`includes/`** | `.php` | PHPCS (WPCS) | Add/modify theme setup hooks, custom action triggers, AJAX logic, CPTs, and helper functions. | **Do NOT** output raw HTML or inline CSS/scripts. Keep logic purely functional. |
-| **`includes/acf-json/`** | `.json` | None | Automatically write and load field groups via ACF plugin interface. | **Do NOT** manually modify files in this directory. Always sync changes through the WP Admin ACF panel. |
-| **`template-parts/blocks/`** | `block.json`, `render.php` | PHPCS (WPCS) | Add/modify block metadata (`block.json`) and PHP rendering layouts (`render.php`). | Use Tailwind CSS utility classes directly in `render.php`. Do **NOT** create separate `.css` files per block unless pseudo-elements/JS states require it. |
-| **`sources/js/`** | `.js` | ESLint 10 | Write global eager scripts or feature-specific dynamic JS modules. | **Never** use `var` variables. Ensure dynamic module imports are properly checks-wrapped before loading. |
-| **`sources/css/`** | `.css` | Stylelint 17 | Define `@theme` design tokens, `@utility` helper classes, and custom menu CSS. | **No SCSS files**. Do **NOT** hardcode hex color values. Always use `@theme` tokens or standard Tailwind utilities. **Do NOT use arbitrary bracket values (`[...]`)**. |
-| **`assets/`** | `.js`, `.css`, `.json` | None | Target path for production bundles and development HMR scripts. | **NEVER** edit files in this folder manually. Any custom changes will be deleted on the next `npm run build`. |
+| Directory                    | Target File Types          | Lint Standard | Dev Actions Allowed                                                                           | Prohibited / Restricted Actions                                                                                                                                        |
+| ---------------------------- | -------------------------- | ------------- | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Root (Theme Root)**        | `.php`, `.css`, `.json`    | PHPCS (WPCS)  | Edit page templates (e.g., `page.php`, `single.php`, `archive.php`).                          | **Do NOT** write helper functions or business logic here. Keep code thin. Bootstrap in `functions.php` only.                                                           |
+| **`includes/`**              | `.php`                     | PHPCS (WPCS)  | Add/modify theme setup hooks, custom action triggers, AJAX logic, CPTs, and helper functions. | **Do NOT** output raw HTML or inline CSS/scripts. Keep logic purely functional.                                                                                        |
+| **`includes/acf-json/`**     | `.json`                    | None          | Automatically write and load field groups via ACF plugin interface.                           | **Do NOT** manually modify files in this directory. Always sync changes through the WP Admin ACF panel.                                                                |
+| **`template-parts/blocks/`** | `block.json`, `render.php` | PHPCS (WPCS)  | Add/modify block metadata (`block.json`) and PHP rendering layouts (`render.php`).            | Use Tailwind CSS utility classes directly in `render.php`. Do **NOT** create separate `.css` files per block unless pseudo-elements/JS states require it.              |
+| **`sources/js/`**            | `.js`                      | ESLint 10     | Write global eager scripts or feature-specific dynamic JS modules.                            | **Never** use `var` variables. Ensure dynamic module imports are properly checks-wrapped before loading.                                                               |
+| **`sources/css/`**           | `.css`                     | Stylelint 17  | Define `@theme` design tokens, `@utility` helper classes, and custom menu CSS.                | **No SCSS files**. Do **NOT** hardcode hex color values. Always use `@theme` tokens or standard Tailwind utilities. **Do NOT use arbitrary bracket values (`[...]`)**. |
+| **`assets/`**                | `.js`, `.css`, `.json`     | None          | Target path for production bundles and development HMR scripts.                               | **NEVER** edit files in this folder manually. Any custom changes will be deleted on the next `npm run build`.                                                          |
 
 ---
 
@@ -184,14 +189,18 @@ npm run phpcbf       # Automatically format PHP scripts (WPCS)
 Frontend compilation uses **Vite 8** with **Tailwind CSS v4** (`@tailwindcss/vite`) to build JavaScript modules, process utility CSS, and output cache-busting production files.
 
 ### Development Mode
+
 During development, the theme loads files directly from the Vite dev server (default `http://127.0.0.1:5173`):
+
 1. `theme-scripts.php` initializes a connection request with `viteDevServerUrl()`.
 2. It enqueues the local Vite client (`/@vite/client`) to activate HMR.
 3. Dev assets (`sources/css/style.css` and `sources/js/script.js`) are loaded dynamically.
 4. Active filter hooks add `type="module"` to enqueued scripts.
 
 ### Production Mode
+
 For production (`npm run build`), Vite creates a dependency manifest at `assets/.vite/manifest.json`:
+
 1. It reads the entry points: `sources/js/script.js`, `sources/css/style.css`, and dynamically located scripts under `sources/js/modules/**/*.js`.
 2. Tailwind v4 scans all PHP and JS files declared in `@source` directives inside `sources/css/style.css` and tree-shakes unused utilities automatically.
 3. Assets are built, chunk-split, optimized, and saved under `assets/` with cache-busting hashes.
@@ -210,6 +219,7 @@ template-parts/blocks/{block-name}/
 ```
 
 ### New Block Checklist
+
 1. **Metadata**: Create `template-parts/blocks/{block-name}/block.json`.
 2. **Template**: Create `template-parts/blocks/{block-name}/render.php` using Tailwind CSS utility classes.
 3. **Register**: Add `/template-parts/blocks/{block-name}` to the `$blocks` array in `includes/acf-block-register.php`.
@@ -220,6 +230,7 @@ template-parts/blocks/{block-name}/
 ## 8. JavaScript System & Core Modules
 
 The Javascript architecture optimizes loading speeds by splitting execution:
+
 - **Eager scripts**: Critical components loaded immediately (e.g. `deviceMenu.js`).
 - **Lazy scripts**: Async assets imported dynamically only if their matching HTML selectors exist on the page (e.g. `swiperInit.js`, `fancybox.js`).
 
@@ -228,6 +239,7 @@ The Javascript architecture optimizes loading speeds by splitting execution:
 ## 9. Tailwind CSS v4 Guidelines & Architecture
 
 ### CSS Architecture
+
 ```text
 sources/css/
 ├── style.css   → Primary entry (@import "tailwindcss", @source, @theme, @utility)
@@ -235,6 +247,7 @@ sources/css/
 ```
 
 ### Key Rules
+
 1. **Design Tokens (`@theme`)**: Declare all primary/secondary colors, fonts, shadows, and heights under `@theme` in `sources/css/style.css`.
 2. **No Hardcoded Hex Values**: Always reference color tokens via `var(--color-primary)` or Tailwind classes (`text-primary`, `bg-secondary`).
 3. **No Arbitrary Bracket Values**: Do **not** use arbitrary bracket syntax in utility classes (e.g., `w-[320px]`, `text-[15px]`, `aspect-[16/9]`). Always use standard Tailwind utilities or add tokens to `@theme`.
@@ -245,6 +258,7 @@ sources/css/
 ## 10. PHP Hook & Utility Architecture
 
 Business logic is organized into module files in `includes/`:
+
 - **`theme-functions.php`**: Utility functions (`placeholder_image()`, `acf_svg()`, `entry_banner()`, `acf_link()`, `acf_image()`).
 - **`theme-action.php`**: Custom action hooks, emoji removal, and AJAX search handlers (`wpnest_ajaxsearch_filter`).
 - **`theme-filter.php`**: Filters, head tag cleanups, and SVG mime upload support.
@@ -266,6 +280,7 @@ Business logic is organized into module files in `includes/`:
 ## 12. CI/CD Automated Pipelines
 
 Automated integration runs via three GitHub Actions workflows in `.github/workflows/`:
+
 1. **Code Standards Checks (`code-standards.yml`)**: Runs ESLint, Stylelint, PHPCS, and Vite build on push.
 2. **PR Checks (`pr-check.yml`)**: Validates PR titles and change sizes.
 3. **Release Auto-Pack (`release.yml`)**: Packages production theme ZIPs on tag push.
